@@ -1,7 +1,7 @@
 import MainLayout from "./_components/Layout/MainLayout";
 import MainNavBar from "./_components/Nav/MainNavBar";
 import "./globals.css";
-import { Dongle, Nanum_Pen_Script } from "next/font/google";
+import { Dongle } from "next/font/google";
 
 const dongle = Dongle({
   weight: ["300", "400", "700"],
