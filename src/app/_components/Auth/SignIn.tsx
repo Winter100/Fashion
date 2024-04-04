@@ -1,72 +1,83 @@
 "use client";
 
-import useFetch from "@/app/_hooks/useFetch";
 import useInput from "@/app/_hooks/useInput";
-import { Button, Label, Spinner, TextInput } from "flowbite-react";
-import { FormEvent } from "react";
+import { signInType } from "@/app/_types/type";
+import handleSignIn from "@/app/_utils/signIn";
+import supabase from "@/app/_utils/supabase";
 
-const fetchUrl = "";
-const method = "POST";
+import { Button, Label, Spinner, TextInput } from "flowbite-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function SignIn() {
-  const { input, handleChange } = useInput({
-    email: "",
-    password: "",
-  });
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
-  const { isLoading, handleFetch } = useFetch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm<signInType>();
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
+  async function onSubmit(value: signInType) {
+    setIsLoading(true);
+    const { email, password } = value;
+    const { error } = await handleSignIn(email, password);
 
-    const { email, password } = input;
-
-    if (!email || !password) return;
-
-    const value = {
-      email,
-      password,
-    };
-    const data = await handleFetch(fetchUrl, method, value);
+    if (error?.status === 400) {
+      setError("root", { message: "아이디 또는 비밀번호를 확인해주세요" });
+      setIsLoading(false);
+      return;
+    }
+    router.replace("/");
   }
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       className="m-auto mt-40 flex w-full max-w-md flex-col gap-4 "
     >
       <h1 className="m-auto text-8xl">로그인</h1>
       <div>
         <div className="mb-2 block ">
           <Label className="text-2xl" htmlFor="email" value="이메일" />
+          {errors?.email && (
+            <span className="ml-4 text-2xl text-red-500">
+              {errors?.email?.message}
+            </span>
+          )}
         </div>
         <TextInput
           style={{ fontSize: "24px", padding: "7px" }}
-          onChange={handleChange}
-          name="email"
-          value={input.email}
           id="email"
           type="email"
-          disabled={isLoading}
-          required
+          {...register("email", { required: "이메일을 입력해주세요" })}
         />
       </div>
       <div>
         <div className="mb-2 block">
-          <Label className="text-2xl" htmlFor="password1" value="비밀번호" />
+          <Label className="text-2xl" htmlFor="password" value="비밀번호" />
+          {errors?.password && (
+            <span className="ml-4 text-2xl text-red-500">
+              {errors?.password?.message}
+            </span>
+          )}
         </div>
         <TextInput
-          onChange={handleChange}
-          style={{ fontSize: "24px", padding: "7px" }}
-          name="password"
-          value={input.password}
           id="password"
           type="password"
-          disabled={isLoading}
-          required
+          style={{ fontSize: "24px", padding: "7px" }}
+          {...register("password", { required: "비밀번호를 입력해주세요" })}
         />
       </div>
-      <Button type="submit" disabled={isLoading}>
+      {errors.root && (
+        <span className=" m-auto text-2xl text-red-600">
+          {errors.root.message}
+        </span>
+      )}
+      <Button disabled={isLoading} type="submit">
         {!isLoading ? (
           <span className=" text-2xl">로그인</span>
         ) : (
