@@ -51,7 +51,7 @@ export default function SignUp() {
       <h1 className="m-auto text-8xl">회원가입</h1>
       <div>
         <div className="mb-2 block ">
-          <Label className="text-4xl" htmlFor="email" value="이메일" />
+          <Label className="text-2xl" htmlFor="email" value="이메일" />
           {errors?.email && (
             <span className="ml-4 text-2xl text-red-500">
               {errors?.email?.message}
@@ -67,7 +67,7 @@ export default function SignUp() {
       </div>
       <div>
         <div className="mb-2 block ">
-          <Label className="text-4xl" htmlFor="name" value="닉네임" />
+          <Label className="text-2xl" htmlFor="name" value="닉네임" />
           {errors?.name && (
             <span className="ml-4 text-2xl text-red-500">
               {errors?.name?.message}
@@ -82,7 +82,7 @@ export default function SignUp() {
       </div>
       <div>
         <div className="mb-2 block ">
-          <Label className="text-4xl" htmlFor="password" value="비밀번호" />
+          <Label className="text-2xl" htmlFor="password" value="비밀번호" />
           {errors?.password && (
             <span className="ml-4 text-2xl text-red-500">
               {errors?.password?.message}
@@ -99,7 +99,7 @@ export default function SignUp() {
       <div>
         <div className="mb-2 block ">
           <Label
-            className="text-4xl"
+            className="text-2xl"
             htmlFor="passwordConfirm"
             value="비밀번호 확인"
           />
