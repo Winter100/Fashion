@@ -10,14 +10,14 @@ export default function Page() {
     title: "",
     concept: "",
     content: "",
-    image: "",
   });
-  const { image: preview, handleImage: handlePreview } = usePreview();
+  const { preview, handleImage: handlePreview, image } = usePreview();
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     console.log({ ...input });
+    console.log(image);
   }
 
   const props = { input, onChageInput, preview, handlePreview, handleSubmit };

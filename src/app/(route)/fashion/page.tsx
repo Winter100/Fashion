@@ -1,18 +1,27 @@
-import List from "@/app/_components/Fashion/List";
 import Link from "next/link";
 
-export default async function Page() {
+import { links } from "./_data/linksData";
+
+import FashionList from "@/app/_components/Fashion/List";
+import Paginations from "@/app/_components/Pagination/Pagination";
+import SubMenuList from "@/app/_components/Menu/SubMenuList";
+
+const subMenu = links.map((menu) => (
+  <Link
+    className="cursor-pointer text-2xl hover:font-bold"
+    key={menu.title}
+    href={menu.href}
+  >
+    {menu.title}
+  </Link>
+));
+
+export default function Page() {
   return (
-    <div>
-      <ul className=" mb-2 mt-2 flex justify-end">
-        <Link
-          href="fashion/write"
-          className="cursor-pointer text-4xl hover:font-bold"
-        >
-          글쓰기
-        </Link>
-      </ul>
-      <List />
-    </div>
+    <>
+      <SubMenuList>{subMenu}</SubMenuList>
+      <FashionList />
+      <Paginations route="fashion" query="page" totalPage={100} />
+    </>
   );
 }
