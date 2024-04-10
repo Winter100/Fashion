@@ -18,10 +18,12 @@ const subMenu = links.map((menu) => (
 
 export default function Page() {
   return (
-    <>
+    <div className="h-full">
       <SubMenuList>{subMenu}</SubMenuList>
+
       <FashionList />
+
       <Paginations route="fashion" query="page" totalPage={100} />
-    </>
+    </div>
   );
 }
