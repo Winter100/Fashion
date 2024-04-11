@@ -8,6 +8,7 @@ import { Button, Label, Spinner, TextInput } from "flowbite-react";
 
 import { signUpType } from "@/app/_types/type";
 import handleSignUp from "@/app/_utils/signUp";
+import Link from "next/link";
 
 export default function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
@@ -121,6 +122,11 @@ export default function SignUp() {
           {errors.root.message}
         </span>
       )}
+      <span className=" text-center  text-2xl text-blue-600 ">
+        <Link className=" hover:font-bold" href={"/auth/signin"}>
+          로그인으로...
+        </Link>
+      </span>
       <Button disabled={isLoading} type="submit">
         {!isLoading ? (
           <span className=" text-2xl">회원가입</span>

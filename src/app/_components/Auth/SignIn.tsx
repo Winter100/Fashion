@@ -1,18 +1,16 @@
 "use client";
 
-import useInput from "@/app/_hooks/useInput";
-import { signInType } from "@/app/_types/type";
+import Link from "next/link";
 import handleSignIn from "@/app/_utils/signIn";
-import supabase from "@/app/_utils/supabase";
 
+import { signInType } from "@/app/_types/type";
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function SignIn() {
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
   const {
     register,
@@ -20,6 +18,8 @@ export default function SignIn() {
     formState: { errors },
     setError,
   } = useForm<signInType>();
+
+  const queryClient = useQueryClient();
 
   async function onSubmit(value: signInType) {
     setIsLoading(true);
@@ -31,7 +31,7 @@ export default function SignIn() {
       setIsLoading(false);
       return;
     }
-    router.replace("/");
+    await queryClient.invalidateQueries({ queryKey: ["auth"] });
   }
 
   return (
@@ -77,6 +77,11 @@ export default function SignIn() {
           {errors.root.message}
         </span>
       )}
+      <span className=" text-center  text-2xl text-blue-600 ">
+        <Link className=" hover:font-bold" href={"/auth/signup"}>
+          회원가입으로...
+        </Link>
+      </span>
       <Button disabled={isLoading} type="submit">
         {!isLoading ? (
           <span className=" text-2xl">로그인</span>
