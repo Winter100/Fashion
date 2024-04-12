@@ -1,17 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
-
 import { signUpType } from "@/app/_types/type";
-import handleSignUp from "@/app/_utils/signUp";
-import Link from "next/link";
+import useSignUp from "@/app/_hooks/useSignUp";
 
 export default function SignUp() {
-  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const {
@@ -21,8 +17,12 @@ export default function SignUp() {
     setError,
   } = useForm<signUpType>();
 
-  async function onSubmit(e: signUpType) {
-    if (e.password !== e.passwordConfirm) {
+  const { signUp, isPending } = useSignUp();
+
+  async function onSubmit(value: signUpType) {
+    const { email, name, password, passwordConfirm } = value;
+
+    if (password !== passwordConfirm) {
       return setError(
         "passwordConfirm",
         { message: "비밀번호가 일치하지 않습니다" },
@@ -30,20 +30,21 @@ export default function SignUp() {
       );
     }
 
-    setIsLoading(true);
-    const { email, name, password } = e;
-    const { error } = await handleSignUp(email, password, name);
-
-    if (error?.status === 422) {
-      setError(
-        "root",
-        { message: "다른 이메일을 사용해주세요" },
-        { shouldFocus: true },
-      );
-      return setIsLoading(false);
-    }
-    router.replace("/");
+    signUp(
+      { email, name, password },
+      {
+        onError: (e) => {
+          setError("root", { message: e.message }, { shouldFocus: true });
+        },
+      },
+    );
   }
+
+  function routeHandler(e: FormEvent) {
+    e.preventDefault();
+    router.push("/auth/signin");
+  }
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -60,6 +61,7 @@ export default function SignUp() {
           )}
         </div>
         <TextInput
+          disabled={isPending}
           style={{ fontSize: "24px", padding: "7px" }}
           id="email"
           type="email"
@@ -76,6 +78,7 @@ export default function SignUp() {
           )}
         </div>
         <TextInput
+          disabled={isPending}
           id="name"
           style={{ fontSize: "24px", padding: "7px" }}
           {...register("name", { required: "닉네임을 입력해주세요" })}
@@ -91,6 +94,7 @@ export default function SignUp() {
           )}
         </div>
         <TextInput
+          disabled={isPending}
           id="password"
           type="password"
           style={{ fontSize: "24px", padding: "7px" }}
@@ -111,6 +115,7 @@ export default function SignUp() {
           )}
         </div>
         <TextInput
+          disabled={isPending}
           id="passwordConfirm"
           type="password"
           style={{ fontSize: "24px", padding: "7px" }}
@@ -122,13 +127,18 @@ export default function SignUp() {
           {errors.root.message}
         </span>
       )}
-      <span className=" text-center  text-2xl text-blue-600 ">
-        <Link className=" hover:font-bold" href={"/auth/signin"}>
-          로그인으로...
-        </Link>
-      </span>
-      <Button disabled={isLoading} type="submit">
-        {!isLoading ? (
+      {!isPending && (
+        <button
+          disabled={isPending}
+          type="button"
+          onClick={routeHandler}
+          className="m-auto inline-block text-center  text-2xl text-blue-600 hover:font-bold "
+        >
+          로그인
+        </button>
+      )}
+      <Button disabled={isPending} type="submit">
+        {!isPending ? (
           <span className=" text-2xl">회원가입</span>
         ) : (
           <Spinner aria-label="Spinner button example" size="sm" />

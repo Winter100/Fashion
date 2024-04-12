@@ -1,17 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import handleSignIn from "@/app/_utils/signIn";
-
 import { signInType } from "@/app/_types/type";
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useQueryClient } from "@tanstack/react-query";
+import useLogin from "@/app/_hooks/useLogin";
+import { useRouter } from "next/navigation";
+import { FormEvent } from "react";
 
 export default function SignIn() {
-  const [isLoading, setIsLoading] = useState(false);
-
   const {
     register,
     handleSubmit,
@@ -19,19 +15,26 @@ export default function SignIn() {
     setError,
   } = useForm<signInType>();
 
-  const queryClient = useQueryClient();
+  const { login, isPending } = useLogin();
+
+  const router = useRouter();
 
   async function onSubmit(value: signInType) {
-    setIsLoading(true);
     const { email, password } = value;
-    const { error } = await handleSignIn(email, password);
 
-    if (error?.status === 400) {
-      setError("root", { message: "아이디 또는 비밀번호를 확인해주세요" });
-      setIsLoading(false);
-      return;
-    }
-    await queryClient.invalidateQueries({ queryKey: ["auth"] });
+    login(
+      { email, password },
+      {
+        onError: (e) => {
+          setError("root", { message: "아이디 또는 비밀번호를 확인해주세요." });
+        },
+      },
+    );
+  }
+
+  function routeHandler(e: FormEvent) {
+    e.preventDefault();
+    router.push("/auth/signup");
   }
 
   return (
@@ -50,6 +53,7 @@ export default function SignIn() {
           )}
         </div>
         <TextInput
+          disabled={isPending}
           style={{ fontSize: "24px", padding: "7px" }}
           id="email"
           type="email"
@@ -66,6 +70,7 @@ export default function SignIn() {
           )}
         </div>
         <TextInput
+          disabled={isPending}
           id="password"
           type="password"
           style={{ fontSize: "24px", padding: "7px" }}
@@ -77,13 +82,18 @@ export default function SignIn() {
           {errors.root.message}
         </span>
       )}
-      <span className=" text-center  text-2xl text-blue-600 ">
-        <Link className=" hover:font-bold" href={"/auth/signup"}>
-          회원가입으로...
-        </Link>
-      </span>
-      <Button disabled={isLoading} type="submit">
-        {!isLoading ? (
+      {!isPending && (
+        <button
+          disabled={isPending}
+          type="button"
+          onClick={routeHandler}
+          className="m-auto inline-block text-center  text-2xl text-blue-600 hover:font-bold "
+        >
+          회원가입
+        </button>
+      )}
+      <Button disabled={isPending} type="submit">
+        {!isPending ? (
           <span className=" text-2xl">로그인</span>
         ) : (
           <Spinner aria-label="Spinner button example" size="sm" />
