@@ -3,7 +3,8 @@
 import Write from "@/app/_components/Write/Write";
 import useInput from "@/app/_hooks/useInput";
 import usePreview from "@/app/_hooks/usePreview";
-import getAuth from "@/app/_utils/getAuth";
+import { getAuth } from "@/app/_utils/apiAuth";
+
 import supabase, { supabaseUrl } from "@/app/_utils/supabase";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";

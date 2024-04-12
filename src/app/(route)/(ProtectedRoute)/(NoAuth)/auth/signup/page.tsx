@@ -1,5 +1,5 @@
 import SignUp from "@/app/_components/Auth/SignUp";
 
-export default function page() {
+export default function Page() {
   return <SignUp />;
 }

@@ -1,10 +1,9 @@
 import Link from "next/link";
-
-import { links } from "./_data/linksData";
-
 import FashionList from "@/app/_components/Fashion/List";
 import Paginations from "@/app/_components/Pagination/Pagination";
 import SubMenuList from "@/app/_components/Menu/SubMenuList";
+
+import { links } from "@/app/_utils/_data/linksData";
 
 const subMenu = links.map((menu) => (
   <Link
