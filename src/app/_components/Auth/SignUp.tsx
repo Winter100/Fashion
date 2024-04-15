@@ -14,21 +14,14 @@ export default function SignUp() {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
     setError,
   } = useForm<signUpType>();
 
   const { signUp, isPending } = useSignUp();
 
   async function onSubmit(value: signUpType) {
-    const { email, name, password, passwordConfirm } = value;
-
-    if (password !== passwordConfirm) {
-      return setError(
-        "passwordConfirm",
-        { message: "비밀번호가 일치하지 않습니다" },
-        { shouldFocus: true },
-      );
-    }
+    const { email, name, password } = value;
 
     signUp(
       { email, name, password },
@@ -119,7 +112,11 @@ export default function SignUp() {
           id="passwordConfirm"
           type="password"
           style={{ fontSize: "24px", padding: "7px" }}
-          {...register("passwordConfirm", { required: true })}
+          {...register("passwordConfirm", {
+            required: true,
+            validate: (value) =>
+              value === getValues().password || "비밀번호가 다릅니다.",
+          })}
         />
       </div>
       {errors.root && (

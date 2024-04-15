@@ -19,7 +19,7 @@ export default function SignIn() {
 
   const router = useRouter();
 
-  async function onSubmit(value: signInType) {
+  function onSubmit(value: signInType) {
     const { email, password } = value;
 
     login(
