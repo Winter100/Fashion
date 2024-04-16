@@ -3,13 +3,12 @@ import { useParams } from "next/navigation";
 import { getFashionItem } from "../_tanstack/getFashionItem";
 
 export default function useDetail() {
-  const params = useParams();
-  const { id: fashionId } = params;
+  const { id }: { id: string } = useParams();
 
   const { data, isLoading } = useQuery({
-    queryKey: [`detail`, fashionId],
-    queryFn: () => getFashionItem(fashionId as string),
+    queryKey: [`detail`, id],
+    queryFn: () => getFashionItem(id as string),
   });
 
-  return { fashionId, data, isLoading };
+  return { id, data, isLoading };
 }
