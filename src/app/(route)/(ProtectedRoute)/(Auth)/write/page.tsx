@@ -1,55 +1,34 @@
 "use client";
 
-import Write from "@/app/_components/Write/Write";
-import useInput from "@/app/_hooks/useInput";
-import usePreview from "@/app/_hooks/usePreview";
-import { getAuth } from "@/app/_utils/apiAuth";
-
-import supabase, { supabaseUrl } from "@/app/_utils/supabase";
-import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
+import Write from "@/app/_components/Fashion/Edit";
+import usePost from "@/app/_hooks/usePost";
+import imgCompression from "@/app/_utils/imgCompression";
+import { inputType } from "@/app/_types/type";
+import useUser from "@/app/_hooks/useUser";
 
 export default function Page() {
-  const router = useRouter();
-  const { input, handleChange: onChageInput } = useInput({
-    title: "",
-    content: "",
-    concept: "",
-  });
-  const { preview, handleImage: handlePreview, image } = usePreview();
+  const { postFashion, isPending } = usePost();
+  const { user } = useUser();
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
+  async function onSubmit(value: inputType) {
+    const { title, concept, content, imageFile } = value;
+    const compressionImage = await imgCompression(imageFile[0]);
 
-    const user = await getAuth();
+    if (!user) return;
 
-    const isLogin = user?.user?.role === "authenticated";
-
-    if (!isLogin) router.replace("/auth/signin");
-
-    const { title, concept, content } = input;
-    if (!image) return;
-
-    const imageName = `${Math.random()}-${image.name}`.replaceAll("/", "");
-    const imagePath = `${supabaseUrl}/storage/v1/object/public/fashion-images/${imageName}`;
-    const { error } = await supabase.from("fashionList").insert([
-      {
-        title,
-        content,
-        concept,
-        image: imagePath,
-        user: user?.user?.user_metadata.name,
-      },
-    ]);
-
-    const { error: imageError } = await supabase.storage
-      .from("fashion-images")
-      .upload(imageName, image);
-
-    if (!error && !imageError) router.replace("/fashion");
+    const fashionItemData = {
+      user,
+      title,
+      concept,
+      content,
+      image: compressionImage,
+    };
+    try {
+      postFashion(fashionItemData);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
-  const props = { input, onChageInput, preview, handlePreview, handleSubmit };
-
-  return <Write {...props} />;
+  return <Write onSubmit={onSubmit} isPending={isPending} />;
 }
