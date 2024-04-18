@@ -1,11 +1,13 @@
 "use client";
 
-import { signInType } from "@/app/_types/type";
-import { Button, Label, Spinner, TextInput } from "flowbite-react";
-import { useForm } from "react-hook-form";
-import useLogin from "@/app/_hooks/useLogin";
-import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { Button, Label, Spinner, TextInput } from "flowbite-react";
+
+import { signInType } from "@/app/_types/type";
+import useLogin from "@/app/_hooks/useLogin";
+import { useUserContextData } from "@/app/_context/ContextProvider";
 
 export default function SignIn() {
   const {
@@ -16,6 +18,7 @@ export default function SignIn() {
   } = useForm<signInType>();
 
   const { login, isPending } = useLogin();
+  const { setLoginData } = useUserContextData();
 
   const router = useRouter();
 
@@ -27,6 +30,9 @@ export default function SignIn() {
       {
         onError: (e) => {
           setError("root", { message: "아이디 또는 비밀번호를 확인해주세요." });
+        },
+        onSuccess: (e) => {
+          setLoginData(e?.user);
         },
       },
     );

@@ -1,26 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import getAuth from "@/app/_utils/getAuth";
-
-import { useQuery } from "@tanstack/react-query";
-import { useSignOut } from "@/app/_utils/signOut";
+import useSignout from "@/app/_hooks/useSignout";
+import { useUserContextData } from "@/app/_context/ContextProvider";
 
 export default function AuthBar() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["auth"],
-    queryFn: getAuth,
-  });
-
-  const { mutate } = useSignOut();
+  const { signout: signoutMutation } = useSignout();
+  const { userData, clearLoginData } = useUserContextData();
 
   function signOut() {
-    mutate();
+    signoutMutation();
+    clearLoginData();
   }
 
-  const user = data?.user;
+  const isAuthenticated = userData?.aud === "authenticated";
 
-  if (isLoading) return null;
-  if (!user && !isLoading) return <Link href={"/auth/signin"}>로그인</Link>;
-  if (user && !isLoading) return <button onClick={signOut}>로그아웃</button>;
+  return (
+    <>
+      {!isAuthenticated ? (
+        <Link href={"/auth/signin"}>로그인</Link>
+      ) : (
+        <button onClick={signOut}>로그아웃</button>
+      )}
+    </>
+  );
 }
