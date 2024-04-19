@@ -1,12 +1,27 @@
 import { Label } from "flowbite-react";
+import Image from "next/image";
 
-export default function Detail() {
+interface DetailType {
+  title: string;
+  image: string;
+  concept: string;
+  content: string;
+  id: string;
+}
+
+export default function Detail({
+  title,
+  image,
+  concept,
+  content,
+  id,
+}: DetailType) {
   return (
     <>
       <div className="flex-rows m-auto flex max-w-5xl gap-4  p-4">
         <div className="h-[500px] flex-1 p-1">
           <div className="relative m-auto h-[460px] w-4/5 border-2">
-            <p>이미지 링크 자리</p>
+            <Image src={image} alt={title} fill />
           </div>
         </div>
 
@@ -24,7 +39,7 @@ export default function Detail() {
                 id="title"
                 className=" border-bold rounded-lg border-2 p-2 text-xl"
               >
-                asdf제목
+                {title}
               </p>
             </div>
             <div>
@@ -32,14 +47,14 @@ export default function Detail() {
                 <Label
                   htmlFor="concept"
                   className=" m-auto text-xl"
-                  value="오늘의 나"
+                  value="컨셉"
                 />
               </div>
               <p
-                id="title"
+                id="concept"
                 className=" border-bold rounded-lg border-2 p-2 text-xl"
               >
-                asdf
+                {concept}
               </p>
             </div>
             <div>
@@ -52,18 +67,13 @@ export default function Detail() {
               </div>
               <p
                 id="title"
-                className=" border-bold h-60 rounded-lg border-2 p-2 text-xl"
+                className=" border-bold h-60 overflow-y-auto whitespace-pre-wrap rounded-lg border-2 p-2 text-xl"
               >
-                asdf
+                {content}
               </p>
             </div>
           </div>
         </div>
-      </div>
-      <div className="flex justify-center">
-        <p>
-          <span className=" text-2xl">댓글?</span>
-        </p>
       </div>
     </>
   );

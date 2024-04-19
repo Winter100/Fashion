@@ -1,17 +1,22 @@
+"use client";
+
+import Link from "next/link";
+
 import Item from "./Item";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
+import useFashion from "@/app/_hooks/useFashion";
 
 export default function List() {
-  const DUMMY = [
-    { title: "1" },
-    { title: "12" },
-    { title: "13" },
-    { title: "14" },
-    { title: "15" },
-  ];
+  const { data, isLoading } = useFashion();
+
+  if (isLoading) return <LoadingSpinner />;
+
   return (
-    <ul className=" grid grid-cols-3 gap-10">
-      {DUMMY.map((item) => (
-        <Item key={item.title} />
+    <ul className=" grid grid-cols-4 grid-rows-3 gap-2 ">
+      {data?.map((item) => (
+        <Link href={`/fashion/detail/${item.id}`} key={item.id}>
+          <Item {...item} />
+        </Link>
       ))}
     </ul>
   );
