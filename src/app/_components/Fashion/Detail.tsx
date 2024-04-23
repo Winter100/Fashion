@@ -18,14 +18,21 @@ export default function Detail({
 }: DetailType) {
   return (
     <>
-      <div className="flex-rows m-auto flex max-w-5xl gap-4  p-4">
-        <div className="h-[500px] flex-1 p-1">
-          <div className="relative m-auto h-[460px] w-4/5 border-2">
-            <Image src={image} alt={title} fill />
+      <div className="flex-rows m-auto flex max-w-5xl gap-2 p-2">
+        <div className="flex-1">
+          <div className="image-parents-div-fill">
+            <Image
+              src={image}
+              quality={100}
+              alt={title}
+              sizes="100vw"
+              fill
+              objectFit="contain"
+            />
           </div>
         </div>
 
-        <div className="flex-1">
+        <div className="m-auto flex-1">
           <div className=" flex flex-col gap-6">
             <div>
               <div className=" block ">

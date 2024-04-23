@@ -1,9 +1,10 @@
-import MainLayout from "./_components/Layout/MainLayout";
-import MainNavBar from "./_components/Nav/MainNavBar";
-import TanstackProvider from "./_components/Provider/TanstackProvider";
-import User from "./_context/ContextProvider";
 import "./globals.css";
 import { Dongle } from "next/font/google";
+
+import TanstackProvider from "./_components/Provider/TanstackProvider";
+import User from "./_context/ContextProvider";
+import MainNavBar from "./_components/Nav/MainNavBar";
+import MainLayout from "./_components/Layout/MainLayout";
 
 const dongle = Dongle({
   weight: ["300", "400", "700"],

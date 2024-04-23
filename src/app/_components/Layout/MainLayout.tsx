@@ -3,7 +3,5 @@ export default function MainLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="m-auto h-dvh max-w-screen-lg  border-2 p-6">{children}</div>
-  );
+  return <main className="layout-max-width m-auto h-full p-1">{children}</main>;
 }

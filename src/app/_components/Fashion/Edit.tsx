@@ -32,10 +32,17 @@ export default function Write({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex-rows m-auto flex max-w-5xl gap-4  p-4">
-        <div className="h-[500px] flex-1 p-1">
-          <div className="relative m-auto flex h-[460px] w-4/5 items-center justify-center border-2">
+        <div className="flex-1">
+          <div className="image-parents-div-fill">
             {!errors?.imageFile && isImage && (
-              <Image src={preview || item?.image} alt="업로드 이미지" fill />
+              <Image
+                src={preview || item?.image}
+                alt="업로드 이미지"
+                fill
+                quality={100}
+                sizes="100vw"
+                className="object-contain"
+              />
             )}
             {
               <span className=" ml-4 text-2xl text-red-500">

@@ -5,4 +5,20 @@
 body {
   box-sizing: border-box;
   list-style: none;
+
+  /* @apply text-black dark:bg-gray-900 dark:text-cyan-50; */
+}
+
+@layer components {
+  .mtmb-2 {
+    @apply mb-2 mt-2;
+  }
+
+  .layout-max-width {
+    @apply max-w-screen-xl;
+  }
+
+  .image-parents-div-fill {
+    @apply relative m-auto flex h-[480px] w-[460px] items-center justify-center;
+  }
 }
