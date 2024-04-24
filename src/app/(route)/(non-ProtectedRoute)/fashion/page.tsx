@@ -18,7 +18,7 @@ const subMenu = links.map((menu) => (
 export default function Page() {
   return (
     <div className="h-full">
-      <SubMenuList>{subMenu}</SubMenuList>
+      <SubMenuList flex={"justify-end"}>{subMenu}</SubMenuList>
 
       <FashionList />
 
