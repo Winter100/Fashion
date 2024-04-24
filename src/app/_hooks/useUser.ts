@@ -5,6 +5,7 @@ export default function useUser() {
   const { data: user, isLoading } = useQuery({
     queryKey: ["auth"],
     queryFn: getAuth,
+    staleTime: Infinity,
   });
 
   const isAuthenticated = user?.role === "authenticated";

@@ -2,6 +2,7 @@ import { useRouter } from "next/navigation";
 import { UpdateData } from "../_types/type";
 import { useMutation } from "@tanstack/react-query";
 import { updateFashionItem } from "../_tanstack/updateFashionItem";
+import { toast } from "react-toastify";
 
 export default function useUpdate() {
   const router = useRouter();
@@ -16,7 +17,11 @@ export default function useUpdate() {
     }: UpdateData) =>
       updateFashionItem({ user, title, content, concept, image, fashionId }),
     onSuccess: () => {
+      toast.success("수정이 완료되었습니다.");
       router.replace("/fashion?page=1");
+    },
+    onError: () => {
+      toast.error("잠시 후 다시 시도해 주세요!");
     },
   });
 

@@ -1,9 +1,10 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { signUp as signUpApi } from "../_utils/apiAuth";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
+
+import { signUp as signUpApi } from "../_utils/apiAuth";
 
 export default function useSignUp() {
-  const queryClient = useQueryClient();
   const router = useRouter();
 
   const { mutate: signUp, isPending } = useMutation({
@@ -17,8 +18,9 @@ export default function useSignUp() {
       name: string;
     }) => signUpApi({ email, password, name }),
     onSuccess: (user) => {
-      queryClient.setQueryData(["auth"], user.user);
-      router.replace("/");
+      toast.success("회원가입이 완료되었습니다.");
+      toast.success("로그인을 해주세요!");
+      router.replace("/auth/signin");
     },
   });
   return { signUp, isPending };
