@@ -1,5 +1,5 @@
-import { Label } from "flowbite-react";
 import Image from "next/image";
+import { Label } from "flowbite-react";
 
 interface DetailType {
   title: string;
@@ -25,9 +25,10 @@ export default function Detail({
               src={image}
               quality={100}
               alt={title}
-              sizes="100vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               fill
-              objectFit="contain"
+              priority
+              className=" object-contain"
             />
           </div>
         </div>

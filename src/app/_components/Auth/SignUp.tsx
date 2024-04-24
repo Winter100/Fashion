@@ -4,6 +4,7 @@ import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
+
 import { signUpType } from "@/app/_types/type";
 import useSignUp from "@/app/_hooks/useSignUp";
 
@@ -55,6 +56,7 @@ export default function SignUp() {
         </div>
         <TextInput
           disabled={isPending}
+          autoFocus
           style={{ fontSize: "24px", padding: "7px" }}
           id="email"
           type="email"

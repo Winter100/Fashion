@@ -2,9 +2,10 @@ import "./globals.css";
 import { Dongle } from "next/font/google";
 
 import TanstackProvider from "./_components/Provider/TanstackProvider";
-import User from "./_context/ContextProvider";
 import MainNavBar from "./_components/Nav/MainNavBar";
 import MainLayout from "./_components/Layout/MainLayout";
+import ToastProvider from "./_components/Provider/ToastProvider";
+import UserContextProvider from "./_components/Provider/UserContextProvider";
 
 const dongle = Dongle({
   weight: ["300", "400", "700"],
@@ -24,12 +25,14 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${dongle.className}`}>
-        <TanstackProvider>
-          <User>
-            <MainNavBar />
-            <MainLayout>{children}</MainLayout>
-          </User>
-        </TanstackProvider>
+        <ToastProvider>
+          <TanstackProvider>
+            <UserContextProvider>
+              <MainNavBar />
+              <MainLayout>{children}</MainLayout>
+            </UserContextProvider>
+          </TanstackProvider>
+        </ToastProvider>
       </body>
     </html>
   );

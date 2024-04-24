@@ -1,18 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import { Button, Label, TextInput, Textarea } from "flowbite-react";
-import { inputType } from "@/app/_types/type";
+import { Button, Label, Spinner, TextInput, Textarea } from "flowbite-react";
 import { useForm } from "react-hook-form";
+
+import { inputType } from "@/app/_types/type";
 import usePreview from "@/app/_hooks/usePreview";
 
 export default function Write({
   onSubmit,
-  isPending,
   item,
+  submitLoading,
 }: {
   onSubmit: (value: inputType) => void;
-  isPending: boolean;
+  submitLoading: boolean;
   item?: any;
 }) {
   const {
@@ -52,7 +53,7 @@ export default function Write({
           </div>
 
           <div className="flex justify-center">
-            {!isPending && (
+            {!submitLoading && (
               <label
                 htmlFor="imageFile"
                 className="cursor-pointer text-2xl hover:font-bold"
@@ -66,7 +67,7 @@ export default function Write({
                 required: !item?.image && "이미지가 필요합니다.",
                 onChange: handlePreview,
               })}
-              disabled={isPending}
+              disabled={submitLoading}
               id="imageFile"
               hidden
               type="file"
@@ -92,7 +93,7 @@ export default function Write({
                 {...register("title", {
                   required: "제목을 입력해주세요.",
                 })}
-                disabled={isPending}
+                disabled={submitLoading}
                 id="title"
                 name="title"
                 type="text"
@@ -115,7 +116,7 @@ export default function Write({
                 {...register("concept", {
                   required: "컨셉을 짧게 적어주세요.",
                 })}
-                disabled={isPending}
+                disabled={submitLoading}
                 id="concept"
                 name="concept"
                 type="text"
@@ -135,7 +136,7 @@ export default function Write({
                 </span>
               </div>
               <Textarea
-                disabled={isPending}
+                disabled={submitLoading}
                 {...register("content", { required: "내용을 입력해주세요." })}
                 id="content"
                 name="content"
@@ -148,8 +149,12 @@ export default function Write({
         </div>
       </div>
       <>
-        <Button disabled={isPending} className="m-auto" type="submit">
-          <span className=" text-2xl">작성</span>
+        <Button disabled={submitLoading} className="m-auto" type="submit">
+          {!submitLoading ? (
+            <span className=" text-2xl">작성</span>
+          ) : (
+            <Spinner />
+          )}
         </Button>
       </>
     </form>

@@ -7,7 +7,7 @@ import { Button, Label, Spinner, TextInput } from "flowbite-react";
 
 import { signInType } from "@/app/_types/type";
 import useLogin from "@/app/_hooks/useLogin";
-import { useUserContextData } from "@/app/_context/ContextProvider";
+import { useUserContextData } from "../Provider/UserContextProvider";
 
 export default function SignIn() {
   const {
@@ -60,6 +60,7 @@ export default function SignIn() {
         </div>
         <TextInput
           disabled={isPending}
+          autoFocus
           style={{ fontSize: "24px", padding: "7px" }}
           id="email"
           type="email"
@@ -77,6 +78,7 @@ export default function SignIn() {
         </div>
         <TextInput
           disabled={isPending}
+          autoComplete="off"
           id="password"
           type="password"
           style={{ fontSize: "24px", padding: "7px" }}
