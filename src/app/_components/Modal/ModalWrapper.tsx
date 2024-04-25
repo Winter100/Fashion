@@ -13,11 +13,11 @@ export default function ModalWrapper({
     createPortal(
       <div
         onClick={handleClose}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-70"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-gray-600 bg-opacity-70"
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="grid h-56 w-80 grid-rows-3 rounded-lg bg-white p-5"
+          className="grid h-72 w-96 grid-rows-3 rounded-lg bg-white p-5"
         >
           {children}
         </div>

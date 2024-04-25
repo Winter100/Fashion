@@ -1,10 +1,10 @@
 import { ModalContextType } from "@/app/_types/type";
 import { createContext, useState } from "react";
 import ModalWrapper from "./ModalWrapper";
-import OpenModalBtn from "./OpenModalBtn";
+import OpenBtn from "./OpenBtn";
 import ModalTitle from "./ModalTitle";
 import ModalContent from "./ModalContent";
-import ModalBtnGroup from "./ModalBtnGroup";
+import ModalBtnGroup from "./ModalBtnWrapper";
 
 export const ModalContext = createContext<ModalContextType>({
   open: false,
@@ -29,7 +29,7 @@ export default function Modal({ children }: { children: React.ReactNode }) {
   );
 }
 
-Modal.OpenModalBtn = OpenModalBtn;
+Modal.OpenBtn = OpenBtn;
 Modal.Wrapper = ModalWrapper;
 Modal.Title = ModalTitle;
 Modal.Content = ModalContent;

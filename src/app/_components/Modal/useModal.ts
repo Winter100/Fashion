@@ -5,7 +5,7 @@ export function useModal() {
   const data = useContext(ModalContext);
 
   if (!data) {
-    throw new Error("Modal Context안에서만 사용 가능합니다.");
+    throw new Error("Modal Context를 벗어났습니다.");
   }
 
   return data;

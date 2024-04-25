@@ -1,3 +1,7 @@
-export default function ModalContent({ content }: { content: string }) {
-  return <div className=" m-auto text-center text-2xl">{content}</div>;
+export default function ModalContent({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <>{children}</>;
 }
