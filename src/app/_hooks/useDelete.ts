@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-import { deleteFashionItem as deleteFashionItemApi } from "../_tanstack/deleteFashionItem";
+import { deleteFashionItem as deleteFashionItemApi } from "../_utils/apiFashion";
 
 export default function useDelete() {
   const router = useRouter();

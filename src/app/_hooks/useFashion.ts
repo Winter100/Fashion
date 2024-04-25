@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
-import { getFashionList } from "../_tanstack/getFashionList";
+import { getFashionList as FashionListApi } from "../_utils/apiFashion";
 
 export default function useFashion() {
   const searchParams = useSearchParams();
@@ -8,7 +8,7 @@ export default function useFashion() {
 
   const { data, isLoading } = useQuery({
     queryKey: ["fashion", page],
-    queryFn: getFashionList,
+    queryFn: FashionListApi,
   });
 
   return { data, isLoading };

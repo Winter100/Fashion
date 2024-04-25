@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 import { PostData } from "../_types/type";
-import { postFashionItem as postFashionItemApi } from "../_tanstack/postFashionItem";
+import { postFashionItem as postFashionItemApi } from "../_utils/apiFashion";
 
 export default function usePost() {
   const router = useRouter();
