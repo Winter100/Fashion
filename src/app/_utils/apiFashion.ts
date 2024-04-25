@@ -4,22 +4,43 @@ import supabase, { supabaseUrl } from "../_utils/supabase";
 export async function deleteFashionItem({ id }: { id: string }) {
   const { error } = await supabase.from("fashionList").delete().eq("id", id);
 
+  if (error) throw new Error(error.message);
+
   return id;
 }
 
 export async function getFashionItem(id: string) {
-  const { data: findItem, error }: any = await supabase
+  const { data: findItem, error } = await supabase
     .from("fashionList")
     .select("*")
     .eq("id", id);
+
+  if (error) throw new Error(error.message);
+
+  return findItem[0];
+}
+export async function getFashionEditItem(
+  id: string,
+  userId: string | undefined,
+) {
+  const { data: findItem, error } = await supabase
+    .from("fashionList")
+    .select("*")
+    .eq("id", id);
+
+  if (error) throw new Error(error.message);
+  if (findItem[0]?.user_id !== userId) throw new Error("권한이 없습니다");
 
   return findItem[0];
 }
 
 export async function getFashionList() {
-  let { data: fashionList, error } = await supabase
+  const { data: fashionList, error } = await supabase
     .from("fashionList")
-    .select("id,title,image,user");
+    .select("id,title,image,user,concept");
+
+  if (error) throw new Error(error.message);
+
   return fashionList;
 }
 
@@ -48,13 +69,11 @@ export async function postFashionItem({
     .from("fashion-images")
     .upload(imageName, image);
 
-  if (error || imageError) {
-    throw new Error("실패");
-  }
+  if (error) throw new Error(error.message);
+  if (imageError) throw new Error(imageError.message);
 }
 
 export async function updateFashionItem({
-  user,
   title,
   content,
   concept,
@@ -73,10 +92,15 @@ export async function updateFashionItem({
     const { error: imageError } = await supabase.storage
       .from("fashion-images")
       .upload(imageName, image);
+
+    if (error) throw new Error(error.message);
+    if (imageError) throw new Error(imageError.message);
   } else {
     const { error } = await supabase
       .from("fashionList")
       .update({ title, content, concept })
       .eq("id", fashionId);
+
+    if (error) throw new Error(error.message);
   }
 }

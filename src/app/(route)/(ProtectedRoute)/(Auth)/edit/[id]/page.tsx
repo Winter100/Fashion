@@ -1,30 +1,34 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 import Edit from "@/app/_components/Fashion/Edit";
-import useDetail from "@/app/_hooks/useDetail";
 import useUpdate from "@/app/_hooks/useUpdate";
 import imgCompression from "@/app/_utils/imgCompression";
 import { inputType } from "@/app/_types/type";
-import useUser from "@/app/_hooks/useUser";
 import LoadingSpinner from "@/app/_components/Spinner/LoadingSpinner";
 import useLoading from "@/app/_hooks/useLoading";
+import useEditData from "@/app/_hooks/useEditData";
 
 export default function Page() {
+  const router = useRouter();
+
   const { updateFashion } = useUpdate();
   const { isLoading: submitLoading, setLoading: setSubmitLoading } =
     useLoading();
 
-  const { isLoading, data, id } = useDetail();
-  const { user } = useUser();
-  const router = useRouter();
+  const { isLoading, data, id, isError } = useEditData();
 
-  if (isLoading) return <LoadingSpinner />;
+  useEffect(() => {
+    if (isError) {
+      toast.error("권한이 없습니다.");
+      router.replace("/fashion?page=1");
+    }
+  }, [isError, router]);
 
-  if (data?.user_id !== user?.id) {
-    router.replace("/fashion?page=1");
-  }
+  if (isLoading || isError) return <LoadingSpinner />;
 
   const inititem = {
     title: data?.title,
@@ -39,17 +43,11 @@ export default function Page() {
     const { title, concept, content, imageFile } = value;
     let updateData;
 
-    if (!user) {
-      router.refresh();
-      return;
-    }
-
     try {
       if (imageFile[0]) {
         // 새로운 이미지 등록
         const compressionImage = await imgCompression(imageFile[0]);
         updateData = {
-          user,
           title,
           concept,
           content,
@@ -59,7 +57,6 @@ export default function Page() {
       } else {
         // 기존 이미지 사용
         updateData = {
-          user,
           title,
           concept,
           content,

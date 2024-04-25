@@ -20,7 +20,6 @@ export interface PostData {
 }
 
 export interface UpdateData {
-  user: User;
   title: string;
   concept: string;
   content: string;
@@ -44,13 +43,16 @@ export type signUpType = signInType & {
   passwordConfirm: string;
 };
 
-export interface ItemType {
+export interface ListItemType {
   id: string;
   title: string;
   concept: string;
+  image: string;
+}
+
+export interface ItemType extends ListItemType {
   content: string;
   created_at: string;
-  image: string;
   user: string;
 }
 
@@ -58,4 +60,8 @@ export interface ModalContextType {
   open: boolean;
   handleOpen: () => void;
   handleClose: () => void;
+}
+
+export interface EditDataType extends ItemType {
+  user_id: string;
 }
