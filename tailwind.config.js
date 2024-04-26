@@ -14,12 +14,16 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      height: {
-        "row-10": "10%",
-        "row-80": "80%",
-        "row-20": "20%",
+      colors: {
+        background: "rgba(var(--background))",
+        // background: "var(--background)",
+        fontColor: "rgba(var(--fontColor))",
+        gnbBackground: "rgba(var(--gnbBackground))",
+        borderColor: "rgba(var(--borderColor))",
+        toggleBackground: "rgba(var(--toggleBackground))",
       },
     },
   },
   plugins: [require("flowbite/plugin")],
+  darkMode: "class",
 };

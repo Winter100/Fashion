@@ -5,15 +5,9 @@
 body {
   box-sizing: border-box;
   list-style: none;
-
-  /* @apply text-black dark:bg-gray-900 dark:text-cyan-50; */
 }
 
 @layer components {
-  .mtmb-2 {
-    @apply mb-2 mt-2;
-  }
-
   .layout-max-width {
     @apply max-w-screen-xl;
   }
@@ -21,4 +15,27 @@ body {
   .image-parents-div-fill {
     @apply relative m-auto flex h-[480px] w-[460px] items-center justify-center;
   }
+
+  .auth-btn-hover {
+    @apply hover:text-blue-700;
+  }
+
+  .dark-border {
+    @apply text-gray border-red-700;
+  }
+}
+
+.light {
+  --background: 249, 249, 249;
+  --fontColor: 18, 18, 18;
+  --borderColor: 230, 230, 230;
+  --toggleBackground: 156, 163, 175;
+}
+
+.dark {
+  --background: 20, 21, 23;
+  --fontColor: 156, 163, 175;
+  --borderColor: 107, 114, 128;
+  --toggleBackground: 95, 98, 120;
+  /* --background: #808080; */ /* --gnbBackground: 100, 100, 100; */
 }
