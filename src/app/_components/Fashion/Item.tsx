@@ -1,15 +1,10 @@
+import { ListItemType } from "@/app/_types/type";
 import Image from "next/image";
 
-export default function Item({
-  title,
-  image,
-}: {
-  title: string;
-  image: string;
-}) {
+export default function Item({ title, image, concept }: ListItemType) {
   return (
-    <div className="duration-400 flex h-[28rem] w-72 cursor-pointer flex-col border border-gray-200 transition-shadow ease-in-out hover:border-gray-300 hover:shadow-2xl">
-      <div className="relative h-72">
+    <div className="duration-400 border-borderColor flex h-[28rem] w-72 cursor-pointer flex-col border transition-shadow ease-in-out hover:border-gray-600 hover:shadow-2xl">
+      <div className="relative h-full ">
         <Image
           className=" object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -20,9 +15,9 @@ export default function Item({
           priority
         />
       </div>
-      <div className="flex h-2/6 flex-col items-center justify-center p-2 text-2xl">
-        <p>{title}</p>
-        <p>짧은 컨셉...</p>
+      <div className="flex h-[14rem] flex-col items-center justify-center gap-4  p-2">
+        <p className=" text-3xl">{title}</p>
+        <p className=" text-xl">{concept}</p>
       </div>
     </div>
   );
