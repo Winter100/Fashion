@@ -1,5 +1,7 @@
 import Image from "next/image";
-import { Label } from "flowbite-react";
+import { useRouter } from "next/navigation";
+
+import { Button, Label } from "flowbite-react";
 
 interface DetailType {
   title: string;
@@ -9,64 +11,81 @@ interface DetailType {
 }
 
 export default function Detail({ title, image, concept, content }: DetailType) {
+  const router = useRouter();
   return (
-    <div className="flex-rows layout-max-width m-auto flex gap-2 rounded-lg  p-2">
-      <div className="flex-1">
-        <div className="image-parents-div-fill">
-          <Image
-            src={image}
-            quality={100}
-            alt={title}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            fill
-            priority
-            className=" object-contain"
-          />
-        </div>
+    <div className="layout-max-width bg-backgroundTwo m-auto flex h-4/5 w-full flex-col items-center justify-center">
+      <div className="h-13 bg-backgroundOne layout-max-width m-auto flex w-full items-center justify-between">
+        <Button
+          className="h-full"
+          onClick={() => router.back()}
+          size="md"
+          color="green"
+        >
+          <span className="text-xl">뒤로가기</span>
+        </Button>
       </div>
 
-      <div className="m-auto flex-1">
-        <div className=" flex flex-col gap-6">
-          <div>
-            <div className=" block ">
-              <Label htmlFor="title" className=" m-auto text-xl" value="제목" />
-            </div>
-            <p
-              id="title"
-              className=" border-borderColor rounded-lg border p-2 text-xl"
-            >
-              {title}
-            </p>
+      <div className="flex-rows bg-backgroundTwo flex h-full w-full items-center gap-2 rounded-lg p-2">
+        <div className="flex h-full flex-1 flex-col items-center">
+          <div className="image-parents-div-fill">
+            <Image
+              src={image}
+              alt="업로드 이미지"
+              fill
+              quality={100}
+              sizes="100vw"
+              className="object-contain"
+            />
           </div>
-          <div>
-            <div className="block ">
-              <Label
-                htmlFor="concept"
-                className=" m-auto text-xl"
-                value="컨셉"
-              />
+        </div>
+
+        <div className="m-auto flex-1">
+          <div className=" flex flex-col gap-10">
+            <div>
+              <div className=" block ">
+                <Label
+                  htmlFor="title"
+                  className=" m-auto text-xl"
+                  value="제목"
+                />
+              </div>
+              <p
+                id="title"
+                className=" rounded-lg border border-borderColor p-2 text-xl"
+              >
+                {title}
+              </p>
             </div>
-            <p
-              id="concept"
-              className="  border-borderColor rounded-lg border p-2 text-xl"
-            >
-              {concept}
-            </p>
-          </div>
-          <div>
-            <div className="block ">
-              <Label
-                htmlFor="content"
-                className=" m-auto text-xl"
-                value="내용"
-              />
+            <div>
+              <div className="block ">
+                <Label
+                  htmlFor="concept"
+                  className=" m-auto text-xl"
+                  value="컨셉"
+                />
+              </div>
+              <p
+                id="concept"
+                className="  rounded-lg border border-borderColor p-2 text-xl"
+              >
+                {concept}
+              </p>
             </div>
-            <p
-              id="title"
-              className="  border-borderColor h-60 overflow-y-auto whitespace-pre-wrap rounded-lg border p-2 text-xl"
-            >
-              {content}
-            </p>
+            <div>
+              <div className="block ">
+                <Label
+                  htmlFor="content"
+                  className=" m-auto text-xl"
+                  value="내용"
+                />
+              </div>
+              <p
+                id="title"
+                className=" h-[26rem] overflow-y-auto whitespace-pre-wrap rounded-lg border border-borderColor p-2 text-xl"
+              >
+                {content}
+              </p>
+            </div>
           </div>
         </div>
       </div>

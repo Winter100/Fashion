@@ -17,12 +17,14 @@ const subMenu = links.map((menu) => (
 
 export default function Page() {
   return (
-    <div className="h-full">
-      <SubMenuList flex={"justify-end"}>{subMenu}</SubMenuList>
+    <>
+      <SubMenuList className="mb-2 mt-2 flex h-8 justify-end">
+        {subMenu}
+      </SubMenuList>
 
       <FashionList />
 
       <Paginations route="fashion" query="page" totalPage={100} />
-    </div>
+    </>
   );
 }

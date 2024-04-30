@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import Write from "@/app/_components/Fashion/Edit";
 import usePost from "@/app/_hooks/usePost";
 import imgCompression from "@/app/_utils/imgCompression";
-import { inputType } from "@/app/_types/type";
 import useUser from "@/app/_hooks/useUser";
 import useLoading from "@/app/_hooks/useLoading";
+import { inputType } from "@/app/_types/type";
 
 export default function Page() {
   const { postFashion } = usePost();
@@ -40,5 +40,14 @@ export default function Page() {
     }
   }
 
-  return <Write onSubmit={onSubmit} submitLoading={submitLoading} />;
+  return (
+    <div className="flex h-full flex-col">
+      <Write
+        onSubmit={onSubmit}
+        btnText="등 록"
+        submitLoading={submitLoading}
+      />
+      ;
+    </div>
+  );
 }

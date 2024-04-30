@@ -70,6 +70,13 @@ export default function Page() {
   }
 
   return (
-    <Edit onSubmit={onSubmit} item={inititem} submitLoading={submitLoading} />
+    <div className="flex h-full flex-col">
+      <Edit
+        onSubmit={onSubmit}
+        btnText="수 정"
+        item={inititem}
+        submitLoading={submitLoading}
+      />
+    </div>
   );
 }
