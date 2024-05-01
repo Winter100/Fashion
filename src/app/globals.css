@@ -9,15 +9,15 @@ body {
 
 @layer components {
   .layout-max-width {
-    @apply max-w-screen-xl;
+    @apply max-w-5xl;
   }
 
   .image-parents-div-fill {
-    @apply relative m-auto flex h-[480px] w-[460px] items-center justify-center;
+    @apply relative m-auto flex h-[80%] w-full items-center justify-center;
   }
 
   .auth-btn-hover {
-    @apply hover:text-blue-700;
+    @apply w-full rounded-2xl text-center hover:bg-toggleBackground hover:text-black;
   }
 
   .dark-border {
@@ -27,15 +27,21 @@ body {
 
 .light {
   --background: 249, 249, 249;
-  --fontColor: 18, 18, 18;
+  --fontColor: 25, 25, 25;
   --borderColor: 230, 230, 230;
   --toggleBackground: 156, 163, 175;
+  --borderColorOne: 25, 25, 25;
 }
 
 .dark {
   --background: 20, 21, 23;
-  --fontColor: 156, 163, 175;
+  --backgroundOne: 30, 32, 34;
+  --backgroundTwo: 33, 35, 37;
+  --btnHoverBackground: 30, 32, 34;
+  --fontColor: 150, 163, 175;
+  /* --fontColor: 156, 163, 175; */
   --borderColor: 107, 114, 128;
+  --borderColorOne: 255, 255, 255;
   --toggleBackground: 95, 98, 120;
   /* --background: #808080; */ /* --gnbBackground: 100, 100, 100; */
 }

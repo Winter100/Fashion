@@ -23,10 +23,11 @@ module.exports = {
         fontColor: "rgba(var(--fontColor))",
         gnbBackground: "rgba(var(--gnbBackground))",
         borderColor: "rgba(var(--borderColor))",
+        borderColorOne: "rgba(var(--borderColorOne))",
         toggleBackground: "rgba(var(--toggleBackground))",
       },
     },
   },
-  plugins: [require("flowbite/plugin")],
+  plugins: [require("flowbite/plugin"), require("tailwind-scrollbar-hide")],
   darkMode: "class",
 };

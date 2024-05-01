@@ -13,8 +13,8 @@ interface DetailType {
 export default function Detail({ title, image, concept, content }: DetailType) {
   const router = useRouter();
   return (
-    <div className="layout-max-width bg-backgroundTwo m-auto flex h-4/5 w-full flex-col items-center justify-center">
-      <div className="h-13 bg-backgroundOne layout-max-width m-auto flex w-full items-center justify-between">
+    <div className="layout-max-width m-auto flex h-full w-full flex-col items-center justify-center bg-backgroundTwo">
+      <div className="h-13 layout-max-width m-auto flex w-full items-center justify-between bg-backgroundOne">
         <Button
           className="h-full"
           onClick={() => router.back()}
@@ -25,7 +25,7 @@ export default function Detail({ title, image, concept, content }: DetailType) {
         </Button>
       </div>
 
-      <div className="flex-rows bg-backgroundTwo flex h-full w-full items-center gap-2 rounded-lg p-2">
+      <div className="flex-rows flex h-full w-full items-center gap-2 rounded-lg bg-backgroundTwo p-2">
         <div className="flex h-full flex-1 flex-col items-center">
           <div className="image-parents-div-fill">
             <Image
