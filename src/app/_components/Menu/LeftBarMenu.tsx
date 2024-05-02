@@ -1,0 +1,69 @@
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { IoShirtOutline } from "react-icons/io5";
+import { RiTShirtAirFill } from "react-icons/ri";
+import { GiClothes } from "react-icons/gi";
+import { GoPencil } from "react-icons/go";
+
+export default function LeftBarMenu() {
+  const pathName = usePathname();
+  return (
+    <>
+      <Link
+        className={`auth-btn-hover ${pathName.includes("/fashion") ? "text-fontColor/95" : "text-fontColor/20"}`}
+        href="/fashion?page=1"
+      >
+        <li className=" flex items-center justify-center gap-2">
+          <span>
+            <IoShirtOutline className="text-3xl" />
+          </span>
+          <span className="hidden text-2xl lg:block lg:text-2xl">
+            오늘 어때?
+          </span>
+        </li>
+      </Link>
+      <Link
+        className={`auth-btn-hover ${pathName.includes("/tomorrow") ? "text-fontColor/95" : "text-fontColor/20"}`}
+        href="/tomorrow?page=1"
+      >
+        <li className=" flex items-center justify-center gap-2">
+          <span>
+            <RiTShirtAirFill className="text-3xl" />
+          </span>
+          <span className="hidden text-2xl lg:block lg:text-2xl">
+            내일 어때?
+          </span>
+        </li>
+      </Link>
+      <Link
+        className={`auth-btn-hover ${pathName.includes("/this") ? "text-fontColor/95" : "text-fontColor/20"}`}
+        href="/this?page=1"
+      >
+        <li className=" flex items-center justify-center gap-2">
+          <span>
+            <GiClothes className="text-3xl" />
+          </span>
+          <span className="hidden text-2xl lg:block lg:text-2xl">
+            이거 어때?
+          </span>
+        </li>
+      </Link>
+
+      <Link
+        className={`auth-btn-hover ${pathName.includes("/write") ? "text-fontColor/95" : "text-fontColor/20"}`}
+        href="/write"
+      >
+        <li className=" flex items-center justify-center gap-2">
+          <span>
+            <GoPencil className="text-3xl" />
+          </span>
+          <span className="hidden text-2xl lg:block lg:text-2xl">
+            기록 남기기
+          </span>
+        </li>
+      </Link>
+    </>
+  );
+}

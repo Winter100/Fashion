@@ -4,6 +4,8 @@ export default function LeftLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="hidden h-full md:fixed md:block md:w-48">{children}</div>
+    <div className="z-20 hidden h-full w-28 sm:fixed sm:block  xl:w-48">
+      {children}
+    </div>
   );
 }

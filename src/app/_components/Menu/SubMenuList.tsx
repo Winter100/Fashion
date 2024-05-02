@@ -1,7 +1,9 @@
 export default function SubMenuList({
   children,
+  className,
 }: {
   children: React.ReactNode;
+  className: string;
 }) {
-  return <ul className=" mb-2 mt-2 flex justify-end gap-4">{children}</ul>;
+  return <ul className={className}>{children}</ul>;
 }

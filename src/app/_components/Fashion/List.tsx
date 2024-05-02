@@ -12,7 +12,7 @@ export default function List() {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <ul className="grid h-full w-full grid-cols-2 justify-items-center gap-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+    <ul className="grid grid-cols-2 justify-items-center gap-2 lg:grid-cols-4 xl:grid-cols-6">
       {data?.map((item) => (
         <li key={item.id} className=" h-80 w-full ">
           <Link href={`/fashion/detail/${item.id}`}>

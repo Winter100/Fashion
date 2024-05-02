@@ -28,7 +28,7 @@ export default function Paginations({
   }
 
   return (
-    <div className="flex overflow-x-auto sm:justify-center">
+    <div className="flex h-14 justify-center overflow-x-auto">
       <Pagination
         className="text-xl"
         previousLabel="이전"
