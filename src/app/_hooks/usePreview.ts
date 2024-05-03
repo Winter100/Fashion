@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
-export default function usePreview() {
+
+export function usePreview() {
   const [preview, setPreview] = useState("");
 
   async function handlePreview(e: ChangeEvent<HTMLInputElement>) {
