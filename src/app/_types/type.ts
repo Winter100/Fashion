@@ -1,30 +1,36 @@
-import { User } from "@supabase/supabase-js";
 import { ChangeEventHandler, FormEvent } from "react";
+
+import { User } from "@supabase/supabase-js";
 
 export interface inputType {
   title: string;
-  concept: string;
+  tag: string;
   content: string;
   preview: string;
-  // image: { 0: File };
   imageFile: { 0: File };
 }
 
 export interface PostData {
   user?: User | null;
   title: string;
-  concept: string;
+  tag: string;
   content: string;
   image: File;
   fashionId?: string;
 }
 
-export interface UpdateData {
+export interface UpdateDataFn {
   title: string;
-  concept: string;
   content: string;
   image?: File;
   fashionId?: string;
+}
+export interface UpdateData {
+  title: string;
+  tag: string;
+  content: string;
+  image?: File;
+  id?: string;
 }
 export interface WriteType {
   input: inputType;
@@ -46,7 +52,7 @@ export type signUpType = signInType & {
 export interface ListItemType {
   id: string;
   title: string;
-  concept: string;
+  user: string;
   image: string;
 }
 

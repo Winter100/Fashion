@@ -1,17 +1,30 @@
 import { PostData, UpdateData } from "../_types/type";
 import supabase, { supabaseUrl } from "../_utils/supabase";
+import { TAG_NAME } from "./constant";
 
-export async function deleteFashionItem({ id }: { id: string }) {
-  const { error } = await supabase.from("fashionList").delete().eq("id", id);
+export async function getFashionList(
+  tag: string = TAG_NAME.today,
+  page: number = 1,
+) {
+  const itemsPerPage = 3;
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = page * itemsPerPage - 1;
+
+  const { data: fashionList, error } = await supabase
+    .from(`fashion-${tag}`)
+    .select("id,title,image,user,created_at")
+    .order("created_at", { ascending: false })
+    .limit(itemsPerPage)
+    .range(startIndex, endIndex);
 
   if (error) throw new Error(error.message);
 
-  return id;
+  return fashionList;
 }
 
-export async function getFashionItem(id: string) {
+export async function getFashionItem(id: string, tag: string) {
   const { data: findItem, error } = await supabase
-    .from("fashionList")
+    .from(`fashion-${tag}`)
     .select("*")
     .eq("id", id);
 
@@ -19,12 +32,14 @@ export async function getFashionItem(id: string) {
 
   return findItem[0];
 }
+
 export async function getFashionEditItem(
   id: string,
   userId: string | undefined,
+  tag: string,
 ) {
   const { data: findItem, error } = await supabase
-    .from("fashionList")
+    .from(`fashion-${tag}`)
     .select("*")
     .eq("id", id);
 
@@ -34,30 +49,34 @@ export async function getFashionEditItem(
   return findItem[0];
 }
 
-export async function getFashionList() {
-  const { data: fashionList, error } = await supabase
-    .from("fashionList")
-    .select("id,title,image,user,concept");
+export async function deleteFashionItem({
+  id,
+  tag,
+}: {
+  id: string;
+  tag: string;
+}) {
+  const { error } = await supabase.from(`fashion-${tag}`).delete().eq("id", id);
 
   if (error) throw new Error(error.message);
 
-  return fashionList;
+  return { id, tag };
 }
 
 export async function postFashionItem({
   user,
   title,
   content,
-  concept,
+  tag,
   image,
 }: PostData) {
   const imageName = `${Math.random()}-${image.name}`.replaceAll("/", "");
   const imagePath = `${supabaseUrl}/storage/v1/object/public/fashion-images/${imageName}`;
-  const { error } = await supabase.from("fashionList").insert([
+  const { error } = await supabase.from(`fashion-${tag}`).insert([
     {
       title,
       content,
-      concept,
+      tag,
       image: imagePath,
       user: user?.user_metadata.name,
       email: user?.email,
@@ -71,23 +90,25 @@ export async function postFashionItem({
 
   if (error) throw new Error(error.message);
   if (imageError) throw new Error(imageError.message);
+
+  return tag;
 }
 
 export async function updateFashionItem({
   title,
   content,
-  concept,
+  tag,
   image,
-  fashionId,
+  id,
 }: UpdateData) {
   if (image) {
     const imageName = `${Math.random()}-${image.name}`.replaceAll("/", "");
     const imagePath = `${supabaseUrl}/storage/v1/object/public/fashion-images/${imageName}`;
 
     const { error } = await supabase
-      .from("fashionList")
-      .update({ title, content, concept, image: imagePath })
-      .eq("id", fashionId);
+      .from(`fashion-${tag}`)
+      .update({ title, content, image: imagePath })
+      .eq("id", id);
 
     const { error: imageError } = await supabase.storage
       .from("fashion-images")
@@ -97,9 +118,9 @@ export async function updateFashionItem({
     if (imageError) throw new Error(imageError.message);
   } else {
     const { error } = await supabase
-      .from("fashionList")
-      .update({ title, content, concept })
-      .eq("id", fashionId);
+      .from(`fashion-${tag}`)
+      .update({ title, content })
+      .eq("id", id);
 
     if (error) throw new Error(error.message);
   }
