@@ -23,9 +23,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
+    <html lang="ko" className="dark scrollbar-hide">
       <body
-        className={`${dongle.className} h-dvh bg-background text-fontColor/70 `}
+        className={`${dongle.className} bg-backgroundOne text-fontColor/70`}
       >
         <DynamicDarkModeProvider>{children}</DynamicDarkModeProvider>
       </body>

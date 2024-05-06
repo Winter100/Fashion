@@ -9,7 +9,7 @@ body {
 
 @layer components {
   .layout-max-width {
-    @apply max-w-5xl;
+    @apply max-w-6xl;
   }
 
   .image-parents-div-fill {
