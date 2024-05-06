@@ -5,9 +5,10 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
 
-import { signInType } from "@/app/_types/type";
-import useLogin from "@/app/_hooks/useLogin";
+import { useLogin } from "@/app/_hooks/useAuth";
 import { useUserContextData } from "../Provider/UserContextProvider";
+
+import { signInType } from "@/app/_types/type";
 
 export default function SignIn() {
   const {
@@ -28,7 +29,7 @@ export default function SignIn() {
     login(
       { email, password },
       {
-        onError: (e) => {
+        onError: () => {
           setError("root", { message: "아이디 또는 비밀번호를 확인해주세요." });
         },
         onSuccess: (e) => {

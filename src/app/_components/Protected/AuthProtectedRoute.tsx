@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-import useUser from "@/app/_hooks/useUser";
+import { useUser } from "@/app/_hooks/useAuth";
+
 import LoadingSpinner from "../Spinner/LoadingSpinner";
 
 // 비로그인시 들어올 수 없는 페이지 (글쓰기, 수정)
