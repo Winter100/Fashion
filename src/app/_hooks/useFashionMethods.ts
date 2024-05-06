@@ -14,9 +14,14 @@ import {
 import { useUser } from "./useAuth";
 
 import { PostData, UpdateDataFn } from "../_types/type";
+import { getRoute } from "../_utils/getRoute";
+import { TAG_NAME } from "../_utils/constant";
 
-export function useFashionList(tag: string = "Today") {
+export function useFashionList() {
+  const params = useParams();
   const searchParams = useSearchParams();
+
+  const tag = params.tag as string;
   const page = Number(searchParams.get("page"));
 
   const { data, isLoading, isError } = useQuery({
@@ -45,7 +50,7 @@ export function usePost() {
       postFashionItemApi({ user, title, content, tag, image }),
     onSuccess: (tag) => {
       toast.success("패션을 기록했습니다!");
-      router.push(`/fashion${tag}?page=1`);
+      router.push(getRoute(TAG_NAME.fashion, tag, 1));
     },
     onError: () => {
       toast.error("패션 기록을 실패했습니다.");
@@ -68,7 +73,7 @@ export function useDelete() {
     onSuccess: ({ id, tag }) => {
       toast.success("삭제되었습니다!");
       queryClient.removeQueries({ queryKey: ["detail", tag, id] });
-      router.replace(`/fashion${tag}?page=1`);
+      router.replace(getRoute(TAG_NAME.fashion, tag, 1));
     },
     onError: () => {
       toast.error("잠시 후 다시 시도해 주세요!");
@@ -93,7 +98,7 @@ export function useUpdate() {
     onError: (e) => {
       toast.error(e.message);
       toast.error("잠시 후 다시 시도해 주세요!");
-      router.replace(`/fashion${tag}?page=1`);
+      router.replace(getRoute(TAG_NAME.fashion, tag, 1));
     },
   });
 

@@ -1,22 +1,19 @@
 "use client";
 
+import { TAG_NAME } from "@/app/_utils/constant";
+import { getRoute } from "@/app/_utils/getRoute";
 import { Pagination } from "flowbite-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Paginations({
-  route,
-  query,
-  totalPage,
-}: {
-  route: string;
-  query: string;
-  totalPage: number;
-}) {
+export default function Paginations() {
   const [currentPage, setCurrentPage] = useState(1);
+
   const searchParams = useSearchParams();
-  const page = Number(searchParams.get("page"));
   const router = useRouter();
+
+  const { tag } = useParams();
+  const page = Number(searchParams.get("page"));
 
   useEffect(() => {
     setCurrentPage(page);
@@ -24,7 +21,7 @@ export default function Paginations({
 
   function onPageChange(page: number) {
     setCurrentPage(page);
-    router.push(`${route}?${query}=${page}`);
+    router.push(getRoute(TAG_NAME.fashion, tag as string, page));
   }
 
   return (
@@ -34,7 +31,7 @@ export default function Paginations({
         previousLabel="이전"
         nextLabel="다음"
         currentPage={currentPage}
-        totalPages={totalPage}
+        totalPages={100}
         onPageChange={onPageChange}
         showIcons
       />

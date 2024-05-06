@@ -9,6 +9,7 @@ import {
   signUp as signUpApi,
 } from "../_utils/apiAuth";
 import { TAG_NAME } from "../_utils/constant";
+import { getRoute } from "../_utils/getRoute";
 
 const AUTH_KEY = "auth";
 
@@ -49,7 +50,7 @@ export function useSignout() {
     onSuccess: () => {
       queryClient.removeQueries({ queryKey: [AUTH_KEY], exact: true });
       toast.success("로그아웃 되었습니다.");
-      router.replace(`/fashion${TAG_NAME.today}?page=1`);
+      router.replace(getRoute(TAG_NAME.fashion, TAG_NAME.today, 1));
     },
   });
   return { signout, isPending };

@@ -2,8 +2,9 @@
 
 import { useRouter } from "next/navigation";
 
-import useSignout from "@/app/_hooks/useSignout";
-import { useUserContextData } from "@/app/_context/ContextProvider";
+import { useSignout } from "@/app/_hooks/useAuth";
+
+import { useUserContextData } from "../Provider/UserContextProvider";
 
 export default function AuthBar() {
   const router = useRouter();
@@ -19,16 +20,34 @@ export default function AuthBar() {
   function signInRoute() {
     router.push("/auth/signin");
   }
+  function myPageRoute() {
+    router.push("/mypage");
+  }
 
   const isAuthenticated = userData?.aud === "authenticated";
 
   return (
-    <>
+    <ul className=" flex w-full">
       {!isAuthenticated ? (
-        <button onClick={signInRoute}>로그인</button>
+        <li className=" auth-btn-hover">
+          <button className="w-full" onClick={signInRoute}>
+            로그인
+          </button>
+        </li>
       ) : (
-        <button onClick={signOut}>로그아웃</button>
+        <>
+          <li className=" auth-btn-hover">
+            <button className="w-full" onClick={signOut}>
+              로그아웃
+            </button>
+          </li>
+          <li className=" auth-btn-hover">
+            <button className="w-full" onClick={myPageRoute}>
+              My
+            </button>
+          </li>
+        </>
       )}
-    </>
+    </ul>
   );
 }

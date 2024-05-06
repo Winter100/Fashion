@@ -1,39 +1,27 @@
-"use client";
-
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
 import DarkModeToggleBtn from "../DarkMode/DarkModeToggleBtn";
 import AuthBar from "./AuthBar";
 import Title from "./Title";
+import dynamic from "next/dynamic";
 
-import { menu } from "./menu";
+const DynamicLeftBarMenu = dynamic(() => import("../Menu/LeftBarMenu"), {
+  ssr: false,
+});
 
 export default function LeftBar() {
-  const pathName = usePathname();
   return (
-    <nav className="h-full w-full">
-      <header className="border-borderColorOne/20 flex items-center justify-center border-b  sm:h-36">
+    <nav className="flex h-full w-full flex-col items-center justify-between sm:pb-40">
+      <header className="flex h-16 items-center justify-center border-borderColorOne/20">
         <Title />
       </header>
 
-      <ul className=" flex flex-col items-center justify-center gap-4  text-4xl sm:h-[50rem]">
-        {menu.map((li) => (
-          <Link
-            className={`auth-btn-hover ${pathName.includes(li.filter) ? "text-fontColor/95" : "text-fontColor/20"}`}
-            href={li.href}
-            key={li.name}
-          >
-            <li>{li.name}</li>
-          </Link>
-        ))}
+      <ul className=" flex w-full flex-col items-center justify-center gap-20  text-4xl">
+        <DynamicLeftBarMenu />
       </ul>
-
-      <div className=" border-borderColorOne/20 flex items-center justify-center border-t  sm:h-12">
+      <div className=" flex w-full items-center justify-center border-borderColorOne/20  ">
         <DarkModeToggleBtn />
       </div>
 
-      <div className=" border-borderColorOne/20 flex items-center justify-center border-b border-t   text-2xl sm:h-12">
+      <div className=" flex w-full items-center justify-center border-borderColorOne/20 text-2xl">
         <AuthBar />
       </div>
     </nav>

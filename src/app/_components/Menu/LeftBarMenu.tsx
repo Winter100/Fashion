@@ -7,13 +7,16 @@ import { RiTShirtAirFill } from "react-icons/ri";
 import { GiClothes } from "react-icons/gi";
 import { GoPencil } from "react-icons/go";
 
+import { TAG_NAME } from "@/app/_utils/constant";
+import { getRoute } from "@/app/_utils/getRoute";
+
 export default function LeftBarMenu() {
   const pathName = usePathname();
   return (
     <>
       <Link
-        className={`auth-btn-hover ${pathName.includes("/fashion") ? "text-fontColor/95" : "text-fontColor/20"}`}
-        href="/fashion?page=1"
+        className={`auth-btn-hover ${pathName.includes(TAG_NAME.today) ? "text-fontColor/95" : "text-fontColor/20"}`}
+        href={getRoute(TAG_NAME.fashion, TAG_NAME.today, 1)}
       >
         <li className=" flex items-center justify-center gap-2">
           <span>
@@ -25,8 +28,8 @@ export default function LeftBarMenu() {
         </li>
       </Link>
       <Link
-        className={`auth-btn-hover ${pathName.includes("/tomorrow") ? "text-fontColor/95" : "text-fontColor/20"}`}
-        href="/tomorrow?page=1"
+        className={`auth-btn-hover ${pathName.includes(TAG_NAME.tomorrow) ? "text-fontColor/95" : "text-fontColor/20"}`}
+        href={getRoute(TAG_NAME.fashion, TAG_NAME.tomorrow, 1)}
       >
         <li className=" flex items-center justify-center gap-2">
           <span>
@@ -38,8 +41,8 @@ export default function LeftBarMenu() {
         </li>
       </Link>
       <Link
-        className={`auth-btn-hover ${pathName.includes("/this") ? "text-fontColor/95" : "text-fontColor/20"}`}
-        href="/this?page=1"
+        className={`auth-btn-hover ${pathName.includes(TAG_NAME.this) ? "text-fontColor/95" : "text-fontColor/20"}`}
+        href={getRoute(TAG_NAME.fashion, TAG_NAME.this, 1)}
       >
         <li className=" flex items-center justify-center gap-2">
           <span>
