@@ -1,20 +1,21 @@
 "use client";
+import { PiSun, PiMoon } from "react-icons/pi";
 
 import { useDarkMode } from "../Provider/DarkModeProvider";
-import ModeToggleBtn from "./ModeToggleBtn";
 
 export default function DarkModeToggleBtn() {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   return (
     <button
-      className=" hover:bg-toggleBackground/90 rounded-lg"
+      title="테마 바꾸기"
+      className="rounded-lg hover:bg-toggleBackground/90"
       onClick={toggleDarkMode}
     >
       {isDarkMode ? (
-        <ModeToggleBtn src="light" />
+        <PiSun className=" text-3xl" />
       ) : (
-        <ModeToggleBtn src="dark" />
+        <PiMoon className=" text-3xl" />
       )}
     </button>
   );

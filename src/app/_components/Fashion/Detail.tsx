@@ -1,36 +1,30 @@
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-
-import { Button, Label } from "flowbite-react";
+import { Label } from "flowbite-react";
+import { convertToKST } from "@/app/_utils/convertToKST";
 
 interface DetailType {
+  user: string;
   title: string;
-  image: string;
-  concept: string;
   content: string;
+  image: string;
+  created_at: Date;
 }
 
-export default function Detail({ title, image, concept, content }: DetailType) {
-  const router = useRouter();
+export default function Detail({
+  user,
+  title,
+  content,
+  image,
+  created_at,
+}: DetailType) {
   return (
-    <div className="layout-max-width m-auto flex h-full w-full flex-col items-center justify-center bg-backgroundTwo">
-      <div className="h-13 layout-max-width m-auto flex w-full items-center justify-between bg-backgroundOne">
-        <Button
-          className="h-full"
-          onClick={() => router.back()}
-          size="md"
-          color="green"
-        >
-          <span className="text-xl">뒤로가기</span>
-        </Button>
-      </div>
-
-      <div className="flex-rows flex h-full w-full items-center gap-2 rounded-lg bg-backgroundTwo p-2">
+    <div className="flex h-full w-full flex-col items-center justify-center border">
+      <div className="flex-rows flex  w-full items-center gap-2 rounded-lg p-2">
         <div className="flex h-full flex-1 flex-col items-center">
           <div className="image-parents-div-fill">
             <Image
               src={image}
-              alt="업로드 이미지"
+              alt="패션 이미지"
               fill
               quality={100}
               sizes="100vw"
@@ -51,7 +45,7 @@ export default function Detail({ title, image, concept, content }: DetailType) {
               </div>
               <p
                 id="title"
-                className=" rounded-lg border border-borderColor p-2 text-xl"
+                className="rounded-lg  border-borderColor p-2 text-xl"
               >
                 {title}
               </p>
@@ -59,16 +53,31 @@ export default function Detail({ title, image, concept, content }: DetailType) {
             <div>
               <div className="block ">
                 <Label
-                  htmlFor="concept"
+                  htmlFor="user"
                   className=" m-auto text-xl"
-                  value="컨셉"
+                  value="글쓴이"
                 />
               </div>
               <p
-                id="concept"
-                className="  rounded-lg border border-borderColor p-2 text-xl"
+                id="user"
+                className="rounded-lg  border-borderColor p-2 text-xl"
               >
-                {concept}
+                {user}
+              </p>
+            </div>
+            <div>
+              <div className="block ">
+                <Label
+                  htmlFor="date"
+                  className=" m-auto text-xl"
+                  value="작성일"
+                />
+              </div>
+              <p
+                id="date"
+                className="rounded-lg  border-borderColor p-2 text-xl"
+              >
+                {convertToKST(created_at)}
               </p>
             </div>
             <div>
@@ -81,7 +90,7 @@ export default function Detail({ title, image, concept, content }: DetailType) {
               </div>
               <p
                 id="title"
-                className=" h-[26rem] overflow-y-auto whitespace-pre-wrap rounded-lg border border-borderColor p-2 text-xl"
+                className=" h-[26rem] overflow-y-auto whitespace-pre-wrap rounded-lg  border-borderColor p-2 text-xl"
               >
                 {content}
               </p>

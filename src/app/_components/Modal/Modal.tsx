@@ -1,10 +1,12 @@
-import { ModalContextType } from "@/app/_types/type";
 import { createContext, useState } from "react";
+
 import ModalWrapper from "./ModalWrapper";
 import OpenBtn from "./OpenBtn";
 import ModalTitle from "./ModalTitle";
 import ModalContent from "./ModalContent";
 import ModalBtnGroup from "./ModalBtnWrapper";
+
+import { ModalContextType } from "@/app/_types/type";
 
 export const ModalContext = createContext<ModalContextType>({
   open: false,

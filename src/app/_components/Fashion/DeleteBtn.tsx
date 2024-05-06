@@ -1,15 +1,17 @@
 "use client";
 
-import { Button } from "flowbite-react";
+import { Button, Spinner } from "flowbite-react";
 
-import useDelete from "@/app/_hooks/useDelete";
+import { useDelete } from "@/app/_hooks/useFashionMethods";
+
 import Modal from "../Modal/Modal";
 
-export default function DeleteBtn({ itemId }: { itemId: string }) {
-  const { deleteFashion, isPending } = useDelete();
+export default function DeleteBtn() {
+  const { deleteFashion, isLoading, setLoading } = useDelete();
 
   function handleDelete() {
-    deleteFashion({ id: itemId });
+    setLoading(true);
+    deleteFashion();
   }
 
   return (
@@ -18,22 +20,19 @@ export default function DeleteBtn({ itemId }: { itemId: string }) {
       <Modal.Wrapper>
         <Modal.Title title="경 고" />
         <Modal.Content>
-          <span className=" m-auto text-center text-3xl">
+          <span className=" m-auto text-center text-3xl text-black">
             선택한 게시물을 정말 <span className="text-red-600">삭제</span>
             하시겠습니까?
           </span>
         </Modal.Content>
         <Modal.ButtonWrapper
           className="m-auto flex gap-6"
-          isProcessing={isPending}
+          isProcessing={isLoading}
         >
-          <Button
-            color="failure"
-            disabled={isPending}
-            isProcessing={isPending}
-            onClick={handleDelete}
-          >
-            <span className="text-xl">삭 제</span>
+          <Button color="failure" disabled={isLoading} onClick={handleDelete}>
+            <span className="text-xl">
+              {!isLoading ? "삭 제" : <Spinner />}
+            </span>
           </Button>
         </Modal.ButtonWrapper>
       </Modal.Wrapper>

@@ -1,12 +1,22 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { Button, Label, Spinner, TextInput, Textarea } from "flowbite-react";
+import {
+  Button,
+  Label,
+  Select,
+  Spinner,
+  TextInput,
+  Textarea,
+} from "flowbite-react";
 
-import usePreview from "@/app/_hooks/usePreview";
+import { usePreview } from "@/app/_hooks/usePreview";
+
 import { inputType } from "@/app/_types/type";
+import { TAG_NAME } from "@/app/_utils/constant";
 
 export default function Write({
   onSubmit,
@@ -26,20 +36,25 @@ export default function Write({
   } = useForm<inputType>({
     defaultValues: {
       title: item?.title,
-      concept: item?.concept,
       content: item?.content,
+      tag: item?.tag || "",
     },
   });
   const { preview, handlePreview } = usePreview();
+  const [isSelectDisabled, setIsSelectDisabled] = useState(!!item?.tag);
   const router = useRouter();
 
   const isImage = preview || item?.image;
+
+  useEffect(() => {
+    setIsSelectDisabled(!!item?.tag);
+  }, [item?.tag]);
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="layout-max-width bg-backgroundTwo m-auto flex h-4/5 w-full flex-col items-center justify-center"
+      className=" m-auto flex h-full w-full flex-col items-center justify-center"
     >
-      <div className="h-13 bg-backgroundOne layout-max-width m-auto flex w-full items-center justify-between">
+      <div className="h-13  layout-max-width m-auto flex w-full items-center justify-between">
         <Button
           className="h-full"
           onClick={() => router.back()}
@@ -65,7 +80,7 @@ export default function Write({
         </Button>
       </div>
 
-      <div className="flex-rows bg-backgroundTwo flex h-full w-full items-center gap-2 rounded-lg p-2">
+      <div className="flex-rows flex h-full w-full items-center gap-2 rounded-lg bg-backgroundOne p-2">
         <div className="flex h-full flex-1 flex-col items-center">
           <div className="image-parents-div-fill">
             {!errors?.imageFile && isImage && (
@@ -74,7 +89,6 @@ export default function Write({
                 alt="업로드 이미지"
                 fill
                 quality={100}
-                sizes="100vw"
                 className="object-contain"
               />
             )}
@@ -134,28 +148,30 @@ export default function Write({
                 className=" font-bold"
               />
             </div>
-            <div>
-              <div className="block ">
-                <Label
-                  htmlFor="concept"
-                  className=" m-auto text-2xl"
-                  value="컨셉"
-                />
+
+            <div className="w-full ">
+              <div className="block">
+                <Label htmlFor="tag" className="text-2xl" value="게시판 선택" />
                 <span className=" ml-4 text-2xl text-red-500">
-                  {errors?.concept && errors?.concept.message}
+                  {errors?.tag && errors?.tag.message}
                 </span>
               </div>
-              <TextInput
-                {...register("concept", {
-                  required: "컨셉을 짧게 적어주세요.",
+              <Select
+                {...register("tag", {
+                  required: "게시판을 선택해주세요.",
                 })}
-                disabled={submitLoading}
-                id="concept"
-                name="concept"
-                type="text"
-                style={{ fontSize: "20px", padding: "7px" }}
-                className=" font-bold"
-              />
+                style={{ fontSize: "20px" }}
+                id="tag"
+                name="tag"
+                disabled={isSelectDisabled || submitLoading}
+              >
+                <option disabled value="">
+                  게시판을 선택해주세요
+                </option>
+                <option value={TAG_NAME.today}>오늘 어때?</option>
+                <option value={TAG_NAME.tomorrow}>내일 어때?</option>
+                <option value={TAG_NAME.this}>이거 어때?</option>
+              </Select>
             </div>
             <div>
               <div className="block ">
