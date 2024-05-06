@@ -6,7 +6,7 @@ export async function getFashionList(
   tag: string = TAG_NAME.today,
   page: number = 1,
 ) {
-  const itemsPerPage = 3;
+  const itemsPerPage = 30;
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = page * itemsPerPage - 1;
 

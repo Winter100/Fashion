@@ -1,9 +1,7 @@
 export const TAG_NAME = {
-  today: "Today",
-  tomorrow: "Tomorrow",
-  this: "This",
+  fashion: "fashion",
+  detail: "detail",
+  today: "today",
+  tomorrow: "tomorrow",
+  this: "this",
 };
-
-// export const FULL_SCREEN_ERROR_MESSAGE = {
-//   hasNoPosts
-// }
