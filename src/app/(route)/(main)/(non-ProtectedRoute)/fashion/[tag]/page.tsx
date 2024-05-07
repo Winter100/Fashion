@@ -23,6 +23,8 @@ export default async function Page({
     queryFn: () => getFashionList(tag, page),
   });
 
+  queryClient.clear();
+
   return (
     <div className=" flex h-full flex-col justify-between">
       <HydrationBoundary state={dehydrate(queryClient)}>

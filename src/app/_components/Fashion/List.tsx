@@ -15,7 +15,7 @@ export default function List({ tag }: { tag: string }) {
   if (data?.length === 0 || !data) {
     return (
       <ErrorWrapper>
-        <span>등록된 글이 없습니다.</span>
+        <span>등록된 기록이 없습니다.</span>
       </ErrorWrapper>
     );
   }
