@@ -12,15 +12,16 @@ export default async function Page({
   searchParams,
 }: {
   params: { tag: string };
-  searchParams: { page: string };
+  searchParams: { page: string; date: string };
 }) {
   const tag = params.tag;
   const page = Number(searchParams.page);
+  const date = searchParams.date;
 
   const queryClient = new QueryClient({});
   await queryClient.prefetchQuery({
-    queryKey: [tag, page],
-    queryFn: () => getFashionList(tag, page),
+    queryKey: [tag, page, date],
+    queryFn: () => getFashionList(tag, page, date),
   });
 
   queryClient.clear();
