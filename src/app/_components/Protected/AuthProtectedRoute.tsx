@@ -24,7 +24,7 @@ export default function AuthProtectedRoute({
     }
   }, [isLoading, isAuthenticated, router]);
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading || !isAuthenticated) return <LoadingSpinner />;
 
   if (isAuthenticated) return <>{children}</>;
 }

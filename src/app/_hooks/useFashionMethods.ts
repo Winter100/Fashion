@@ -1,3 +1,4 @@
+import { mergeDateAndpadZero } from "@/app/_utils/mergeDateAndpadZero";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
@@ -14,7 +15,7 @@ import {
 import { useUser } from "./useAuth";
 
 import { PostData, UpdateDataFn } from "../_types/type";
-import { getRoute } from "../_utils/getRoute";
+import { setFashionRoute } from "../_utils/setFashionRoute";
 import { TAG_NAME } from "../_utils/constant";
 
 export function useFashionList() {
@@ -23,10 +24,11 @@ export function useFashionList() {
 
   const tag = params.tag as string;
   const page = Number(searchParams.get("page"));
+  const date = searchParams.get("date") ?? mergeDateAndpadZero();
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: [tag, page],
-    queryFn: () => fashionListApi(tag, page),
+    queryKey: [tag, page, date],
+    queryFn: () => fashionListApi(tag, page, date),
   });
 
   return { data, isLoading };
@@ -50,7 +52,9 @@ export function usePost() {
       postFashionItemApi({ user, title, content, tag, image }),
     onSuccess: (tag) => {
       toast.success("패션을 기록했습니다!");
-      router.push(getRoute(TAG_NAME.fashion, tag, 1));
+      router.push(
+        setFashionRoute(TAG_NAME.fashion, tag, 1, mergeDateAndpadZero()),
+      );
     },
     onError: () => {
       toast.error("패션 기록을 실패했습니다.");
@@ -73,7 +77,8 @@ export function useDelete() {
     onSuccess: ({ id, tag }) => {
       toast.success("삭제되었습니다!");
       queryClient.removeQueries({ queryKey: ["detail", tag, id] });
-      router.replace(getRoute(TAG_NAME.fashion, tag, 1));
+      // router.replace(setFashionRoute(TAG_NAME.fashion, tag, 1, date));
+      router.back();
     },
     onError: () => {
       toast.error("잠시 후 다시 시도해 주세요!");
@@ -98,7 +103,9 @@ export function useUpdate() {
     onError: (e) => {
       toast.error(e.message);
       toast.error("잠시 후 다시 시도해 주세요!");
-      router.replace(getRoute(TAG_NAME.fashion, tag, 1));
+      router.replace(
+        setFashionRoute(TAG_NAME.fashion, tag, 1, mergeDateAndpadZero()),
+      );
     },
   });
 

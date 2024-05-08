@@ -1,8 +1,16 @@
 "use client";
 
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+
+import { TAG_NAME } from "@/app/_utils/constant";
+import {
+  mergeDateAndpadZero,
+  parseDateFromString,
+} from "@/app/_utils/mergeDateAndpadZero";
+import { setFashionRoute } from "@/app/_utils/setFashionRoute";
 
 type ValuePiece = Date | null;
 
@@ -11,18 +19,28 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 const today = new Date();
 
 export default function MainCalendar() {
-  const [value, setValue] = useState<Value>(today);
-  const [activeStartDate, setActiveStartDate] = useState(() => new Date());
+  const searchParams = useSearchParams();
+  const date = parseDateFromString(searchParams.get("date") as string);
+  const [value, setValue] = useState<Value>(date);
+  const [activeStartDate, setActiveStartDate] = useState(today);
+  const { tag } = useParams();
+  const router = useRouter();
 
-  const onChange = (nextValue: Value) => {
-    // console.log(nextValue);
+  function onChange(nextValue: Value) {
+    const date = new Date(nextValue as Date);
+    const convertDate = mergeDateAndpadZero(date);
+
+    router.push(
+      setFashionRoute(TAG_NAME.fashion, tag as string, 1, convertDate),
+    );
     setValue(nextValue);
-  };
+  }
 
-  const goToToday = () => {
-    setValue(today);
+  function goToToday() {
+    // setValue(today);
     setActiveStartDate(today);
-  };
+    onChange(today);
+  }
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
@@ -46,7 +64,7 @@ export default function MainCalendar() {
         maxDetail="month"
         prev2Label={null}
         next2Label={null}
-        calendarType="US"
+        calendarType="gregory"
         showNeighboringMonth={false}
         formatDay={(_, date) => date.toLocaleString("en", { day: "numeric" })}
         tileDisabled={({ date }) =>

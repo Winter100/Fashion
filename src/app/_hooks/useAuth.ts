@@ -9,7 +9,8 @@ import {
   signUp as signUpApi,
 } from "../_utils/apiAuth";
 import { TAG_NAME } from "../_utils/constant";
-import { getRoute } from "../_utils/getRoute";
+import { setFashionRoute } from "../_utils/setFashionRoute";
+import { mergeDateAndpadZero } from "../_utils/mergeDateAndpadZero";
 
 const AUTH_KEY = "auth";
 
@@ -50,7 +51,14 @@ export function useSignout() {
     onSuccess: () => {
       queryClient.removeQueries({ queryKey: [AUTH_KEY], exact: true });
       toast.success("로그아웃 되었습니다.");
-      router.replace(getRoute(TAG_NAME.fashion, TAG_NAME.today, 1));
+      router.replace(
+        setFashionRoute(
+          TAG_NAME.fashion,
+          TAG_NAME.today,
+          1,
+          mergeDateAndpadZero(),
+        ),
+      );
     },
   });
   return { signout, isPending };

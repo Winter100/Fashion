@@ -5,15 +5,21 @@ import { TAG_NAME } from "./constant";
 export async function getFashionList(
   tag: string = TAG_NAME.today,
   page: number = 1,
+  date: string | Date,
 ) {
   const itemsPerPage = 30;
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = page * itemsPerPage - 1;
 
+  const startDate = `${date}T00:00:00Z`; // 해당 날짜의 시작 (UTC 기준)
+  const endDate = `${date}T23:59:59Z`; // 해당 날짜의 종료 (UTC 기준)
+
   const { data: fashionList, error } = await supabase
     .from(`fashion-${tag}`)
     .select("id,title,image,user,created_at")
     .order("created_at", { ascending: false })
+    .gte("created_at", startDate) // 지정된 날짜 이상의 데이터
+    .lte("created_at", endDate) // 지정된 날짜 이하의 데이터
     .limit(itemsPerPage)
     .range(startIndex, endIndex);
 

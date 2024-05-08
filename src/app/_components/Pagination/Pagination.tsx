@@ -1,7 +1,8 @@
 "use client";
 
 import { TAG_NAME } from "@/app/_utils/constant";
-import { getRoute } from "@/app/_utils/getRoute";
+import { mergeDateAndpadZero } from "@/app/_utils/mergeDateAndpadZero";
+import { setFashionRoute } from "@/app/_utils/setFashionRoute";
 import { Pagination } from "flowbite-react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -14,6 +15,7 @@ export default function Paginations() {
 
   const { tag } = useParams();
   const page = Number(searchParams.get("page"));
+  const date = searchParams.get("date") as string;
 
   useEffect(() => {
     setCurrentPage(page);
@@ -21,7 +23,7 @@ export default function Paginations() {
 
   function onPageChange(page: number) {
     setCurrentPage(page);
-    router.push(getRoute(TAG_NAME.fashion, tag as string, page));
+    router.push(setFashionRoute(TAG_NAME.fashion, tag as string, page, date));
   }
 
   return (
