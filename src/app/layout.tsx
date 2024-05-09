@@ -13,8 +13,8 @@ const DynamicDarkModeProvider = dynamic(
 );
 
 export const metadata = {
-  title: "오늘 어때?",
-  description: "오늘 하루의 패션을 한장의 사진으로 기록해보세요!",
+  title: "이 옷 어때?",
+  description: "내 패션을 기록하고, 모두에게 자랑해 보세요.",
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko" className="dark scrollbar-hide">
+    <html lang="ko" className="scrollbar-hide">
       <body
         className={`${dongle.className} bg-backgroundOne text-fontColor/70`}
       >

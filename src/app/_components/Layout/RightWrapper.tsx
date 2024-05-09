@@ -1,6 +1,6 @@
-export default function LeftLayout({
+export default function RightWrapper({
   children,
-  className = "z-20 hidden h-full w-28 sm:fixed sm:block xl:w-40",
+  className = "flex items-center justify-center",
 }: {
   children: React.ReactNode;
   className?: string;

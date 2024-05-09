@@ -2,18 +2,24 @@ import Link from "next/link";
 
 import HomeLayout from "../_components/Layout/HomeLayout";
 import { TAG_NAME } from "../_utils/constant";
-import { getRoute } from "../_utils/getRoute";
+import { setFashionRoute } from "../_utils/setFashionRoute";
+import { mergeDateAndpadZero } from "../_utils/mergeDateAndpadZero";
 
 export default async function page() {
   return (
     <HomeLayout>
-      <h1 className="hidden text-7xl">오늘 어때?</h1>
-      <p className="text-5xl">오늘의 나를 한장의 사진으로 기록해보세요!</p>
+      <h1 className="hidden">이 옷 어때?</h1>
+      <p className="text-4xl sm:text-5xl">내 패션을 기록하고 자랑해 보세요!</p>
       <Link
-        href={getRoute(TAG_NAME.fashion, TAG_NAME.today, 1)}
+        href={setFashionRoute(
+          TAG_NAME.fashion,
+          TAG_NAME.today,
+          1,
+          mergeDateAndpadZero(),
+        )}
         className=" flex h-12 w-20 items-center justify-center rounded-lg border border-borderColor text-2xl hover:border-gray-700"
       >
-        오늘 어때?
+        이 옷 어때?
       </Link>
     </HomeLayout>
   );

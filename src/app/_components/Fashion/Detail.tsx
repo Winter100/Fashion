@@ -18,8 +18,8 @@ export default function Detail({
   created_at,
 }: DetailType) {
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center border">
-      <div className="flex-rows flex  w-full items-center gap-2 rounded-lg p-2">
+    <div className="flex w-full flex-col items-center justify-center">
+      <div className="flex-rows flex w-full items-center gap-2 p-2">
         <div className="flex h-full flex-1 flex-col items-center">
           <div className="image-parents-div-fill">
             <Image
@@ -43,10 +43,7 @@ export default function Detail({
                   value="제목"
                 />
               </div>
-              <p
-                id="title"
-                className="rounded-lg  border-borderColor p-2 text-xl"
-              >
+              <p id="title" className="p-2 text-xl">
                 {title}
               </p>
             </div>
@@ -58,10 +55,7 @@ export default function Detail({
                   value="글쓴이"
                 />
               </div>
-              <p
-                id="user"
-                className="rounded-lg  border-borderColor p-2 text-xl"
-              >
+              <p id="user" className="p-2 text-xl">
                 {user}
               </p>
             </div>
@@ -73,10 +67,7 @@ export default function Detail({
                   value="작성일"
                 />
               </div>
-              <p
-                id="date"
-                className="rounded-lg  border-borderColor p-2 text-xl"
-              >
+              <p id="date" className="p-2 text-xl">
                 {convertToKST(created_at)}
               </p>
             </div>
@@ -90,7 +81,7 @@ export default function Detail({
               </div>
               <p
                 id="title"
-                className=" h-[26rem] overflow-y-auto whitespace-pre-wrap rounded-lg  border-borderColor p-2 text-xl"
+                className=" h-80 overflow-y-auto whitespace-pre-wrap p-2 text-xl"
               >
                 {content}
               </p>
