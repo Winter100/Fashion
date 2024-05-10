@@ -1,4 +1,4 @@
-import { PostData, UpdateData } from "../_types/type";
+import { PostData, UpdateData, deleteType } from "../_types/type";
 import supabase, { supabaseUrl } from "../_utils/supabase";
 import { TAG_NAME } from "./constant";
 
@@ -28,6 +28,16 @@ export async function getFashionList(
   return fashionList;
 }
 
+export async function getMyFashionList(tag: string, userName: string) {
+  const { data, error } = await supabase
+    .from(`fashion-${tag}`)
+    .select("*")
+    .eq("user", userName);
+
+  if (error) throw new Error(error.message);
+  return data;
+}
+
 export async function getFashionItem(id: string, tag: string) {
   const { data: findItem, error } = await supabase
     .from(`fashion-${tag}`)
@@ -55,18 +65,16 @@ export async function getFashionEditItem(
   return findItem[0];
 }
 
-export async function deleteFashionItem({
-  id,
-  tag,
-}: {
-  id: string;
-  tag: string;
-}) {
-  const { error } = await supabase.from(`fashion-${tag}`).delete().eq("id", id);
-
-  if (error) throw new Error(error.message);
-
-  return { id, tag };
+export async function deleteFashionItem(items: deleteType[]) {
+  try {
+    await Promise.all(
+      items.map(({ id, tag }) =>
+        supabase.from(`fashion-${tag}`).delete().eq("id", id),
+      ),
+    );
+  } catch (error: any) {
+    throw new Error(error?.message);
+  }
 }
 
 export async function postFashionItem({

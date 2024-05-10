@@ -10,7 +10,7 @@ import {
 } from "../_utils/apiAuth";
 import { TAG_NAME } from "../_utils/constant";
 import { setFashionRoute } from "../_utils/setFashionRoute";
-import { mergeDateAndpadZero } from "../_utils/mergeDateAndpadZero";
+import { mergeDateAndpadZero } from "../_utils/dateFn";
 
 const AUTH_KEY = "auth";
 

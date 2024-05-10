@@ -1,8 +1,8 @@
-import { mergeDateAndpadZero } from "@/app/_utils/mergeDateAndpadZero";
+import { mergeDateAndpadZero } from "@/app/_utils/dateFn";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import {
-  QueryClient,
   useMutation,
+  useQueries,
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
@@ -16,10 +16,11 @@ import {
   updateFashionItem as upDateFashionItemApi,
   getFashionEditItem as getFashionEditItemApi,
   deleteFashionItem as deleteFashionItemApi,
+  getMyFashionList as myFashionListApi,
 } from "../_utils/apiFashion";
 import { useUser } from "./useAuth";
 
-import { PostData, UpdateDataFn } from "../_types/type";
+import { PostData, UpdateDataFn, deleteType } from "../_types/type";
 import { setFashionRoute } from "../_utils/setFashionRoute";
 import { TAG_NAME } from "../_utils/constant";
 
@@ -37,6 +38,33 @@ export function useFashionList() {
   });
 
   return { data, isLoading };
+}
+
+export function useMyFashionList<T>() {
+  const { user } = useUser();
+  const name = user?.user_metadata.name;
+
+  const tags = [TAG_NAME.today, TAG_NAME.tomorrow, TAG_NAME.this];
+
+  const { data, pending } = useQueries({
+    queries: tags.map((tag) => ({
+      queryKey: [tag, name],
+      queryFn: () => myFashionListApi(tag, name),
+    })),
+    combine: (results) => {
+      return {
+        data: results.map((result) => result.data),
+        pending: results.some((result) => result.isPending),
+      };
+    },
+  });
+
+  const flattenedArray: T = data.reduce<any>(
+    (acc, curr) => acc.concat(curr),
+    [],
+  );
+
+  return { flattenedArray, pending };
 }
 
 export function useDetail() {
@@ -70,20 +98,16 @@ export function usePost() {
 }
 
 export function useDelete() {
-  const router = useRouter();
   const queryClient = useQueryClient();
-
-  const { tag, id }: { tag: string; id: string } = useParams();
-
+  const router = useRouter();
   const { isLoading, setLoading } = useLoading();
 
   const { mutate: deleteFashion } = useMutation({
-    mutationFn: () => deleteFashionItemApi({ id, tag }),
-    onSuccess: ({ id, tag }) => {
-      toast.success("삭제되었습니다!");
-      queryClient.removeQueries({ queryKey: ["detail", tag, id] });
-      // router.replace(setFashionRoute(TAG_NAME.fashion, tag, 1, date));
-      router.back();
+    mutationFn: (items: deleteType[]) => deleteFashionItemApi(items),
+    onSuccess: () => {
+      toast.success("삭제 되었습니다!");
+      queryClient.invalidateQueries();
+      router.refresh();
     },
     onError: () => {
       toast.error("잠시 후 다시 시도해 주세요!");
@@ -96,6 +120,7 @@ export function useDelete() {
 
 export function useUpdate() {
   const { tag, id }: { tag: string; id: string } = useParams();
+  const queryClient = useQueryClient();
   const router = useRouter();
 
   const { mutate: updateFashion, isPending } = useMutation({
@@ -103,6 +128,7 @@ export function useUpdate() {
       upDateFashionItemApi({ title, content, tag, image, id }),
     onSuccess: () => {
       toast.success("수정이 완료되었습니다.");
+      queryClient.invalidateQueries({ queryKey: ["detail", tag, id] });
       router.back();
     },
     onError: (e) => {
@@ -124,6 +150,7 @@ export function useEditData() {
   const { data, isLoading, isError } = useQuery({
     queryKey: [`detail`, tag, id],
     queryFn: () => getFashionEditItemApi(id as string, user?.id, tag),
+    staleTime: 2 * 1000,
   });
 
   return { id, data, isLoading, isError };

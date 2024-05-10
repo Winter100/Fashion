@@ -71,3 +71,20 @@ export interface ModalContextType {
 export interface EditDataType extends ItemType {
   user_id: string;
 }
+
+export interface MyItemType {
+  email: string;
+  id: string;
+  user: string;
+  user_id: string;
+  title: string;
+  image: string;
+  tag: string;
+  created_at: Date;
+  content: string;
+}
+
+export interface deleteType {
+  id: string;
+  tag: string;
+}
