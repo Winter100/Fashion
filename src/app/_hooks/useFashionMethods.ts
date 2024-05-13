@@ -20,9 +20,10 @@ import {
 } from "../_utils/apiFashion";
 import { useUser } from "./useAuth";
 
-import { PostData, UpdateDataFn, deleteType } from "../_types/type";
+import { PostData, UpdateDataFn, DeleteType } from "../_types/type";
 import { setFashionRoute } from "../_utils/setFashionRoute";
 import { TAG_NAME } from "../_utils/constant";
+import { useState } from "react";
 
 export function useFashionList() {
   const params = useParams();
@@ -97,17 +98,19 @@ export function usePost() {
   return { postFashion };
 }
 
-export function useDelete() {
+export function useDelete(setOpenModal: any) {
   const queryClient = useQueryClient();
-  const router = useRouter();
   const { isLoading, setLoading } = useLoading();
+  const router = useRouter();
 
   const { mutate: deleteFashion } = useMutation({
-    mutationFn: (items: deleteType[]) => deleteFashionItemApi(items),
+    mutationFn: (items: DeleteType[]) => deleteFashionItemApi(items),
     onSuccess: () => {
-      toast.success("삭제 되었습니다!");
+      toast.success("기록이 삭제 됐습니다!");
       queryClient.invalidateQueries();
       router.refresh();
+      setOpenModal(false);
+      setLoading(false);
     },
     onError: () => {
       toast.error("잠시 후 다시 시도해 주세요!");

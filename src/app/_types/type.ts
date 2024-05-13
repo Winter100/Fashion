@@ -84,7 +84,7 @@ export interface MyItemType {
   content: string;
 }
 
-export interface deleteType {
+export interface DeleteType {
   id: string;
   tag: string;
 }

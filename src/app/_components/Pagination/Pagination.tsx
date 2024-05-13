@@ -1,7 +1,7 @@
 "use client";
 
 import { TAG_NAME } from "@/app/_utils/constant";
-import { mergeDateAndpadZero } from "@/app/_utils/mergeDateAndpadZero";
+import { mergeDateAndpadZero } from "@/app/_utils/dateFn";
 import { setFashionRoute } from "@/app/_utils/setFashionRoute";
 import { Pagination } from "flowbite-react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";

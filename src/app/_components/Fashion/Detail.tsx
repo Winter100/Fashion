@@ -34,7 +34,7 @@ export default function Detail({
         </div>
 
         <div className="m-auto flex-1">
-          <div className=" flex flex-col gap-10">
+          <div className=" flex flex-col gap-4">
             <div>
               <div className=" block ">
                 <Label
@@ -43,7 +43,7 @@ export default function Detail({
                   value="제목"
                 />
               </div>
-              <p id="title" className="p-2 text-xl">
+              <p id="title" className="rounded-xl border p-2 text-xl">
                 {title}
               </p>
             </div>
@@ -55,7 +55,7 @@ export default function Detail({
                   value="글쓴이"
                 />
               </div>
-              <p id="user" className="p-2 text-xl">
+              <p id="user" className="rounded-xl border p-2 text-xl">
                 {user}
               </p>
             </div>
@@ -67,7 +67,7 @@ export default function Detail({
                   value="작성일"
                 />
               </div>
-              <p id="date" className="p-2 text-xl">
+              <p id="date" className="rounded-xl border p-2 text-xl">
                 {convertToKST(created_at)}
               </p>
             </div>
@@ -81,7 +81,7 @@ export default function Detail({
               </div>
               <p
                 id="title"
-                className=" h-80 overflow-y-auto whitespace-pre-wrap p-2 text-xl"
+                className=" h-48 overflow-y-auto whitespace-pre-wrap rounded-xl border p-2 text-xl"
               >
                 {content}
               </p>
