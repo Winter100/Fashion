@@ -9,7 +9,7 @@ import { GoPencil } from "react-icons/go";
 
 import { TAG_NAME } from "@/app/_utils/constant";
 import { setFashionRoute } from "@/app/_utils/setFashionRoute";
-import { mergeDateAndpadZero } from "@/app/_utils/mergeDateAndpadZero";
+import { mergeDateAndpadZero } from "@/app/_utils/dateFn";
 
 export default function LeftBarMenu() {
   const pathName = usePathname();

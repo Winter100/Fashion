@@ -2,7 +2,8 @@
 
 import LeftLayout from "@/app/_components/Layout/LeftLayout";
 import { useUser } from "@/app/_hooks/useAuth";
-import { Button, ButtonGroup } from "flowbite-react";
+import { Button } from "flowbite-react";
+import Link from "next/link";
 
 export default function Page() {
   const { user } = useUser();
@@ -19,10 +20,8 @@ export default function Page() {
             <div>
               <ul className="flex flex-col items-center justify-center gap-10 p-5">
                 <li>
-                  <ButtonGroup>
-                    <Button>내 정보</Button>
-                    <Button>내 기록</Button>
-                  </ButtonGroup>
+                  <Button>내 정보</Button>
+                  <Link href={"/mypage/list"}>내 기록</Link>
                 </li>
               </ul>
             </div>

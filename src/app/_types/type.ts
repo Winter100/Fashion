@@ -72,7 +72,7 @@ export interface EditDataType extends ItemType {
   user_id: string;
 }
 
-export interface MyItemType {
+export interface MyFashionListType {
   email: string;
   id: string;
   user: string;
@@ -83,8 +83,18 @@ export interface MyItemType {
   created_at: Date;
   content: string;
 }
+export interface MyItemType {
+  item: MyFashionListType;
+  isChecked: boolean;
+  handleCheck: (id: string, tag: string) => void;
+}
 
-export interface DeleteType {
+export interface DeleteListType {
   id: string;
   tag: string;
+}
+
+export interface DeletePropsType {
+  isLoading: boolean;
+  onDelete: () => void;
 }

@@ -1,17 +1,7 @@
+import React, { cloneElement } from "react";
 import { useModal } from "./useModal";
 
-export default function OpenBtn({
-  name,
-  ...props
-}: {
-  name: string;
-  [key: string]: any;
-}) {
-  const { className } = props;
+export default function OpenBtn({ children }: { children: any }) {
   const { handleOpen } = useModal();
-  return (
-    <button className={className} onClick={handleOpen}>
-      {name}
-    </button>
-  );
+  return <div>{cloneElement(children, { onClick: handleOpen })}</div>;
 }
