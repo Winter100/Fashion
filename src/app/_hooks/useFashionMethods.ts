@@ -1,4 +1,3 @@
-import { mergeDateAndpadZero } from "@/app/_utils/dateFn";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import {
   useMutation,
@@ -23,19 +22,18 @@ import { useUser } from "./useAuth";
 import { PostData, UpdateDataFn, DeleteListType } from "../_types/type";
 import { setFashionRoute } from "../_utils/setFashionRoute";
 import { TAG_NAME } from "../_utils/constant";
-import { useState } from "react";
+import { useSearchName } from "./useSearchName";
+import { convertPadZeroDate } from "../_utils/dateFn";
 
 export function useFashionList() {
   const params = useParams();
-  const searchParams = useSearchParams();
+  const { page, start, end } = useSearchName();
 
   const tag = params.tag as string;
-  const page = Number(searchParams.get("page"));
-  const date = searchParams.get("date") ?? mergeDateAndpadZero();
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: [tag, page, date],
-    queryFn: () => fashionListApi(tag, page, date),
+    queryKey: [tag, page, start, end],
+    queryFn: () => fashionListApi(tag, page, start, end),
   });
 
   return { data, isLoading };
@@ -87,7 +85,7 @@ export function usePost() {
     onSuccess: (tag) => {
       toast.success("패션을 기록했습니다!");
       router.push(
-        setFashionRoute(TAG_NAME.fashion, tag, 1, mergeDateAndpadZero()),
+        setFashionRoute(TAG_NAME.fashion, tag, 1, convertPadZeroDate()),
       );
     },
     onError: () => {
@@ -127,14 +125,15 @@ export function useUpdate() {
       upDateFashionItemApi({ title, content, tag, image, id }),
     onSuccess: () => {
       toast.success("수정이 완료되었습니다.");
-      queryClient.invalidateQueries({ queryKey: ["detail", tag, id] });
+      queryClient.invalidateQueries();
+      // queryClient.invalidateQueries({ queryKey: ["detail", tag, id] });
       router.back();
     },
     onError: (e) => {
       toast.error(e.message);
       toast.error("잠시 후 다시 시도해 주세요!");
       router.replace(
-        setFashionRoute(TAG_NAME.fashion, tag, 1, mergeDateAndpadZero()),
+        setFashionRoute(TAG_NAME.fashion, tag, 1, convertPadZeroDate()),
       );
     },
   });

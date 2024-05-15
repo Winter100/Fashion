@@ -7,23 +7,27 @@ import {
 import FashionList from "@/app/_components/Fashion/List";
 import Paginations from "@/app/_components/Pagination/Pagination";
 import { getFashionList } from "@/app/_utils/apiFashion";
-import { mergeDateAndpadZero } from "@/app/_utils/mergeDateAndpadZero";
 
 export default async function Page({
   params,
   searchParams,
 }: {
   params: { tag: string };
-  searchParams: { page: string; date: string };
+  searchParams: { page: string; start: string; end: string };
 }) {
   const tag = params.tag;
   const page = Number(searchParams.page);
-  const date = searchParams.date || mergeDateAndpadZero();
+  const start = searchParams.start;
+  const end = searchParams.end;
 
-  const queryClient = new QueryClient({});
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {},
+    },
+  });
   await queryClient.prefetchQuery({
-    queryKey: [tag, page, date],
-    queryFn: () => getFashionList(tag, page, date),
+    queryKey: [tag, page, start, end],
+    queryFn: () => getFashionList(tag, page, start, end),
   });
 
   return (
