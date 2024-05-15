@@ -54,6 +54,7 @@ export interface ListItemType {
   title: string;
   user: string;
   image: string;
+  created_at: string;
 }
 
 export interface ItemType extends ListItemType {
