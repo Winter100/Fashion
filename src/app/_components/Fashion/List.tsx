@@ -24,7 +24,7 @@ export default function List({ tag }: { tag: string }) {
     <ul className="grid grid-cols-2 justify-items-center gap-4 p-6 lg:grid-cols-4 xl:grid-cols-6">
       {data?.map((item) => (
         <li key={item.id} className=" h-80 w-full ">
-          <Link href={`/detail/${tag}/${item.id}`}>
+          <Link prefetch={false} href={`/detail/${tag}/${item.id}`}>
             <Item {...item} />
           </Link>
         </li>
