@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import { IoShirtOutline } from "react-icons/io5";
 import { RiTShirtAirFill } from "react-icons/ri";
@@ -9,17 +9,17 @@ import { GoPencil } from "react-icons/go";
 
 import { TAG_NAME } from "@/app/_utils/constant";
 import { setFashionRoute } from "@/app/_utils/setFashionRoute";
-import { mergeDateAndpadZero } from "@/app/_utils/dateFn";
+import { useSearchName } from "@/app/_hooks/useSearchName";
 
 export default function LeftBarMenu() {
   const pathName = usePathname();
-  const searchParams = useSearchParams();
-  const date = searchParams.get("date") ?? mergeDateAndpadZero();
+  const { start, end } = useSearchName();
   return (
     <>
       <Link
+        prefetch={false}
         className={`auth-btn-hover ${pathName.includes(TAG_NAME.today) ? "text-fontColor/95" : "text-fontColor/20"}`}
-        href={setFashionRoute(TAG_NAME.fashion, TAG_NAME.today, 1, date)}
+        href={setFashionRoute(TAG_NAME.fashion, TAG_NAME.today, 1, start, end)}
       >
         <li className=" flex items-center justify-center gap-2">
           <span>
@@ -31,8 +31,15 @@ export default function LeftBarMenu() {
         </li>
       </Link>
       <Link
+        prefetch={false}
         className={`auth-btn-hover ${pathName.includes(TAG_NAME.tomorrow) ? "text-fontColor/95" : "text-fontColor/20"}`}
-        href={setFashionRoute(TAG_NAME.fashion, TAG_NAME.tomorrow, 1, date)}
+        href={setFashionRoute(
+          TAG_NAME.fashion,
+          TAG_NAME.tomorrow,
+          1,
+          start,
+          end,
+        )}
       >
         <li className=" flex items-center justify-center gap-2">
           <span>
@@ -44,8 +51,9 @@ export default function LeftBarMenu() {
         </li>
       </Link>
       <Link
+        prefetch={false}
         className={`auth-btn-hover ${pathName.includes(TAG_NAME.this) ? "text-fontColor/95" : "text-fontColor/20"}`}
-        href={setFashionRoute(TAG_NAME.fashion, TAG_NAME.this, 1, date)}
+        href={setFashionRoute(TAG_NAME.fashion, TAG_NAME.this, 1, start, end)}
       >
         <li className=" flex items-center justify-center gap-2">
           <span>

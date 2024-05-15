@@ -1,7 +1,8 @@
+import dynamic from "next/dynamic";
+
 import DarkModeToggleBtn from "../DarkMode/DarkModeToggleBtn";
 import AuthBar from "./AuthBar";
 import Title from "./Title";
-import dynamic from "next/dynamic";
 
 const DynamicLeftBarMenu = dynamic(() => import("../Menu/LeftBarMenu"), {
   ssr: false,

@@ -8,7 +8,6 @@ import { useUser } from "@/app/_hooks/useAuth";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
 import { TAG_NAME } from "@/app/_utils/constant";
 import { setFashionRoute } from "@/app/_utils/setFashionRoute";
-import { mergeDateAndpadZero } from "@/app/_utils/dateFn";
 
 // 로그인시 들어올 수 없는 페이지 (로그인, 회원가입)
 export default function NoAuthProtectedRoute({
@@ -22,14 +21,7 @@ export default function NoAuthProtectedRoute({
 
   useEffect(() => {
     if (!isLoading && isAuthenticated)
-      router.replace(
-        setFashionRoute(
-          TAG_NAME.fashion,
-          TAG_NAME.today,
-          1,
-          mergeDateAndpadZero(),
-        ),
-      );
+      router.replace(setFashionRoute(TAG_NAME.fashion, TAG_NAME.today));
   }, [isLoading, isAuthenticated, router]);
 
   if (isLoading) return <LoadingSpinner />;

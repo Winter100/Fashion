@@ -3,6 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 
+import { setFashionRoute } from "@/app/_utils/setFashionRoute";
+import { TAG_NAME } from "@/app/_utils/constant";
+
 export default function Title() {
   const [isHover, setIsHover] = useState(false);
 
@@ -10,19 +13,20 @@ export default function Title() {
 
   return (
     <Link
+      prefetch={false}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
-      href={"/fashion?page=1"}
-      className="flex flex-col items-center justify-center gap-1 text-6xl "
+      href={setFashionRoute(TAG_NAME.fashion, TAG_NAME.today)}
+      className="flex flex-col items-center justify-center text-6xl "
     >
       <div className=" text-3xl">
-        <span className="text-blue-600">오늘</span>
+        <span className="text-blue-600">이 옷</span>
         <span> 어때?</span>
       </div>
       <div
         className={`hidden text-center text-xl opacity-70 transition-colors duration-500 xl:block ${hover}`}
       >
-        오늘 하루의 패션을 기록해보세요!
+        하루의 패션을 기록해보세요!
       </div>
     </Link>
   );
