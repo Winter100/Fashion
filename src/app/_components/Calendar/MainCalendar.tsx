@@ -1,16 +1,15 @@
 "use client";
 
-import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 import { TAG_NAME } from "@/app/_utils/constant";
-import {
-  mergeDateAndpadZero,
-  parseDateFromString,
-} from "@/app/_utils/mergeDateAndpadZero";
+import { convertPadZeroDate, parseDateFromString } from "@/app/_utils/dateFn";
 import { setFashionRoute } from "@/app/_utils/setFashionRoute";
+import { useSearchName } from "@/app/_hooks/useSearchName";
 
 type ValuePiece = Date | null;
 
@@ -19,60 +18,50 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 const today = new Date();
 
 export default function MainCalendar() {
-  const searchParams = useSearchParams();
-  const date = parseDateFromString(searchParams.get("date") as string);
-  const [value, setValue] = useState<Value>(date);
-  const [activeStartDate, setActiveStartDate] = useState(today);
+  const { start, end } = useSearchName();
   const { tag } = useParams();
   const router = useRouter();
 
+  const [value, setValue] = useState<Value>(() => [
+    new Date(parseDateFromString(start)),
+    new Date(parseDateFromString(end)),
+  ]);
+
   function onChange(nextValue: Value) {
-    const date = new Date(nextValue as Date);
-    const convertDate = mergeDateAndpadZero(date);
-
-    router.push(
-      setFashionRoute(TAG_NAME.fashion, tag as string, 1, convertDate),
-    );
-    setValue(nextValue);
-  }
-
-  function goToToday() {
-    // setValue(today);
-    setActiveStartDate(today);
-    onChange(today);
+    if (Array.isArray(nextValue) && nextValue.length >= 2) {
+      setValue(nextValue);
+      router.push(
+        setFashionRoute(
+          TAG_NAME.fashion,
+          tag as string,
+          1,
+          convertPadZeroDate(nextValue[0]),
+          convertPadZeroDate(nextValue[1]),
+        ),
+      );
+    }
   }
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
-      <div className="calendar-header">
-        <button
-          onClick={goToToday}
-          className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-        >
-          오늘
-        </button>
-      </div>
       <Calendar
         onChange={onChange}
+        view="month"
+        defaultValue={[
+          new Date(parseDateFromString(start)),
+          new Date(parseDateFromString(end)),
+        ]}
         value={value}
-        activeStartDate={activeStartDate}
-        onActiveStartDateChange={({ activeStartDate }) =>
-          setActiveStartDate(activeStartDate as Date)
-        }
         className="border-4 border-red-600"
         minDetail="year"
         maxDetail="month"
+        maxDate={today}
         prev2Label={null}
         next2Label={null}
         calendarType="gregory"
+        selectRange={true}
         showNeighboringMonth={false}
         formatDay={(_, date) => date.toLocaleString("en", { day: "numeric" })}
-        tileDisabled={({ date }) =>
-          date > new Date(new Date().setHours(0, 0, 0, 0))
-        }
-        // tileContent={({ activeStartDate, date, view }) =>
-        //   view === "month" && date.getDay() === 0 ? <p>!</p> : null
-        // }
       />
     </div>
   );

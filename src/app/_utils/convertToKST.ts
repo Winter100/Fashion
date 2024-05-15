@@ -1,4 +1,7 @@
-export function convertToKST(isoDateString: Date, filter: boolean = true) {
+export function convertToKST(
+  isoDateString: Date | string,
+  filter: boolean = true,
+) {
   const date = new Date(isoDateString);
 
   const options: Intl.DateTimeFormatOptions = {
