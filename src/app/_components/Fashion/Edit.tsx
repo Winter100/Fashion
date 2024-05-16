@@ -52,9 +52,9 @@ export default function Write({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className=" m-auto flex h-full w-full flex-col items-center justify-center"
+      className="flex h-full w-full flex-col items-center"
     >
-      <div className="h-13  layout-max-width m-auto flex w-full items-center justify-between">
+      <div className="h-13  layout-max-width flex w-full items-center justify-between">
         <Button
           className="h-full"
           onClick={() => router.back()}
@@ -80,7 +80,7 @@ export default function Write({
         </Button>
       </div>
 
-      <div className="flex-rows flex h-full w-full items-center gap-2 rounded-lg bg-backgroundOne p-2">
+      <div className="flex-rows flex w-full items-center gap-2 p-2">
         <div className="flex h-full flex-1 flex-col items-center">
           <div className="image-parents-div-fill">
             {!errors?.imageFile && isImage && (
@@ -89,6 +89,7 @@ export default function Write({
                 alt="업로드 이미지"
                 fill
                 quality={100}
+                sizes="100vw"
                 className="object-contain"
               />
             )}
@@ -191,7 +192,7 @@ export default function Write({
                 name="content"
                 className=" resize-none"
                 style={{ fontSize: "25px", padding: "10px" }}
-                rows={20}
+                rows={15}
               />
             </div>
           </div>

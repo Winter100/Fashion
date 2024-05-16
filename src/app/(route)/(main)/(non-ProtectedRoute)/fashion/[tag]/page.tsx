@@ -17,6 +17,8 @@ export default async function Page({
 }) {
   const tag = params.tag;
   const page = Number(searchParams.page);
+
+  // todo: 날짜가 아니거나 다른 데이터가 들어왔을때 에러 핸들링 필요
   const start = searchParams.start;
   const end = searchParams.end;
 

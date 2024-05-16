@@ -85,7 +85,12 @@ export function usePost() {
     onSuccess: (tag) => {
       toast.success("패션을 기록했습니다!");
       router.push(
-        setFashionRoute(TAG_NAME.fashion, tag, 1, convertPadZeroDate()),
+        setFashionRoute(
+          TAG_NAME.fashion,
+          tag,
+          1,
+          convertPadZeroDate(null, true),
+        ),
       );
     },
     onError: () => {
@@ -126,14 +131,18 @@ export function useUpdate() {
     onSuccess: () => {
       toast.success("수정이 완료되었습니다.");
       queryClient.invalidateQueries();
-      // queryClient.invalidateQueries({ queryKey: ["detail", tag, id] });
       router.back();
     },
     onError: (e) => {
       toast.error(e.message);
       toast.error("잠시 후 다시 시도해 주세요!");
       router.replace(
-        setFashionRoute(TAG_NAME.fashion, tag, 1, convertPadZeroDate()),
+        setFashionRoute(
+          TAG_NAME.fashion,
+          tag,
+          1,
+          convertPadZeroDate(null, true),
+        ),
       );
     },
   });
@@ -148,7 +157,7 @@ export function useEditData() {
   const { data, isLoading, isError } = useQuery({
     queryKey: [`detail`, tag, id],
     queryFn: () => getFashionEditItemApi(id as string, user?.id, tag),
-    staleTime: 2 * 1000,
+    staleTime: 1 * 1000,
   });
 
   return { id, data, isLoading, isError };

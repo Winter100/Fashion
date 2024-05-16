@@ -8,7 +8,7 @@ import { useUser } from "@/app/_hooks/useAuth";
 
 import LoadingSpinner from "../Spinner/LoadingSpinner";
 
-// 비로그인시 들어올 수 없는 페이지 (글쓰기, 수정)
+// 비로그인시 들어올 수 없는 페이지 (글쓰기, 수정, 마이페이지)
 export default function AuthProtectedRoute({
   children,
 }: {
@@ -20,7 +20,7 @@ export default function AuthProtectedRoute({
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
       toast.warn("로그인이 필요합니다!");
-      router.push("/auth/signin");
+      router.replace("/auth/signin");
     }
   }, [isLoading, isAuthenticated, router]);
 
