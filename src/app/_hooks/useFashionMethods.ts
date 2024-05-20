@@ -49,6 +49,7 @@ export function useMyFashionList<T>() {
     queries: tags.map((tag) => ({
       queryKey: [tag, name],
       queryFn: () => myFashionListApi(tag, name),
+      staleTime: Infinity,
     })),
     combine: (results) => {
       return {
@@ -79,11 +80,14 @@ export function useDetail() {
 
 export function usePost() {
   const router = useRouter();
+  const queryClient = useQueryClient();
+
   const { mutate: postFashion } = useMutation({
     mutationFn: ({ user, title, content, tag, image }: PostData) =>
       postFashionItemApi({ user, title, content, tag, image }),
     onSuccess: (tag) => {
       toast.success("패션을 기록했습니다!");
+      queryClient.invalidateQueries();
       router.push(
         setFashionRoute(
           TAG_NAME.fashion,
