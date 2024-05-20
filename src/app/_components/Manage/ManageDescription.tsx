@@ -8,7 +8,7 @@ export default function ManageDescription({
   return (
     <div
       aria-describedby="description"
-      className={`cursor-default text-xl ${className}`}
+      className={`mx-2 cursor-default  text-xl ${className}`}
     >
       {children}
     </div>

@@ -5,7 +5,7 @@ import ManageLabel from "./ManageLabel";
 import ManageContentArea from "./ManageContentArea";
 import ManageContent from "./ManageContent";
 
-export default function ManageWrapper({
+export default function Manage({
   children,
   className = "",
 }: {
@@ -17,9 +17,9 @@ export default function ManageWrapper({
   );
 }
 
-ManageWrapper.Title = ManageTitle;
-ManageWrapper.Description = ManageDescription;
-ManageWrapper.ContentWrapper = ManageContentWrapper;
-ManageWrapper.ContentArea = ManageContentArea;
-ManageWrapper.Label = ManageLabel;
-ManageWrapper.Content = ManageContent;
+Manage.Title = ManageTitle;
+Manage.Description = ManageDescription;
+Manage.ContentWrapper = ManageContentWrapper;
+Manage.ContentArea = ManageContentArea;
+Manage.Label = ManageLabel;
+Manage.Content = ManageContent;
