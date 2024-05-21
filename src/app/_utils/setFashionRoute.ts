@@ -1,15 +1,15 @@
-import { convertPadZeroDate } from "./dateFn";
+import { setDateFormat } from "./dateFn";
 
 /**
  *
- * @returns `/${routeName}/${tag}?page=${pageNumber}&start=${start}&end=${end}`
+ * @returns `/${routeName}/${tag}?page=${page}&start=${startDate}&end=${endDate}`
  */
 export function setFashionRoute(
   routeName: string,
   tag: string,
-  pageNumber: number = 1,
-  start: string | null | undefined = convertPadZeroDate(),
-  end: string | null | undefined = convertPadZeroDate(),
+  page: string | number = 1,
+  startDate: string = setDateFormat(true),
+  endDate: string = setDateFormat(),
 ) {
-  return `/${routeName}/${tag}?page=${pageNumber}&start=${start}&end=${end}`;
+  return `/${routeName}/${tag}?page=${page}&start=${startDate}&end=${endDate}`;
 }

@@ -22,18 +22,17 @@ import { useUser } from "./useAuth";
 import { PostData, UpdateDataFn, DeleteListType } from "../_types/type";
 import { setFashionRoute } from "../_utils/setFashionRoute";
 import { TAG_NAME } from "../_utils/constant";
-import { useSearchName } from "./useSearchName";
-import { convertPadZeroDate } from "../_utils/dateFn";
+import { useQueryString } from "./useQueryString";
 
 export function useFashionList() {
   const params = useParams();
-  const { page, start, end } = useSearchName();
+  const { page, validStart, validEnd } = useQueryString();
 
   const tag = params.tag as string;
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: [tag, page, start, end],
-    queryFn: () => fashionListApi(tag, page, start, end),
+    queryKey: [tag, page, validStart, validEnd],
+    queryFn: () => fashionListApi(tag, page, validStart, validEnd),
   });
 
   return { data, isLoading };
@@ -88,14 +87,7 @@ export function usePost() {
     onSuccess: (tag) => {
       toast.success("패션을 기록했습니다!");
       queryClient.invalidateQueries();
-      router.push(
-        setFashionRoute(
-          TAG_NAME.fashion,
-          tag,
-          1,
-          convertPadZeroDate(null, true),
-        ),
-      );
+      router.push(setFashionRoute(TAG_NAME.fashion, tag));
     },
     onError: () => {
       toast.error("패션 기록을 실패했습니다.");
@@ -140,14 +132,7 @@ export function useUpdate() {
     onError: (e) => {
       toast.error(e.message);
       toast.error("잠시 후 다시 시도해 주세요!");
-      router.replace(
-        setFashionRoute(
-          TAG_NAME.fashion,
-          tag,
-          1,
-          convertPadZeroDate(null, true),
-        ),
-      );
+      router.replace(setFashionRoute(TAG_NAME.fashion, tag));
     },
   });
 

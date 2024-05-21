@@ -27,7 +27,6 @@ export function useUser() {
 
 export function useLogin() {
   const queryClient = useQueryClient();
-  const router = useRouter();
 
   const { mutate: login, isPending } = useMutation({
     mutationFn: ({ email, password }: { email: string; password: string }) =>
@@ -35,7 +34,6 @@ export function useLogin() {
     onSuccess: (user) => {
       queryClient.setQueryData([AUTH_KEY], user?.user);
       toast.success(`반갑습니다! ${user.user.user_metadata?.name || " "} 님`);
-      router.refresh();
     },
   });
   return { login, isPending };

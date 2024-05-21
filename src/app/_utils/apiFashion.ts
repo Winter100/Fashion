@@ -1,19 +1,18 @@
 import { DeleteListType, PostData, UpdateData } from "../_types/type";
 import supabase, { supabaseUrl } from "../_utils/supabase";
 import { TAG_NAME } from "./constant";
-import { convertPadZeroDate } from "./dateFn";
 
 export async function getFashionList(
   tag: string = TAG_NAME.today,
   page: number = 1,
-  start: string = convertPadZeroDate(),
-  end: string = convertPadZeroDate(),
+  start: string,
+  end: string,
 ) {
   const itemsPerPage = 30;
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = page * itemsPerPage - 1;
 
-  const startDate = `${start}T00:00:00Z`; // (UTC 기준)
+  const startDate = `${start}T00:00:00Z`;
   const endDate = `${end}T23:59:59Z`;
 
   const { data: fashionList, error } = await supabase

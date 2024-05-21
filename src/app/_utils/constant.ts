@@ -4,4 +4,5 @@ export const TAG_NAME = {
   today: "today",
   tomorrow: "tomorrow",
   this: "this",
+  write: "write",
 };

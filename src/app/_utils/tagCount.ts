@@ -4,9 +4,9 @@ import { TAG_NAME } from "./constant";
 export function tagCount(flattenedArray: MyFashionListType[]) {
   const counts = flattenedArray.reduce(
     (acc, item) => {
-      if (item.tag === TAG_NAME.today) acc.todayCount++;
-      else if (item.tag === TAG_NAME.tomorrow) acc.tomorrowCount++;
-      else if (item.tag === TAG_NAME.this) acc.thisCount++;
+      if (item?.tag === TAG_NAME.today) acc.todayCount++;
+      else if (item?.tag === TAG_NAME.tomorrow) acc.tomorrowCount++;
+      else if (item?.tag === TAG_NAME.this) acc.thisCount++;
       acc.totalCount++;
       return acc;
     },
