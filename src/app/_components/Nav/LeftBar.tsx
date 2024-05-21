@@ -15,7 +15,7 @@ export default function LeftBar() {
         <Title />
       </header>
 
-      <ul className=" flex w-full flex-col items-center justify-center gap-20  text-4xl">
+      <ul className=" flex w-full flex-col items-center justify-center gap-20 text-4xl">
         <DynamicLeftBarMenu />
       </ul>
       <div className=" flex w-full items-center justify-center border-borderColorOne/20  ">
