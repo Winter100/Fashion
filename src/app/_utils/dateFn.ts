@@ -1,25 +1,35 @@
 /**
  *
- * @ Date를 넣으면 yyyymmdd 형식으로 변환
- * @ 인자가 없다면 오늘 날짜를 반환
+ * @returns Date를 yyyymmdd  형식으로 변환
  */
-export function convertPadZeroDate(
-  d: Date | null = new Date(),
-  startWithFirstDay: boolean = false,
-): string {
+export function convertDateFormat(d?: Date | string | null) {
+  let date;
+
   if (!d) {
-    d = new Date();
-  } else if (!(d instanceof Date)) {
-    d = new Date(d);
+    date = new Date();
+  } else {
+    date = new Date(d);
   }
 
-  const year = d.getFullYear();
-  const month = d.getMonth() + 1;
-  const day = startWithFirstDay ? 1 : d.getDate();
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
 
-  const padZeroMonth = month < 10 ? `0${month}` : `${month}`;
-  const padZeroDay = day < 10 ? `0${day}` : `${day}`;
-  return `${year}${padZeroMonth}${padZeroDay}`;
+  return `${year}${month}${day}`;
+}
+
+/**
+ *
+ * @returns yyyymmdd 형식으로 리턴, 인자가 true면 yyyymm01로 리턴
+ */
+export function setDateFormat(firstDay: boolean = false) {
+  const date = new Date();
+
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = firstDay ? "01" : date.getDate().toString().padStart(2, "0");
+
+  return `${year}${month}${day}`;
 }
 
 export function parseDateFromString(
@@ -35,4 +45,9 @@ export function parseDateFromString(
   } else {
     return new Date(year, month, day);
   }
+}
+
+export function isValidDateFormat(dateString: string | null): boolean {
+  const regex = /^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/;
+  return dateString !== null && regex.test(dateString);
 }
