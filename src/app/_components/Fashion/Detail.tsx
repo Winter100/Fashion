@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { Label } from "flowbite-react";
+
 import { convertToKST } from "@/app/_utils/convertToKST";
+import DetailContentArea from "./DetailContentArea";
 
 interface DetailType {
   user: string;
@@ -18,9 +19,9 @@ export default function Detail({
   created_at,
 }: DetailType) {
   return (
-    <div className="flex w-full flex-col items-center justify-center">
+    <div className="flex ">
       <div className="flex-rows flex w-full items-center gap-2 p-2">
-        <div className="flex h-full flex-1 flex-col items-center">
+        <div className="flex-co flex h-full flex-1">
           <div className="image-parents-div-fill">
             <Image
               src={image}
@@ -33,59 +34,21 @@ export default function Detail({
           </div>
         </div>
 
-        <div className="m-auto flex-1">
-          <div className=" flex flex-col gap-4">
-            <div>
-              <div className=" block ">
-                <Label
-                  htmlFor="title"
-                  className=" m-auto text-xl"
-                  value="제목"
-                />
-              </div>
-              <p id="title" className="rounded-xl border p-2 text-xl">
-                {title}
-              </p>
-            </div>
-            <div>
-              <div className="block ">
-                <Label
-                  htmlFor="user"
-                  className=" m-auto text-xl"
-                  value="글쓴이"
-                />
-              </div>
-              <p id="user" className="rounded-xl border p-2 text-xl">
-                {user}
-              </p>
-            </div>
-            <div>
-              <div className="block ">
-                <Label
-                  htmlFor="date"
-                  className=" m-auto text-xl"
-                  value="작성일"
-                />
-              </div>
-              <p id="date" className="rounded-xl border p-2 text-xl">
-                {convertToKST(created_at)}
-              </p>
-            </div>
-            <div>
-              <div className="block ">
-                <Label
-                  htmlFor="content"
-                  className=" m-auto text-xl"
-                  value="내용"
-                />
-              </div>
-              <p
-                id="title"
-                className=" h-48 overflow-y-auto whitespace-pre-wrap rounded-xl border p-2 text-xl"
-              >
-                {content}
-              </p>
-            </div>
+        <div className="flex-1">
+          <div className=" flex flex-col gap-2">
+            <DetailContentArea id="title" KrTitle="제목" value={title} />
+            <DetailContentArea id="user" KrTitle="글쓴이" value={user} />
+            <DetailContentArea
+              id="date"
+              KrTitle="작성일"
+              value={convertToKST(created_at)}
+            />
+            <DetailContentArea
+              className="h-60 overflow-y-auto"
+              id="content"
+              KrTitle="내용"
+              value={content}
+            />
           </div>
         </div>
       </div>

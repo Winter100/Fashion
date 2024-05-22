@@ -141,12 +141,14 @@ export default function Write({
                 {...register("title", {
                   required: "제목을 입력해주세요.",
                 })}
+                style={{ fontSize: "0.75rem", lineHeight: "1rem" }}
                 disabled={submitLoading}
+                spellCheck={false}
                 id="title"
                 name="title"
                 type="text"
-                style={{ fontSize: "20px", padding: "7px" }}
-                className=" font-bold"
+                maxLength={40}
+                className=" font-mono  font-bold"
               />
             </div>
 
@@ -190,8 +192,8 @@ export default function Write({
                 {...register("content", { required: "내용을 입력해주세요." })}
                 id="content"
                 name="content"
-                className=" resize-none"
-                style={{ fontSize: "25px", padding: "10px" }}
+                spellCheck={false}
+                className="resize-none font-mono text-xs font-bold"
                 rows={15}
               />
             </div>
