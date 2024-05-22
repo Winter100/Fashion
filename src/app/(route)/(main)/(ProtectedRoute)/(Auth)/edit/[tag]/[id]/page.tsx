@@ -24,7 +24,7 @@ export default function Page() {
   useEffect(() => {
     if (isError) {
       toast.error("권한이 없습니다.");
-      router.back();
+      router.replace("/mypage/list");
     }
   }, [isError, router]);
 

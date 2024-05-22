@@ -36,7 +36,7 @@ export default function Page() {
 
   return (
     <div>
-      <h1 className="my-6 text-center text-5xl">내 기록</h1>
+      <h1 className="my-6 text-center text-5xl">기록 관리 하기</h1>
       <ul>
         <li className="grid grid-cols-6 items-center justify-items-center text-3xl">
           <p>사진</p>
