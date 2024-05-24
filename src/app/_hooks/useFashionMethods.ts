@@ -1,4 +1,4 @@
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import {
   useMutation,
   useQueries,
@@ -16,6 +16,8 @@ import {
   getFashionEditItem as getFashionEditItemApi,
   deleteFashionItem as deleteFashionItemApi,
   getMyFashionList as myFashionListApi,
+  getFashionItemComments,
+  postFashionItemComment,
 } from "../_utils/apiFashion";
 import { useUser } from "./useAuth";
 
@@ -23,12 +25,13 @@ import { PostData, UpdateDataFn, DeleteListType } from "../_types/type";
 import { setFashionRoute } from "../_utils/setFashionRoute";
 import { TAG_NAME } from "../_utils/constant";
 import { useQueryString } from "./useQueryString";
+import { User } from "@supabase/supabase-js";
 
 export function useFashionList() {
   const params = useParams();
   const { page, validStart, validEnd } = useQueryString();
 
-  const tag = params.tag as string;
+  const tag = params?.tag as string;
 
   const { data, isLoading, isError } = useQuery({
     queryKey: [tag, page, validStart, validEnd],
@@ -71,7 +74,7 @@ export function useDetail() {
 
   const { data, isLoading } = useQuery({
     queryKey: [`detail`, tag, id],
-    queryFn: () => fashionDetailApi(id as string, tag),
+    queryFn: () => fashionDetailApi(id, tag),
   });
 
   return { data, isLoading };
@@ -145,9 +148,48 @@ export function useEditData() {
 
   const { data, isLoading, isError } = useQuery({
     queryKey: [`detail`, tag, id],
-    queryFn: () => getFashionEditItemApi(id as string, user?.id, tag),
+    queryFn: () => getFashionEditItemApi(id, user?.id, tag),
     staleTime: 1 * 1000,
   });
 
   return { id, data, isLoading, isError };
+}
+export function useComments() {
+  const { tag, id }: { tag: string; id: string } = useParams();
+
+  const { data, isLoading } = useQuery({
+    queryKey: [`comments`, tag, id],
+    queryFn: () => getFashionItemComments(id, tag),
+    staleTime: 3 * 1000,
+  });
+
+  return { data, isLoading };
+}
+
+export function usePostComment() {
+  const queryClient = useQueryClient();
+
+  const { id: fashionId, tag }: { id: string; tag: string } = useParams();
+
+  const { mutate: postComment } = useMutation({
+    mutationFn: ({
+      content,
+      rating,
+      user,
+    }: {
+      user: User;
+      content: string;
+      rating: number;
+    }) => postFashionItemComment({ user, tag, content, fashionId, rating }),
+    onSuccess: () => {
+      toast.success("댓글을 기록했습니다!");
+      queryClient.invalidateQueries({ queryKey: ["comments", tag, fashionId] });
+    },
+    onError: (error) => {
+      // console.log("error", error);
+      toast.error("댓글 기록을 실패했습니다.");
+    },
+  });
+
+  return { postComment };
 }

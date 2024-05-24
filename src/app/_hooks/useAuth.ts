@@ -46,9 +46,10 @@ export function useSignout() {
   const { mutate: signout, isPending } = useMutation({
     mutationFn: signoutApi,
     onSuccess: () => {
-      queryClient.removeQueries({ queryKey: [AUTH_KEY], exact: true });
+      queryClient.invalidateQueries({ queryKey: [AUTH_KEY], exact: true });
+      // queryClient.removeQueries({ queryKey: [AUTH_KEY], exact: true });
       toast.success("로그아웃 되었습니다.");
-      router.replace(setFashionRoute(TAG_NAME.fashion, TAG_NAME.today, 1));
+      // router.replace(setFashionRoute(TAG_NAME.fashion, TAG_NAME.today, 1));
     },
   });
   return { signout, isPending };

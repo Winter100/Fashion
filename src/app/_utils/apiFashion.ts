@@ -1,4 +1,9 @@
-import { DeleteListType, PostData, UpdateData } from "../_types/type";
+import {
+  CommentData,
+  DeleteListType,
+  PostData,
+  UpdateData,
+} from "../_types/type";
 import supabase, { supabaseUrl } from "../_utils/supabase";
 import { TAG_NAME } from "./constant";
 
@@ -43,11 +48,12 @@ export async function getFashionItem(id: string, tag: string) {
   const { data: findItem, error } = await supabase
     .from(`fashion-${tag}`)
     .select("*")
-    .eq("id", id);
+    .eq("id", id)
+    .single();
 
   if (error) throw new Error(error.message);
 
-  return findItem[0];
+  return findItem;
 }
 
 export async function getFashionEditItem(
@@ -139,4 +145,37 @@ export async function updateFashionItem({
 
     if (error) throw new Error(error.message);
   }
+}
+
+export async function getFashionItemComments(id: string, tag: string) {
+  const { data: comments, error } = await supabase
+    .from(`fashion-${tag}-comments`)
+    .select("id,user,created_at,content,rating")
+    .order("created_at", { ascending: true })
+    .eq("fashion_id", id);
+
+  if (error) throw new Error(error.message);
+
+  return comments;
+}
+export async function postFashionItemComment({
+  user,
+  content,
+  fashionId,
+  tag,
+  rating = 0,
+}: CommentData) {
+  const { error } = await supabase.from(`fashion-${tag}-comments`).insert([
+    {
+      user: user?.user_metadata.name,
+      content,
+      fashion_id: fashionId,
+      user_id: user?.id,
+      rating,
+    },
+  ]);
+
+  if (error) throw new Error(error.message);
+
+  return "";
 }
