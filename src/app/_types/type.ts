@@ -19,6 +19,22 @@ export interface PostData {
   fashionId?: string;
 }
 
+export interface CommentData {
+  user: User | null;
+  content: string;
+  fashionId: string;
+  tag: string;
+  rating: number;
+}
+
+export interface CommentType {
+  id: string;
+  created_at: string;
+  user: string;
+  content: string;
+  rating: number;
+}
+
 export interface UpdateDataFn {
   title: string;
   content: string;

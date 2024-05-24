@@ -8,7 +8,7 @@ import LoadingSpinner from "@/app/_components/Spinner/LoadingSpinner";
 import ErrorWrapper from "@/app/_components/Error/ErrorWrapper";
 
 import { useDetail } from "@/app/_hooks/useFashionMethods";
-import CommentList from "@/app/_components/Comment/CommentList";
+import CommentEntry from "@/app/_components/Comment/CommentEntry";
 
 export default function Page() {
   const router = useRouter();
@@ -33,8 +33,8 @@ export default function Page() {
         </Button>
       </div>
       <Detail {...data} />
-      <div className=" h-96 border">
-        <CommentList />
+      <div>
+        <CommentEntry />
       </div>
     </div>
   );

@@ -45,10 +45,6 @@ export default function RecordInfo() {
               <Manage.Label>모든 기록</Manage.Label>
               <Manage.Content>{totalCount} 개</Manage.Content>
             </Manage.ContentArea>
-            {/* <Manage.ContentArea>
-              <Manage.Label>남긴 댓글</Manage.Label>
-              <Manage.Content>7825 개</Manage.Content>
-            </Manage.ContentArea> */}
           </>
         )}
       </Manage.ContentWrapper>

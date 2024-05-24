@@ -7,9 +7,9 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 import { TAG_NAME } from "@/app/_utils/constant";
-import { convertPadZeroDate, parseDateFromString } from "@/app/_utils/dateFn";
+import { convertDateFormat, parseDateFromString } from "@/app/_utils/dateFn";
 import { setFashionRoute } from "@/app/_utils/setFashionRoute";
-import { useSearchName } from "@/app/_hooks/useSearchName";
+import { useQueryString } from "@/app/_hooks/useQueryString";
 
 type ValuePiece = Date | null;
 
@@ -18,13 +18,13 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 const today = new Date();
 
 export default function MainCalendar() {
-  const { start, end } = useSearchName();
+  const { validStart, validEnd } = useQueryString();
   const { tag } = useParams();
   const router = useRouter();
 
   const [value, setValue] = useState<Value>(() => [
-    new Date(parseDateFromString(start)),
-    new Date(parseDateFromString(end)),
+    new Date(parseDateFromString(validStart)),
+    new Date(parseDateFromString(validEnd)),
   ]);
 
   function onChange(nextValue: Value) {
@@ -35,8 +35,8 @@ export default function MainCalendar() {
           TAG_NAME.fashion,
           tag as string,
           1,
-          convertPadZeroDate(nextValue[0]),
-          convertPadZeroDate(nextValue[1]),
+          convertDateFormat(nextValue[0]),
+          convertDateFormat(nextValue[1]),
         ),
       );
     }
@@ -48,8 +48,8 @@ export default function MainCalendar() {
         onChange={onChange}
         view="month"
         defaultValue={[
-          new Date(parseDateFromString(start)),
-          new Date(parseDateFromString(end)),
+          new Date(parseDateFromString(validStart)),
+          new Date(parseDateFromString(validEnd)),
         ]}
         value={value}
         className="border-4 border-red-600"

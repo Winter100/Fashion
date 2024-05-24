@@ -24,9 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" className="scrollbar-hide">
-      <body
-        className={`${dongle.className} bg-backgroundOne text-fontColor/70`}
-      >
+      <body className={`${dongle.className}  bg-backgroundOne text-fontColor`}>
         <DynamicDarkModeProvider>{children}</DynamicDarkModeProvider>
       </body>
     </html>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchName } from "@/app/_hooks/useSearchName";
+import { useQueryString } from "@/app/_hooks/useQueryString";
 import { TAG_NAME } from "@/app/_utils/constant";
 import { setFashionRoute } from "@/app/_utils/setFashionRoute";
 import { Pagination } from "flowbite-react";
@@ -12,16 +12,22 @@ export default function Paginations() {
   const router = useRouter();
 
   const { tag } = useParams();
-  const { page, start, end } = useSearchName();
+  const { page, validStart, validEnd } = useQueryString();
 
   useEffect(() => {
-    setCurrentPage(page);
+    setCurrentPage(Number(page));
   }, [page]);
 
   function onPageChange(page: number) {
     setCurrentPage(page);
     router.push(
-      setFashionRoute(TAG_NAME.fashion, tag as string, page, start, end),
+      setFashionRoute(
+        TAG_NAME.fashion,
+        tag as string,
+        page,
+        validStart,
+        validEnd,
+      ),
     );
   }
 
