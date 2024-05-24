@@ -5,5 +5,5 @@ export default function CommentContent({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <p className={`${className}`}>{children}</p>;
+  return <div className={`${className}`}>{children}</div>;
 }
