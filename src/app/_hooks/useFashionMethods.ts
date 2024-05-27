@@ -168,7 +168,6 @@ export function useComments() {
 
 export function usePostComment() {
   const queryClient = useQueryClient();
-
   const { id: fashionId, tag }: { id: string; tag: string } = useParams();
 
   const { mutate: postComment } = useMutation({
@@ -183,7 +182,7 @@ export function usePostComment() {
     }) => postFashionItemComment({ user, tag, content, fashionId, rating }),
     onSuccess: () => {
       toast.success("댓글을 기록했습니다!");
-      queryClient.invalidateQueries({ queryKey: ["comments", tag, fashionId] });
+      queryClient.invalidateQueries({ queryKey: ["comments"] });
     },
     onError: (error) => {
       // console.log("error", error);

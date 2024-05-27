@@ -18,7 +18,7 @@ export default function CommentView({
           <RatingView rating={rating} />
         </Comment.Title>
       </Comment.Header>
-      <Comment.Content className=" px-4">{content}</Comment.Content>
+      <Comment.Content className=" px-4 font-bold">{content}</Comment.Content>
     </Comment>
   );
 }

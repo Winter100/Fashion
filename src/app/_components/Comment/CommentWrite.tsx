@@ -1,7 +1,9 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { TextInput } from "flowbite-react";
+import Link from "next/link";
 
 import Rating from "../Rating/Rating";
 import Comment from "./Comment/Comment";
@@ -10,30 +12,35 @@ import { useUser } from "@/app/_hooks/useAuth";
 
 export default function CommentWrite() {
   const { postComment } = usePostComment();
-  const [commentValue, setCommentValue] = useState("");
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(1);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      comment: "",
+    },
+  });
 
   const { user } = useUser();
 
-  function handleSubmit() {
-    // commentValue 값이 없을때 에러 핸들링 필요.
-    if (!user || commentValue.length === 0) return;
+  function onSubmit(value: { comment: string }) {
+    if (!user) return;
 
-    const comment = {
+    const { comment } = value;
+    const data = {
       user,
-      content: commentValue,
+      content: comment,
       rating,
     };
-    postComment(comment, {
+    postComment(data, {
       onSuccess: () => {
-        setCommentValue("");
-        setRating(0);
+        setRating(1);
+        reset({ comment: "" });
       },
     });
-  }
-
-  function onChagneT(e: ChangeEvent<HTMLInputElement>) {
-    setCommentValue(e.target.value);
   }
 
   const handleRatingClick = (value: number) => {
@@ -41,7 +48,10 @@ export default function CommentWrite() {
   };
 
   return (
-    <Comment className=" border-b border-backgroundTwo p-3 text-xl">
+    <Comment
+      onSubmit={handleSubmit(onSubmit)}
+      className=" border-b border-backgroundTwo p-3 text-xl"
+    >
       {user?.user_metadata ? (
         <>
           <Comment.Header>
@@ -49,24 +59,28 @@ export default function CommentWrite() {
             <Comment.Title className=" cursor-pointer">
               <Rating rating={rating} length={5} onClick={handleRatingClick} />
             </Comment.Title>
+            <Comment.Title className="text-red-500">
+              {errors.comment && errors.comment?.message}
+            </Comment.Title>
           </Comment.Header>
           <Comment.Content className="flex flex-col gap-2  px-4">
             <TextInput
+              {...register("comment", {
+                required: "내용과 별점을 확인해주세요",
+              })}
               style={{ fontSize: "0.75rem", lineHeight: "1rem" }}
               className="font-mono"
-              onChange={onChagneT}
-              value={commentValue}
             />
             <div className="flex justify-end gap-4 text-xl">
-              <button onClick={() => setCommentValue("")}>취소</button>
-              <button onClick={handleSubmit}>등록</button>
+              <button type="reset">취소</button>
+              <button type="submit">등록</button>
             </div>
           </Comment.Content>
         </>
       ) : (
         <div className="text-center">
           <p>댓글은 로그인 후 남길 수 있습니다.</p>
-          <button>로그인</button>
+          <Link href="/auth/signin">로그인</Link>
         </div>
       )}
     </Comment>

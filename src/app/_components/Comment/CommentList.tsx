@@ -8,7 +8,7 @@ export default function CommentList() {
   const { isLoading, data } = useComments();
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner className="m-auto mt-4 flex" />;
   }
 
   return (

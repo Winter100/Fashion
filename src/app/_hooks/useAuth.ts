@@ -8,8 +8,6 @@ import {
   signOut as signoutApi,
   signUp as signUpApi,
 } from "../_utils/apiAuth";
-import { TAG_NAME } from "../_utils/constant";
-import { setFashionRoute } from "../_utils/setFashionRoute";
 
 const AUTH_KEY = "auth";
 

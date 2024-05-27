@@ -13,7 +13,7 @@ body {
   }
 
   .image-parents-div-fill {
-    @apply relative m-auto flex h-[80%] w-full items-center justify-center;
+    @apply relative m-auto flex h-[100%] w-full items-center justify-center;
   }
 
   .auth-btn-hover {

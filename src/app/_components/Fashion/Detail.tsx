@@ -22,7 +22,7 @@ export default function Detail({
     <div className="flex ">
       <div className="flex-rows flex w-full items-center gap-2 p-2">
         <div className="flex-co flex h-full flex-1">
-          <div className="image-parents-div-fill">
+          <div className="relative w-full">
             <Image
               src={image}
               alt="패션 이미지"

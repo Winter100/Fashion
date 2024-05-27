@@ -1,7 +1,7 @@
 "use client";
 
-import { Rating as RatingView } from "flowbite-react";
 import { useState } from "react";
+import { Rating as RatingView } from "flowbite-react";
 
 interface RatingType {
   length?: number;
@@ -12,9 +12,9 @@ interface RatingType {
 export default function Rating({
   length = 5,
   onClick,
-  rating = 0,
+  rating = 1,
 }: RatingType) {
-  const [isHover, setIsHover] = useState(0);
+  const [isHover, setIsHover] = useState(1);
 
   const handleClick = (index: number) => {
     if (onClick) {
@@ -27,7 +27,7 @@ export default function Rating({
   };
 
   const handleOnMouseLeave = () => {
-    setIsHover(0);
+    setIsHover(1);
   };
   return (
     <div className=" flex ">

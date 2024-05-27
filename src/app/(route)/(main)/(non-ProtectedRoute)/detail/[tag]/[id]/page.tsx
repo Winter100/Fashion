@@ -33,9 +33,7 @@ export default function Page() {
         </Button>
       </div>
       <Detail {...data} />
-      <div>
-        <CommentEntry />
-      </div>
+      <CommentEntry />
     </div>
   );
 }
