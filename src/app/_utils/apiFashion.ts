@@ -64,12 +64,13 @@ export async function getFashionEditItem(
   const { data: findItem, error } = await supabase
     .from(`fashion-${tag}`)
     .select("*")
-    .eq("id", id);
+    .eq("id", id)
+    .single();
 
   if (error) throw new Error(error.message);
-  if (findItem[0]?.user_id !== userId) throw new Error("권한이 없습니다");
+  if (findItem?.user_id !== userId) throw new Error("권한이 없습니다");
 
-  return findItem[0];
+  return findItem;
 }
 
 export async function deleteFashionItem(items: DeleteListType[]) {
@@ -150,7 +151,7 @@ export async function updateFashionItem({
 export async function getFashionItemComments(id: string, tag: string) {
   const { data: comments, error } = await supabase
     .from(`fashion-${tag}-comments`)
-    .select("id,user,created_at,content,rating")
+    .select("id,user,created_at,content,rating,user_id")
     .order("created_at", { ascending: true })
     .eq("fashion_id", id);
 
@@ -178,4 +179,13 @@ export async function postFashionItemComment({
   if (error) throw new Error(error.message);
 
   return "";
+}
+
+export async function deleteFashionComment(id: string, tag: string) {
+  const { error } = await supabase
+    .from(`fashion-${tag}-comments`)
+    .delete()
+    .eq("id", id);
+
+  if (error) throw new Error(error.message);
 }

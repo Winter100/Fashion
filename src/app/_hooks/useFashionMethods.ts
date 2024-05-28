@@ -18,6 +18,7 @@ import {
   getMyFashionList as myFashionListApi,
   getFashionItemComments,
   postFashionItemComment,
+  deleteFashionComment,
 } from "../_utils/apiFashion";
 import { useUser } from "./useAuth";
 
@@ -133,7 +134,6 @@ export function useUpdate() {
       router.back();
     },
     onError: (e) => {
-      toast.error(e.message);
       toast.error("잠시 후 다시 시도해 주세요!");
       router.replace(setFashionRoute(TAG_NAME.fashion, tag));
     },
@@ -191,4 +191,24 @@ export function usePostComment() {
   });
 
   return { postComment };
+}
+
+export function useDeleteComment() {
+  const queryClient = useQueryClient();
+  const { isLoading, setLoading } = useLoading();
+
+  const { mutate: deleteComment } = useMutation({
+    mutationFn: ({ id, tag }: { id: string; tag: string }) =>
+      deleteFashionComment(id, tag),
+    onSuccess: () => {
+      toast.success("댓글이 삭제 됐습니다!");
+      queryClient.invalidateQueries({ queryKey: ["comments"] });
+    },
+    onError: () => {
+      toast.error("잠시 후 다시 시도해 주세요!");
+      setLoading(false);
+    },
+  });
+
+  return { deleteComment, setLoading, isLoading };
 }

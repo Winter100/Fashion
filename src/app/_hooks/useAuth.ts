@@ -19,8 +19,9 @@ export function useUser() {
   });
 
   const isAuthenticated = user?.role === "authenticated";
+  const user_id = user?.id;
 
-  return { user, isLoading, isAuthenticated };
+  return { user, isLoading, isAuthenticated, user_id };
 }
 
 export function useLogin() {

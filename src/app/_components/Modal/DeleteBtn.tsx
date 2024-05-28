@@ -7,17 +7,28 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 import { DeletePropsType } from "@/app/_types/type";
 
-export default function DeleteBtn({ onDelete, isLoading }: DeletePropsType) {
+export default function DeleteBtn({
+  title = "기록",
+  onDelete,
+  isLoading,
+  color = "",
+  size,
+}: DeletePropsType) {
   const [openModal, setOpenModal] = useState(false);
 
   return (
     <>
-      <Button title="삭제" color="light" onClick={() => setOpenModal(true)}>
+      <Button
+        className=""
+        title="삭제"
+        color={color}
+        onClick={() => setOpenModal(true)}
+      >
         <FaRegTrashCan />
       </Button>
       <Modal
         show={openModal}
-        size="md"
+        size={size}
         onClose={() => setOpenModal(false)}
         popup
       >
@@ -26,7 +37,7 @@ export default function DeleteBtn({ onDelete, isLoading }: DeletePropsType) {
           <div className="text-center">
             <HiOutlineExclamationCircle className="mx-auto mb-4 h-8 w-8 text-gray-400 dark:text-gray-200" />
             <h3 className="mb-5 text-2xl font-normal text-gray-500 dark:text-gray-400">
-              선택한 기록을 <span className="text-red-600">삭제</span>
+              선택한 {title}을 <span className="text-red-600">삭제</span>
               하시겠습니까?
             </h3>
             <div className="flex justify-center gap-4">

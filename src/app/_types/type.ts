@@ -33,6 +33,9 @@ export interface CommentType {
   user: string;
   content: string;
   rating: number;
+  sameUser: boolean;
+  onDelete: (items: DeleteListType) => void;
+  commentLoading: boolean;
 }
 
 export interface UpdateDataFn {
@@ -112,6 +115,26 @@ export interface DeleteListType {
 }
 
 export interface DeletePropsType {
+  title?: string;
   isLoading: boolean;
-  onDelete: () => void;
+  onDelete: (items: any) => void;
+  color?:
+    | ""
+    | "dark"
+    | "failure"
+    | "gray"
+    | "light"
+    | "purple"
+    | "success"
+    | "warning"
+    | "blue"
+    | "cyan"
+    | "green"
+    | "indigo"
+    | "lime"
+    | "pink"
+    | "red"
+    | "teal"
+    | "yellow";
+  size: "xs" | "sm" | "md" | "lg" | "xl";
 }

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Button } from "flowbite-react";
 import { FaRegTrashCan } from "react-icons/fa6";
 
-import DeleteBtn from "@/app/_components/Fashion/DeleteBtn";
+import DeleteBtn from "@/app/_components/Modal/DeleteBtn";
 import { useDelete } from "@/app/_hooks/useFashionMethods";
 import { DeleteListType } from "@/app/_types/type";
 import MyFashionList from "@/app/_components/Fashion/MyFashionList";
@@ -46,7 +46,12 @@ export default function Page() {
           <p>수정</p>
           <p>
             {checkedIds.length >= 1 ? (
-              <DeleteBtn onDelete={handleDelete} isLoading={isLoading} />
+              <DeleteBtn
+                onDelete={handleDelete}
+                isLoading={isLoading}
+                color="light"
+                size="md"
+              />
             ) : (
               <Button title="삭제" color="light" disabled>
                 <FaRegTrashCan />

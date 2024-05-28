@@ -43,9 +43,9 @@ export default function CommentWrite() {
     });
   }
 
-  const handleRatingClick = (value: number) => {
-    setRating(value);
-  };
+  // function handleRatingClick(value: number) {
+  //   setRating(value);
+  // }
 
   return (
     <Comment
@@ -56,9 +56,9 @@ export default function CommentWrite() {
         <>
           <Comment.Header>
             <Comment.Title>{user?.user_metadata?.name || ""}</Comment.Title>
-            <Comment.Title className=" cursor-pointer">
+            {/* <Comment.Title className=" cursor-pointer">
               <Rating rating={rating} length={5} onClick={handleRatingClick} />
-            </Comment.Title>
+            </Comment.Title> */}
             <Comment.Title className="text-red-500">
               {errors.comment && errors.comment?.message}
             </Comment.Title>

@@ -19,10 +19,10 @@ export default function Detail({
   created_at,
 }: DetailType) {
   return (
-    <div className="flex ">
+    <div className="flex">
       <div className="flex-rows flex w-full items-center gap-2 p-2">
-        <div className="flex-co flex h-full flex-1">
-          <div className="relative w-full">
+        <div className="flex h-full flex-1 flex-col">
+          <div className="relative h-full rounded-xl border border-backgroundTwo">
             <Image
               src={image}
               alt="패션 이미지"
