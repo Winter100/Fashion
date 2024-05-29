@@ -1,28 +1,33 @@
 "use client";
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Spinner } from "flowbite-react";
 
 import Manage from "../Manage/Manage";
 import { useMyFashionList } from "@/app/_hooks/useFashionMethods";
 import { MyFashionListType } from "@/app/_types/type";
 import { tagCount } from "@/app/_utils/tagCount";
+import { removeFilteredValueForLocalStorage } from "@/app/_utils/localstorage";
 
 export default function RecordInfo() {
+  const router = useRouter();
   const { flattenedArray, pending: isPending } =
     useMyFashionList<MyFashionListType[]>();
 
   const { todayCount, tomorrowCount, thisCount, totalCount } =
     tagCount(flattenedArray);
 
+  function handleRoute() {
+    router.push("/mypage/list");
+    removeFilteredValueForLocalStorage();
+  }
+
   return (
     <Manage className="mt-12">
       <Manage.Title>기록 정보</Manage.Title>
       <Manage.Description className="flex justify-between">
         <span>그동안 기록한 패션의 수 입니다.</span>
-        <Link prefetch={false} href={"/mypage/list"}>
-          관리 하기
-        </Link>
+        <button onClick={handleRoute}>기록 관리</button>
       </Manage.Description>
       <Manage.ContentWrapper className="mt-2 gap-4 text-2xl">
         {isPending ? (

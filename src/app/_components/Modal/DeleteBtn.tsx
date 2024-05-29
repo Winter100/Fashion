@@ -13,12 +13,14 @@ export default function DeleteBtn({
   isLoading,
   color = "",
   size,
+  disabled = false,
 }: DeletePropsType) {
   const [openModal, setOpenModal] = useState(false);
 
   return (
     <>
       <Button
+        disabled={disabled}
         className=""
         title="삭제"
         color={color}

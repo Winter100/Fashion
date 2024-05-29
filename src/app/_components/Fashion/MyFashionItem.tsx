@@ -9,7 +9,11 @@ import { convertToKST } from "@/app/_utils/convertToKST";
 import { convertToTag } from "@/app/_utils/convertToTag";
 import { MyItemType } from "@/app/_types/type";
 
-export default function MyFashionItem({ item, handleCheck }: MyItemType) {
+export default function MyFashionItem({
+  item,
+  handleCheck,
+  isChecked,
+}: MyItemType) {
   const { tag, id, created_at, image, title } = item;
 
   return (
@@ -28,7 +32,11 @@ export default function MyFashionItem({ item, handleCheck }: MyItemType) {
         </Link>
       </p>
       <p>
-        <Checkbox id={id} onChange={() => handleCheck(id, tag)} />
+        <Checkbox
+          checked={isChecked}
+          id={id}
+          onChange={() => handleCheck(id, tag)}
+        />
       </p>
     </>
   );

@@ -137,4 +137,5 @@ export interface DeletePropsType {
     | "teal"
     | "yellow";
   size: "xs" | "sm" | "md" | "lg" | "xl";
+  disabled?: boolean;
 }
