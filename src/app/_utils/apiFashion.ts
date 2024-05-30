@@ -189,3 +189,13 @@ export async function deleteFashionComment(id: string, tag: string) {
 
   if (error) throw new Error(error.message);
 }
+
+export async function searchFashion(tag: string, value: string) {
+  const { data, error } = await supabase
+    .from(`fashion-${tag}`)
+    .select("*")
+    .eq("title", value);
+
+  if (error) throw new Error(error.message);
+  return data;
+}

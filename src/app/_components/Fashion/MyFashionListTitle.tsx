@@ -28,16 +28,16 @@ export default function MyFashionListTitle({
 }: MyFahsionListTitleType) {
   return (
     <ul>
-      <li className="grid grid-cols-6 items-center justify-items-center text-base sm:text-2xl">
+      <li className="grid grid-cols-6 items-center justify-items-center text-base md:text-2xl">
         <div>사진</div>
         <div>제목</div>
         <div>
           <Dropdown label={convertToDateName(dateFilter)} inline>
-            <Dropdown.Item onClick={() => setDateFilter("up")}>
-              오래된 순
-            </Dropdown.Item>
             <Dropdown.Item onClick={() => setDateFilter("down")}>
               최신 순
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setDateFilter("up")}>
+              오래된 순
             </Dropdown.Item>
           </Dropdown>
         </div>

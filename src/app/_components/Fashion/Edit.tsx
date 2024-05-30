@@ -80,8 +80,8 @@ export default function Write({
         </Button>
       </div>
 
-      <div className="flex-rows flex w-full items-center gap-2 p-2">
-        <div className="flex h-full flex-1 flex-col items-center">
+      <div className="flex-rows flex w-full items-center gap-2 p-4">
+        <div className="flex h-full flex-1 flex-col items-center rounded-xl border border-backgroundTwo">
           <div className="image-parents-div-fill">
             {!errors?.imageFile && isImage && (
               <Image

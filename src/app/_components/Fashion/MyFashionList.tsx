@@ -47,7 +47,7 @@ export default function MyFashionList({
       {sortedData.map((item) => (
         <li
           key={item.title}
-          className="my-2  grid h-36 grid-cols-6 items-center justify-items-center text-xl hover:bg-backgroundOne/70"
+          className="my-2 grid h-36 grid-cols-6 items-center justify-items-center text-base hover:bg-backgroundOne/70 md:text-xl"
         >
           <MyFashionItem
             isChecked={checkedIds.some(

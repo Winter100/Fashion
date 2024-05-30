@@ -10,20 +10,20 @@ const DynamicLeftBarMenu = dynamic(() => import("../Menu/LeftBarMenu"), {
 
 export default function LeftBar() {
   return (
-    <nav className="flex h-full w-full flex-col items-center justify-between sm:pb-40">
-      <header className="flex h-16 items-center justify-center border-borderColorOne/20">
+    <nav className=" h-full w-full ">
+      <header className="flex h-16 items-center justify-center">
         <Title />
       </header>
 
-      <ul className=" flex w-full flex-col items-center justify-center gap-20 text-4xl">
-        <DynamicLeftBarMenu />
-      </ul>
-      <div className=" flex w-full items-center justify-center border-borderColorOne/20  ">
-        <DarkModeToggleBtn />
-      </div>
+      <div className=" flex h-full w-full flex-col py-20">
+        <ul className="flex w-full flex-1 flex-col items-center justify-center gap-20 text-4xl">
+          <DynamicLeftBarMenu />
+          <DarkModeToggleBtn />
+        </ul>
 
-      <div className=" flex w-full items-center justify-center border-borderColorOne/20 text-2xl">
-        <AuthBar />
+        <div className="flex w-full flex-1 items-center justify-center text-2xl">
+          <AuthBar />
+        </div>
       </div>
     </nav>
   );

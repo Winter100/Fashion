@@ -19,6 +19,7 @@ import {
   getFashionItemComments,
   postFashionItemComment,
   deleteFashionComment,
+  searchFashion,
 } from "../_utils/apiFashion";
 import { useUser } from "./useAuth";
 
@@ -211,4 +212,28 @@ export function useDeleteComment() {
   });
 
   return { deleteComment, setLoading, isLoading };
+}
+
+export function useSearchFashion<T>(searchValue: string) {
+  const tags = [TAG_NAME.today, TAG_NAME.tomorrow, TAG_NAME.this];
+
+  const { data, pending } = useQueries({
+    queries: tags.map((tag) => ({
+      queryKey: ["search", tag, searchValue],
+      queryFn: () => searchFashion(tag, searchValue),
+    })),
+    combine: (results) => {
+      return {
+        data: results.map((result) => result.data),
+        pending: results.some((result) => result.isPending),
+      };
+    },
+  });
+
+  const flattenedArray: T = data.reduce<any>(
+    (acc, curr) => acc.concat(curr),
+    [],
+  );
+
+  return { flattenedArray, pending };
 }

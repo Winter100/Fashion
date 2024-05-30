@@ -16,7 +16,12 @@ export default function SignIn() {
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm<signInType>();
+  } = useForm<signInType>({
+    defaultValues: {
+      email: "test@test.com",
+      password: "qwerqwer",
+    },
+  });
 
   const { login, isPending } = useLogin();
   const { setLoginData } = useUserContextData();
