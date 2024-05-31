@@ -8,14 +8,18 @@ import { useMyFashionList } from "@/app/_hooks/useFashionMethods";
 import { MyFashionListType } from "@/app/_types/type";
 import { tagCount } from "@/app/_utils/tagCount";
 import { removeFilteredValueForLocalStorage } from "@/app/_utils/localstorage";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
+import ErrorWrapper from "../Error/ErrorWrapper";
 
 export default function RecordInfo() {
   const router = useRouter();
-  const { flattenedArray, pending: isPending } =
-    useMyFashionList<MyFashionListType[]>();
+  const { data, isLoading } = useMyFashionList<MyFashionListType>();
 
-  const { todayCount, tomorrowCount, thisCount, totalCount } =
-    tagCount(flattenedArray);
+  if (isLoading || !data) {
+    return <LoadingSpinner />;
+  }
+
+  const { todayCount, tomorrowCount, thisCount, totalCount } = tagCount(data);
 
   function handleRoute() {
     router.push("/mypage/list");
@@ -30,7 +34,7 @@ export default function RecordInfo() {
         <button onClick={handleRoute}>기록 관리</button>
       </Manage.Description>
       <Manage.ContentWrapper className="mt-2 gap-4 text-2xl">
-        {isPending ? (
+        {isLoading ? (
           <Spinner className=" m-auto flex min-h-40" />
         ) : (
           <>

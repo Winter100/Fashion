@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-import Edit from "@/app/_components/Fashion/Edit";
+import Edit from "@/app/_components/Fashion/Edit/Edit";
 import imgCompression from "@/app/_utils/imgCompression";
 import LoadingSpinner from "@/app/_components/Spinner/LoadingSpinner";
 import { inputType } from "@/app/_types/type";

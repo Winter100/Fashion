@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 
 import { useDelete } from "@/app/_hooks/useFashionMethods";
 import { DeleteListType } from "@/app/_types/type";
-import MyFashionList from "@/app/_components/Fashion/MyFashionList";
-import MyFashionListTitle from "@/app/_components/Fashion/MyFashionListTitle";
 import {
   getFilteredValueForLocalStorage,
   setFilterValueForLocalStorage,
 } from "@/app/_utils/localstorage";
+import MyFashionListTitle from "@/app/_components/Fashion/MyFashion/MyFashionListTitle";
+import MyFashionList from "@/app/_components/Fashion/MyFashion/MyFashionList";
 
 export default function Page() {
   const { deleteFashion, isLoading, setLoading } = useDelete();

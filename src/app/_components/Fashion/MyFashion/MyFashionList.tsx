@@ -4,7 +4,7 @@ import MyFashionItem from "./MyFashionItem";
 
 import { useMyFashionList } from "@/app/_hooks/useFashionMethods";
 import { DeleteListType, MyFashionListType } from "@/app/_types/type";
-import LoadingSpinner from "../Spinner/LoadingSpinner";
+import LoadingSpinner from "../../Spinner/LoadingSpinner";
 
 export default function MyFashionList({
   checkedIds,
@@ -17,17 +17,14 @@ export default function MyFashionList({
   tagFilter: string;
   dateFilter: string;
 }) {
-  const { flattenedArray, pending: isPending } =
-    useMyFashionList<MyFashionListType[]>();
+  const { data, isLoading } = useMyFashionList<MyFashionListType>();
 
-  if (isPending) {
+  if (isLoading || !data) {
     return <LoadingSpinner />;
   }
 
   const filteredData =
-    tagFilter === "all"
-      ? flattenedArray
-      : flattenedArray.filter((item) => item.tag === tagFilter);
+    tagFilter === "all" ? data : data.filter((item) => item.tag === tagFilter);
 
   const sortedData =
     dateFilter === "up"

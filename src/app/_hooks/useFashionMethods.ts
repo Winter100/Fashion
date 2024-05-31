@@ -1,11 +1,7 @@
 import { useParams, useRouter } from "next/navigation";
-import {
-  useMutation,
-  useQueries,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { User } from "@supabase/supabase-js";
 
 import { useLoading } from "./useLoading";
 import {
@@ -27,7 +23,6 @@ import { PostData, UpdateDataFn, DeleteListType } from "../_types/type";
 import { setFashionRoute } from "../_utils/setFashionRoute";
 import { TAG_NAME } from "../_utils/constant";
 import { useQueryString } from "./useQueryString";
-import { User } from "@supabase/supabase-js";
 
 export function useFashionList() {
   const params = useParams();
@@ -45,30 +40,13 @@ export function useFashionList() {
 
 export function useMyFashionList<T>() {
   const { user } = useUser();
-  const name = user?.user_metadata.name;
 
-  const tags = [TAG_NAME.today, TAG_NAME.tomorrow, TAG_NAME.this];
-
-  const { data, pending } = useQueries({
-    queries: tags.map((tag) => ({
-      queryKey: [tag, name],
-      queryFn: () => myFashionListApi(tag, name),
-      staleTime: Infinity,
-    })),
-    combine: (results) => {
-      return {
-        data: results.map((result) => result.data),
-        pending: results.some((result) => result.isPending),
-      };
-    },
+  const { data, isLoading, isError } = useQuery<T[]>({
+    queryKey: ["MyItemList"],
+    queryFn: () => myFashionListApi(user?.user_metadata.name),
   });
 
-  const flattenedArray: T = data.reduce<any>(
-    (acc, curr) => acc.concat(curr),
-    [],
-  );
-
-  return { flattenedArray, pending };
+  return { data, isLoading };
 }
 
 export function useDetail() {
@@ -214,26 +192,13 @@ export function useDeleteComment() {
   return { deleteComment, setLoading, isLoading };
 }
 
-export function useSearchFashion<T>(searchValue: string) {
-  const tags = [TAG_NAME.today, TAG_NAME.tomorrow, TAG_NAME.this];
+export function useSearchFashion<T>() {
+  const { page, q } = useQueryString();
 
-  const { data, pending } = useQueries({
-    queries: tags.map((tag) => ({
-      queryKey: ["search", tag, searchValue],
-      queryFn: () => searchFashion(tag, searchValue),
-    })),
-    combine: (results) => {
-      return {
-        data: results.map((result) => result.data),
-        pending: results.some((result) => result.isPending),
-      };
-    },
+  const { data, isLoading, isError } = useQuery<T[]>({
+    queryKey: ["search", page, q],
+    queryFn: () => searchFashion(q),
   });
 
-  const flattenedArray: T = data.reduce<any>(
-    (acc, curr) => acc.concat(curr),
-    [],
-  );
-
-  return { flattenedArray, pending };
+  return { data, isLoading };
 }

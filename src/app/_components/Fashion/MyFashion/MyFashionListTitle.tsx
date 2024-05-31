@@ -3,9 +3,9 @@
 import { Button, Dropdown } from "flowbite-react";
 import { FaRegTrashCan } from "react-icons/fa6";
 
-import DeleteBtn from "../Modal/DeleteBtn";
 import { TAG_NAME } from "@/app/_utils/constant";
 import { convertToDateName, convertToTag } from "@/app/_utils/convertToTag";
+import DeleteBtn from "../../Modal/DeleteBtn";
 
 interface MyFahsionListTitleType {
   setTagFilter: (value: string) => void;

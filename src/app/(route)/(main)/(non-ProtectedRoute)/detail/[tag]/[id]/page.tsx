@@ -3,10 +3,9 @@
 import { Button } from "flowbite-react";
 import { useRouter } from "next/navigation";
 
-import Detail from "@/app/_components/Fashion/Detail";
 import LoadingSpinner from "@/app/_components/Spinner/LoadingSpinner";
 import ErrorWrapper from "@/app/_components/Error/ErrorWrapper";
-
+import Detail from "@/app/_components/Fashion/Detail/Detail";
 import { useDetail } from "@/app/_hooks/useFashionMethods";
 import CommentEntry from "@/app/_components/Comment/CommentEntry";
 

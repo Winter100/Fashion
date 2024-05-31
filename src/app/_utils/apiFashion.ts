@@ -22,7 +22,7 @@ export async function getFashionList(
 
   const { data: fashionList, error } = await supabase
     .from(`fashion-${tag}`)
-    .select("id,title,image,user,created_at")
+    .select("id,title,image,user,created_at,tag")
     .order("created_at", { ascending: false })
     .gte("created_at", startDate)
     .lte("created_at", endDate)
@@ -34,14 +34,22 @@ export async function getFashionList(
   return fashionList;
 }
 
-export async function getMyFashionList(tag: string, userName: string) {
-  const { data, error } = await supabase
-    .from(`fashion-${tag}`)
-    .select("*")
-    .eq("user", userName);
+export async function getMyFashionList(userName: string) {
+  const tags = [TAG_NAME.today, TAG_NAME.tomorrow, TAG_NAME.this];
 
-  if (error) throw new Error(error.message);
-  return data;
+  let allData: any[] = [];
+
+  for (const tag of tags) {
+    const { data, error } = await supabase
+      .from(`fashion-${tag}`)
+      .select("id,title,image,user,created_at,tag")
+      .eq("user", userName);
+
+    allData = allData.concat(data);
+
+    if (error) throw new Error(error.message);
+  }
+  return allData;
 }
 
 export async function getFashionItem(id: string, tag: string) {
@@ -190,12 +198,22 @@ export async function deleteFashionComment(id: string, tag: string) {
   if (error) throw new Error(error.message);
 }
 
-export async function searchFashion(tag: string, value: string) {
-  const { data, error } = await supabase
-    .from(`fashion-${tag}`)
-    .select("*")
-    .eq("title", value);
+export async function searchFashion(titleValue: string) {
+  const tags = [TAG_NAME.today, TAG_NAME.tomorrow, TAG_NAME.this];
 
-  if (error) throw new Error(error.message);
-  return data;
+  let allData: any[] = [];
+
+  for (const tag of tags) {
+    const { data, error } = await supabase
+      .from(`fashion-${tag}`)
+      .select("id,title,image,user,created_at,tag")
+      .ilike("title", `%${titleValue}%`)
+      .order("created_at", { ascending: false });
+
+    if (error) throw new Error(error.message);
+
+    allData = allData.concat(data);
+  }
+
+  return allData;
 }

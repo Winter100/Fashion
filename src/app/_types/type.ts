@@ -74,6 +74,7 @@ export interface ListItemType {
   user: string;
   image: string;
   created_at: string;
+  tag: string;
 }
 
 export interface ItemType extends ListItemType {

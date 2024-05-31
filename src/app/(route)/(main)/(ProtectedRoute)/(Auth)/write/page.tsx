@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-import Write from "@/app/_components/Fashion/Edit";
+import Write from "@/app/_components/Fashion/Edit/Edit";
 import imgCompression from "@/app/_utils/imgCompression";
 import { inputType } from "@/app/_types/type";
 
