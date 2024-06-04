@@ -43,7 +43,7 @@ export default function MyFashionList({
     <ul>
       {sortedData.map((item) => (
         <li
-          key={item.title}
+          key={item.id}
           className="my-2 grid h-36 grid-cols-6 items-center justify-items-center text-base hover:bg-backgroundOne/70 md:text-xl"
         >
           <MyFashionItem

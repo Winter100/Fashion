@@ -17,7 +17,11 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 const today = new Date();
 
-export default function MainCalendar() {
+export default function MainCalendar({
+  setOpenModal,
+}: {
+  setOpenModal: (close: false) => void;
+}) {
   const { validStart, validEnd } = useQueryString();
   const { tag } = useParams();
   const router = useRouter();
@@ -40,29 +44,27 @@ export default function MainCalendar() {
         ),
       );
     }
+    setOpenModal(false);
   }
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center">
-      <Calendar
-        onChange={onChange}
-        view="month"
-        defaultValue={[
-          new Date(parseDateFromString(validStart)),
-          new Date(parseDateFromString(validEnd)),
-        ]}
-        value={value}
-        className="border-4 border-red-600"
-        minDetail="year"
-        maxDetail="month"
-        maxDate={today}
-        prev2Label={null}
-        next2Label={null}
-        calendarType="gregory"
-        selectRange={true}
-        showNeighboringMonth={false}
-        formatDay={(_, date) => date.toLocaleString("en", { day: "numeric" })}
-      />
-    </div>
+    <Calendar
+      onChange={onChange}
+      view="month"
+      defaultValue={[
+        new Date(parseDateFromString(validStart)),
+        new Date(parseDateFromString(validEnd)),
+      ]}
+      value={value}
+      minDetail="year"
+      maxDetail="month"
+      maxDate={today}
+      prev2Label={null}
+      next2Label={null}
+      calendarType="gregory"
+      selectRange={true}
+      showNeighboringMonth={false}
+      formatDay={(_, date) => date.toLocaleString("en", { day: "numeric" })}
+    />
   );
 }
