@@ -4,29 +4,23 @@ import UserContextProvider from "@/app/_components/Provider/UserContextProvider"
 
 import LeftLayout from "@/app/_components/Layout/LeftLayout";
 import MainLayout from "@/app/_components/Layout/MainLayout";
-import RightLayout from "@/app/_components/Layout/RightLayout";
 
 import Topbar from "@/app/_components/Nav/Topbar";
 import LeftBar from "@/app/_components/Nav/LeftBar";
 
-export default function Layout({
-  children,
-  right,
-}: {
-  children: React.ReactNode;
-  right: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <ToastProvider>
       <TanstackProvider>
         <UserContextProvider>
           <Topbar />
           <div className=" flex min-h-screen w-full">
-            <LeftLayout>
+            <LeftLayout className="z-20 hidden h-full w-28 md:fixed md:block xl:w-40">
               <LeftBar />
             </LeftLayout>
-            <MainLayout>{children}</MainLayout>
-            <RightLayout>{right}</RightLayout>
+            <MainLayout className="mx-0 mt-16 w-full bg-background p-2 md:ml-28 xl:ml-40">
+              {children}
+            </MainLayout>
           </div>
         </UserContextProvider>
       </TanstackProvider>

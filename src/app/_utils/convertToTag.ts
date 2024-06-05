@@ -6,6 +6,8 @@ export function convertToTag(tag: string) {
   if (tag === TAG_NAME.this) return "이거 어때?";
   if (tag === TAG_NAME.write) return "기록 남기기";
   if (tag === TAG_NAME.all) return "모두 보기";
+  if (tag === TAG_NAME.mypage || tag === "list") return "My";
+  if (tag === TAG_NAME.signin) return "로그인";
 
   return "";
 }

@@ -11,11 +11,7 @@ export function CalendarFilter() {
 
   return (
     <>
-      <Button
-        className="hidden md:block"
-        color="light"
-        onClick={() => setOpenModal(true)}
-      >
+      <Button color="light" onClick={() => setOpenModal(true)}>
         <FaRegCalendarAlt />
       </Button>
 

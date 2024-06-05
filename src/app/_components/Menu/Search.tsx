@@ -26,7 +26,7 @@ export default function Search() {
       <TextInput
         style={{ fontFamily: "sans-serif", fontSize: "0.75rem" }}
         rightIcon={IoSearchSharp}
-        className="w-80"
+        className="w-full"
         {...register("search", { required: true })}
       />
     </form>

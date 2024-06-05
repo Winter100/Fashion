@@ -3,20 +3,20 @@ import { PiSun, PiMoon } from "react-icons/pi";
 
 import { useDarkMode } from "../Provider/DarkModeProvider";
 
-export default function DarkModeToggleBtn() {
+export default function DarkModeToggleBtn({
+  className = "text-3xl",
+}: {
+  className?: string;
+}) {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   return (
-    <button
+    <li
       title="테마 바꾸기"
-      className="rounded-lg hover:bg-toggleBackground/90"
+      className={`flex w-full cursor-pointer items-center justify-center rounded-2xl hover:bg-toggleBackground/90 ${className}`}
       onClick={toggleDarkMode}
     >
-      {isDarkMode ? (
-        <PiSun className=" text-3xl" />
-      ) : (
-        <PiMoon className=" text-3xl" />
-      )}
-    </button>
+      {isDarkMode ? <PiSun /> : <PiMoon />}
+    </li>
   );
 }

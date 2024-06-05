@@ -18,9 +18,9 @@ export default function Page() {
   const router = useRouter();
 
   async function onSubmit(value: inputType) {
-    setSubmitLoading(true);
-
     const { title, content, tag, imageFile } = value;
+
+    setSubmitLoading(true);
 
     const compressionImage = await imgCompression(imageFile[0]);
 

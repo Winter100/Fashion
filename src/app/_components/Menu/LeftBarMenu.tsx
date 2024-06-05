@@ -25,7 +25,7 @@ export default function LeftBarMenu() {
         )}
         tag={TAG_NAME.today}
       >
-        <IoShirtOutline className="text-3xl" />
+        <IoShirtOutline />
       </LeftBarLink>
 
       <LeftBarLink
@@ -38,7 +38,7 @@ export default function LeftBarMenu() {
         )}
         tag={TAG_NAME.tomorrow}
       >
-        <RiTShirtAirFill className="text-3xl" />
+        <RiTShirtAirFill />
       </LeftBarLink>
 
       <LeftBarLink
@@ -51,11 +51,11 @@ export default function LeftBarMenu() {
         )}
         tag={TAG_NAME.this}
       >
-        <GiClothes className="text-3xl" />
+        <GiClothes />
       </LeftBarLink>
 
       <LeftBarLink href="/write" tag="write">
-        <GoPencil className="text-3xl" />
+        <GoPencil />
       </LeftBarLink>
     </>
   );

@@ -15,15 +15,12 @@ export default function LeftBar() {
         <Title />
       </header>
 
-      <div className=" flex h-full w-full flex-col py-20">
-        <ul className="flex w-full flex-1 flex-col items-center justify-center gap-20 text-4xl">
+      <div className="flex h-full w-full flex-col">
+        <ul className="flex w-full flex-1 flex-col items-center justify-center gap-20 text-3xl">
           <DynamicLeftBarMenu />
+          <AuthBar />
           <DarkModeToggleBtn />
         </ul>
-
-        <div className="flex w-full flex-1 items-center justify-center text-2xl">
-          <AuthBar />
-        </div>
       </div>
     </nav>
   );

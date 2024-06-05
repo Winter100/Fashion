@@ -1,14 +1,15 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { PiSignInBold } from "react-icons/pi";
+import { CiHome } from "react-icons/ci";
 
 import { useSignout } from "@/app/_hooks/useAuth";
+import { TAG_NAME } from "@/app/_utils/constant";
 
 import { useUserContextData } from "../Provider/UserContextProvider";
+import LeftBarLink from "../Menu/LeftBarLink";
 
 export default function AuthBar() {
-  const router = useRouter();
-
   const { signout: signoutMutation } = useSignout();
   const { userData, clearLoginData } = useUserContextData();
 
@@ -16,38 +17,25 @@ export default function AuthBar() {
     signoutMutation();
     clearLoginData();
   }
-
-  function signInRoute() {
-    router.push("/auth/signin");
-  }
-  function myPageRoute() {
-    router.push("/mypage");
-  }
-
   const isAuthenticated = userData?.aud === "authenticated";
 
   return (
-    <ul className=" flex w-full">
+    <>
       {!isAuthenticated ? (
-        <li className=" auth-btn-hover">
-          <button className="w-full" onClick={signInRoute}>
-            로그인
-          </button>
-        </li>
+        <LeftBarLink href="/auth/signin" tag={TAG_NAME.signin}>
+          <PiSignInBold />
+        </LeftBarLink>
       ) : (
         <>
-          <li className=" auth-btn-hover">
-            <button className="w-full" onClick={signOut}>
-              로그아웃
-            </button>
-          </li>
-          <li className=" auth-btn-hover">
-            <button className="w-full" onClick={myPageRoute}>
-              My
-            </button>
-          </li>
+          <LeftBarLink href="/mypage" tag={TAG_NAME.mypage}>
+            <CiHome />
+          </LeftBarLink>
+
+          <div className="auth-btn-hover text-fontColor/30" onClick={signOut}>
+            로그아웃
+          </div>
         </>
       )}
-    </ul>
+    </>
   );
 }

@@ -6,4 +6,11 @@ export const TAG_NAME = {
   this: "this",
   write: "write",
   all: "all",
+  mypage: "mypage",
+  signin: "signin",
 };
+
+/**
+ * 이미지 용량 제한: 5MB
+ */
+export const IMAGE_MAX_SIZE = 1024 * 1024 * 5;

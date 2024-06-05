@@ -11,6 +11,7 @@ import { inputType } from "@/app/_types/type";
 
 import { useLoading } from "@/app/_hooks/useLoading";
 import { useEditData, useUpdate } from "@/app/_hooks/useFashionMethods";
+import { IMAGE_MAX_SIZE } from "@/app/_utils/constant";
 
 export default function Page() {
   const router = useRouter();
@@ -20,6 +21,12 @@ export default function Page() {
     useLoading();
 
   const { isLoading, data, isError } = useEditData();
+  const inititem = {
+    title: data?.title,
+    content: data?.content,
+    tag: data?.tag,
+    image: data?.image,
+  };
 
   useEffect(() => {
     if (isError) {
@@ -30,17 +37,13 @@ export default function Page() {
 
   if (isLoading || isError) return <LoadingSpinner />;
 
-  const inititem = {
-    title: data?.title,
-    content: data?.content,
-    tag: data?.tag,
-    image: data?.image,
-  };
-
   async function onSubmit(value: inputType) {
+    const { title, content, imageFile } = value;
+    if (imageFile[0]?.size >= IMAGE_MAX_SIZE) {
+      return alert("이미지가 5MB를 초과했습니다 다른 이미지를 선택해주세요.");
+    }
     setSubmitLoading(true);
 
-    const { title, content, imageFile } = value;
     let updateData;
 
     try {

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import {
@@ -14,9 +14,8 @@ import {
 } from "flowbite-react";
 
 import { usePreview } from "@/app/_hooks/usePreview";
-
 import { inputType } from "@/app/_types/type";
-import { TAG_NAME } from "@/app/_utils/constant";
+import { IMAGE_MAX_SIZE, TAG_NAME } from "@/app/_utils/constant";
 
 export default function Write({
   onSubmit,
@@ -32,6 +31,8 @@ export default function Write({
   const {
     register,
     handleSubmit,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm<inputType>({
     defaultValues: {
@@ -45,6 +46,20 @@ export default function Write({
   const router = useRouter();
 
   const isImage = preview || item?.image;
+
+  function handleImageChange(e: ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files) return;
+    const file = e.target.files[0];
+    clearErrors("imageFile");
+    if (file?.size >= IMAGE_MAX_SIZE) {
+      setError("imageFile", {
+        type: "custom",
+        message: "이미지는 5MB를 초과할 수 없습니다.",
+      });
+    } else {
+      handlePreview(e);
+    }
+  }
 
   useEffect(() => {
     setIsSelectDisabled(!!item?.tag);
@@ -112,14 +127,14 @@ export default function Write({
 
             <input
               {...register("imageFile", {
-                required: !item?.image && "이미지가 필요합니다.",
-                onChange: handlePreview,
+                required: !item?.image && "이미지를 선택해주세요.",
+                onChange: handleImageChange,
               })}
               disabled={submitLoading}
               id="imageFile"
               hidden
               type="file"
-              accept="image/*"
+              accept="image/png, image/jpeg, image/jpg"
             />
           </div>
         </div>

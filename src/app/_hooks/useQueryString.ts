@@ -35,3 +35,19 @@ export function useChageQueryString() {
 
   return { changeQuery };
 }
+
+export function useRouteName() {
+  const router = usePathname();
+
+  const parts = router.split("/");
+
+  let routeName;
+
+  if (parts[2]) {
+    routeName = parts[2];
+  } else {
+    routeName = parts[1];
+  }
+
+  return { routeName };
+}
