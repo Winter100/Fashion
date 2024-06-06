@@ -1,5 +1,4 @@
 import Comment from "./Comment/Comment";
-import RatingView from "../Rating/RatingView";
 import { convertToKST } from "@/app/_utils/convertToKST";
 import { CommentType } from "@/app/_types/type";
 import DeleteBtn from "../Modal/DeleteBtn";
@@ -28,9 +27,6 @@ export default function CommentView({
             />
           )}
         </Comment.Title>
-        {/* <Comment.Title>
-          <RatingView rating={rating} />
-        </Comment.Title> */}
       </Comment.Header>
       <Comment.Content className=" px-4 font-bold">{content}</Comment.Content>
     </Comment>

@@ -1,11 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { TextInput } from "flowbite-react";
-import Link from "next/link";
 
-import Rating from "../Rating/Rating";
 import Comment from "./Comment/Comment";
 import { usePostComment } from "@/app/_hooks/useFashionMethods";
 import { useUser } from "@/app/_hooks/useAuth";
@@ -43,10 +42,6 @@ export default function CommentWrite() {
     });
   }
 
-  // function handleRatingClick(value: number) {
-  //   setRating(value);
-  // }
-
   return (
     <Comment
       onSubmit={handleSubmit(onSubmit)}
@@ -56,9 +51,6 @@ export default function CommentWrite() {
         <>
           <Comment.Header>
             <Comment.Title>{user?.user_metadata?.name || ""}</Comment.Title>
-            {/* <Comment.Title className=" cursor-pointer">
-              <Rating rating={rating} length={5} onClick={handleRatingClick} />
-            </Comment.Title> */}
             <Comment.Title className="text-red-500">
               {errors.comment && errors.comment?.message}
             </Comment.Title>

@@ -19,9 +19,9 @@ export default function Detail({
   created_at,
 }: DetailType) {
   return (
-    <div className="flex">
-      <div className="flex-rows flex w-full items-center gap-2 p-2">
-        <div className="flex h-full flex-1 flex-col">
+    <div className="flex ">
+      <div className="flex w-full flex-col items-center gap-2 p-2 md:flex-row">
+        <div className="flex h-96 w-full flex-col md:h-full md:flex-1">
           <div className="relative h-full rounded-xl border border-backgroundTwo">
             <Image
               src={image}
@@ -34,7 +34,7 @@ export default function Detail({
           </div>
         </div>
 
-        <div className="flex-1">
+        <div className="w-full flex-1">
           <div className=" flex flex-col gap-2">
             <DetailContentArea id="title" KrTitle="제목" value={title} />
             <DetailContentArea id="user" KrTitle="글쓴이" value={user} />

@@ -62,6 +62,12 @@ export default function MobileMenu() {
           {convertToTag(menu?.name)}
         </Dropdown.Item>
       ))}
+      <Dropdown.Item
+        onClick={() => handleRoute("/write")}
+        className="flex items-center justify-center"
+      >
+        기록 남기기
+      </Dropdown.Item>
       <Dropdown.Divider />
       {!isAuthenticated ? (
         <Dropdown.Item
