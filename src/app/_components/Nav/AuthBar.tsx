@@ -1,6 +1,5 @@
 "use client";
 
-import { PiSignInBold } from "react-icons/pi";
 import { CiHome } from "react-icons/ci";
 
 import { useSignout } from "@/app/_hooks/useAuth";
@@ -23,7 +22,7 @@ export default function AuthBar() {
     <>
       {!isAuthenticated ? (
         <LeftBarLink href="/auth/signin" tag={TAG_NAME.signin}>
-          <PiSignInBold />
+          {""}
         </LeftBarLink>
       ) : (
         <>
@@ -31,7 +30,10 @@ export default function AuthBar() {
             <CiHome />
           </LeftBarLink>
 
-          <div className="auth-btn-hover text-fontColor/30" onClick={signOut}>
+          <div
+            className="auth-btn-hover cursor-pointer text-fontColor/30"
+            onClick={signOut}
+          >
             로그아웃
           </div>
         </>

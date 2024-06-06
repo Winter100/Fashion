@@ -20,7 +20,7 @@ export default function LoginInfo() {
   return (
     <Manage className="mt-12">
       <Manage.Title>로그인 정보</Manage.Title>
-      <Manage.ContentWrapper className="mt-2 gap-4 text-2xl">
+      <Manage.ContentWrapper className="mt-2 gap-4 text-xl md:text-2xl">
         {isLoading ? (
           <Spinner />
         ) : (

@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Dropdown } from "flowbite-react";
@@ -52,6 +51,7 @@ export default function MobileMenu() {
       <Dropdown.Item className="flex items-center justify-center p-1">
         <DarkModeToggleBtn className="text-xl" />
       </Dropdown.Item>
+
       <Dropdown.Divider />
       {MenuName.map((menu) => (
         <Dropdown.Item

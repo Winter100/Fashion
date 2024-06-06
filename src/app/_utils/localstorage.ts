@@ -1,6 +1,7 @@
+const localStorageUserKey = "sb-sdyfujwfykmydszxtqvv-auth-token";
 export function getUserDataForLocalStorage() {
   if (typeof window !== "undefined") {
-    const user = localStorage.getItem("sb-sdyfujwfykmydszxtqvv-auth-token");
+    const user = localStorage.getItem(localStorageUserKey);
     if (!user) return;
     try {
       return JSON.parse(user).user;
@@ -8,6 +9,10 @@ export function getUserDataForLocalStorage() {
       return null;
     }
   }
+}
+
+export function removeUserDataForLocalSotarge() {
+  localStorage.removeItem(localStorageUserKey);
 }
 
 export function setFilterValueForLocalStorage(

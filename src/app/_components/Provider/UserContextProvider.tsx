@@ -2,7 +2,10 @@
 
 import { createContext, useContext, useState } from "react";
 
-import { getUserDataForLocalStorage } from "@/app/_utils/localstorage";
+import {
+  getUserDataForLocalStorage,
+  removeUserDataForLocalSotarge,
+} from "@/app/_utils/localstorage";
 
 interface UserCotextType {
   userData: any | null;
@@ -28,6 +31,7 @@ export default function UserContextProvider({
   }
   function clearLoginData() {
     setUserData(null);
+    removeUserDataForLocalSotarge();
   }
 
   return (

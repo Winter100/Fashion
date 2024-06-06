@@ -8,6 +8,7 @@ export const TAG_NAME = {
   all: "all",
   mypage: "mypage",
   signin: "signin",
+  signup: "signup",
 };
 
 /**

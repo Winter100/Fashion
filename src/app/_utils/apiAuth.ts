@@ -38,17 +38,34 @@ export async function signUp({
   password: string;
   name: string;
 }) {
-  const { data, error } = await supabase.auth.signUp({
+  const sanitizedName = name.replace(/\s+/g, "");
+
+  const { data: existingUsers, error: searchError } = await supabase
+    .from("user_profiles")
+    .select("name")
+    .eq("name", sanitizedName);
+
+  if (searchError) throw new Error(searchError.message);
+  if (existingUsers.length > 0)
+    throw new Error("존재하는 닉네임입니다. 다른 닉네임을 사용해주세요.");
+
+  const { data, error: signUpError } = await supabase.auth.signUp({
     email,
     password,
     options: {
       data: {
-        name,
+        name: sanitizedName,
       },
     },
   });
 
-  if (error) throw new Error(error.message);
+  if (signUpError) throw new Error(signUpError.message);
+
+  const { data: nameData, error: nameError } = await supabase
+    .from("user_profiles")
+    .insert([{ user_id: data?.user?.id, name: name }]);
+
+  if (nameError) throw new Error(nameError.message);
 
   return data;
 }

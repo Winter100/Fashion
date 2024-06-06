@@ -30,10 +30,6 @@ export default function UserInfo() {
               <Manage.Label>이름</Manage.Label>
               <Manage.Content>{name}</Manage.Content>
             </Manage.ContentArea>
-            <Manage.ContentArea>
-              <Manage.Label>비밀번호</Manage.Label>
-              <Manage.Content>변경하기</Manage.Content>
-            </Manage.ContentArea>
           </>
         )}
       </Manage.ContentWrapper>
