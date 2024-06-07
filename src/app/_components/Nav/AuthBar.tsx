@@ -1,6 +1,8 @@
 "use client";
 
 import { CiHome } from "react-icons/ci";
+import { VscSignIn } from "react-icons/vsc";
+import { VscSignOut } from "react-icons/vsc";
 
 import { useSignout } from "@/app/_hooks/useAuth";
 import { TAG_NAME } from "@/app/_utils/constant";
@@ -22,7 +24,7 @@ export default function AuthBar() {
     <>
       {!isAuthenticated ? (
         <LeftBarLink href="/auth/signin" tag={TAG_NAME.signin}>
-          {""}
+          <VscSignIn />
         </LeftBarLink>
       ) : (
         <>
@@ -31,10 +33,13 @@ export default function AuthBar() {
           </LeftBarLink>
 
           <div
-            className="auth-btn-hover cursor-pointer text-fontColor/30"
+            className="auth-btn-hover flex cursor-pointer items-center justify-center gap-2 text-fontColor/30"
             onClick={signOut}
           >
-            로그아웃
+            <VscSignOut />
+            <span className="hidden text-2xl lg:block lg:text-2xl">
+              로그아웃
+            </span>
           </div>
         </>
       )}

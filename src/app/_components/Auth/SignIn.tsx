@@ -67,7 +67,11 @@ export default function SignIn() {
         <TextInput
           disabled={isPending}
           autoFocus
-          style={{ fontSize: "24px", padding: "7px" }}
+          style={{
+            padding: "7px",
+            fontFamily: "sans-serif",
+            fontSize: "0.75rem",
+          }}
           id="email"
           type="email"
           {...register("email", { required: "이메일을 입력해주세요" })}
@@ -87,7 +91,11 @@ export default function SignIn() {
           autoComplete="off"
           id="password"
           type="password"
-          style={{ fontSize: "24px", padding: "7px" }}
+          style={{
+            padding: "7px",
+            fontFamily: "sans-serif",
+            fontSize: "0.75rem",
+          }}
           {...register("password", { required: "비밀번호를 입력해주세요" })}
         />
       </div>

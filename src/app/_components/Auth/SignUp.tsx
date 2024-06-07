@@ -23,7 +23,9 @@ export default function SignUp() {
   const { signUp, isPending } = useSignUp();
 
   async function onSubmit(value: signUpType) {
-    const { email, name, password } = value;
+    const { email, name: fullName, password } = value;
+
+    const name = fullName.replace(/\s+/g, "");
 
     signUp(
       { email, name, password },
@@ -58,7 +60,11 @@ export default function SignUp() {
         <TextInput
           disabled={isPending}
           autoFocus
-          style={{ fontSize: "24px", padding: "7px" }}
+          style={{
+            padding: "7px",
+            fontFamily: "sans-serif",
+            fontSize: "0.75rem",
+          }}
           id="email"
           type="email"
           {...register("email", { required: "이메일을 입력해주세요" })}
@@ -76,7 +82,11 @@ export default function SignUp() {
         <TextInput
           disabled={isPending}
           id="name"
-          style={{ fontSize: "24px", padding: "7px" }}
+          style={{
+            padding: "7px",
+            fontFamily: "sans-serif",
+            fontSize: "0.75rem",
+          }}
           {...register("name", { required: "닉네임을 입력해주세요" })}
         />
       </div>
@@ -93,7 +103,11 @@ export default function SignUp() {
           disabled={isPending}
           id="password"
           type="password"
-          style={{ fontSize: "24px", padding: "7px" }}
+          style={{
+            padding: "7px",
+            fontFamily: "sans-serif",
+            fontSize: "0.75rem",
+          }}
           {...register("password", { required: "비밀번호를 입력해주세요" })}
         />
       </div>
@@ -114,7 +128,11 @@ export default function SignUp() {
           disabled={isPending}
           id="passwordConfirm"
           type="password"
-          style={{ fontSize: "24px", padding: "7px" }}
+          style={{
+            padding: "7px",
+            fontFamily: "sans-serif",
+            fontSize: "0.75rem",
+          }}
           {...register("passwordConfirm", {
             required: true,
             validate: (value) =>
