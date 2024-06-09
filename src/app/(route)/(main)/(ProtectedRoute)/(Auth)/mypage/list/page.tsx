@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import { useDelete } from "@/app/_hooks/useFashionMethods";
 import { DeleteListType } from "@/app/_types/type";
 import {
   getFilteredValueForLocalStorage,
@@ -10,6 +9,7 @@ import {
 } from "@/app/_utils/localstorage";
 import MyFashionListTitle from "@/app/_components/Fashion/MyFashion/MyFashionListTitle";
 import MyFashionList from "@/app/_components/Fashion/MyFashion/MyFashionList";
+import { useDelete } from "@/app/_hooks/useFashion";
 
 export default function Page() {
   const { deleteFashion, isLoading, setLoading } = useDelete();

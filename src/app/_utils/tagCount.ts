@@ -1,5 +1,5 @@
+import { TAG_NAME } from "../_constant/constant";
 import { MyFashionListType } from "../_types/type";
-import { TAG_NAME } from "./constant";
 
 export function tagCount(flattenedArray: MyFashionListType[]) {
   const counts = flattenedArray.reduce(

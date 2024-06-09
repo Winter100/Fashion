@@ -6,10 +6,10 @@ import { useParams, useRouter } from "next/navigation";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
-import { TAG_NAME } from "@/app/_utils/constant";
 import { convertDateFormat, parseDateFromString } from "@/app/_utils/dateFn";
 import { setFashionRoute } from "@/app/_utils/setFashionRoute";
 import { useQueryString } from "@/app/_hooks/useQueryString";
+import { TAG_NAME } from "@/app/_constant/constant";
 
 type ValuePiece = Date | null;
 

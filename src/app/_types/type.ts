@@ -19,12 +19,19 @@ export interface PostData {
   fashionId?: string;
 }
 
+export interface DetailType {
+  user: string;
+  title: string;
+  content: string;
+  image: string;
+  created_at: Date;
+}
+
 export interface CommentData {
   user: User | null;
   content: string;
   fashionId: string;
   tag: string;
-  rating: number;
 }
 
 export interface CommentType {

@@ -5,8 +5,8 @@ import {
 } from "@tanstack/react-query";
 
 import Paginations from "@/app/_components/Pagination/Pagination";
-import TagFashionList from "@/app/_components/Fashion/TagFashion/TagFashionList";
-import { getFashionList } from "@/app/_utils/apiFashion";
+import FashionList from "@/app/_components/Fashion/Fashion/FashionList";
+import { readFashionListApi } from "@/app/_api/fashionApi";
 
 export default async function Page({
   params,
@@ -27,13 +27,13 @@ export default async function Page({
   });
   await queryClient.prefetchQuery({
     queryKey: [tag, page, start, end],
-    queryFn: () => getFashionList(tag, page, start, end),
+    queryFn: () => readFashionListApi(tag, page, start, end),
   });
 
   return (
     <div className=" flex h-full flex-col justify-between">
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <TagFashionList />
+        <FashionList />
       </HydrationBoundary>
 
       <div className=" h-16 w-full">

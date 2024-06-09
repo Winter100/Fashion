@@ -7,11 +7,12 @@ import imgCompression from "@/app/_utils/imgCompression";
 import { inputType } from "@/app/_types/type";
 
 import { useLoading } from "@/app/_hooks/useLoading";
-import { usePost } from "@/app/_hooks/useFashionMethods";
+
 import { useUser } from "@/app/_hooks/useAuth";
+import { useCreate } from "@/app/_hooks/useFashion";
 
 export default function Page() {
-  const { postFashion } = usePost();
+  const { createFashion } = useCreate();
   const { isLoading: submitLoading, setLoading: setSubmitLoading } =
     useLoading();
   const { user } = useUser();
@@ -37,7 +38,7 @@ export default function Page() {
       image: compressionImage,
     };
     try {
-      postFashion(fashionItemData);
+      createFashion(fashionItemData);
     } catch {
       setSubmitLoading(false);
     }

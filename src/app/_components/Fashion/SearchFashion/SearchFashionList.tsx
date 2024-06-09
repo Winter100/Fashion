@@ -1,13 +1,13 @@
 "use client";
 
-import { useSearchFashion } from "@/app/_hooks/useFashionMethods";
 import { ListItemType } from "@/app/_types/type";
 import ItemEntry from "../ItemEntry";
 import LoadingSpinner from "../../Spinner/LoadingSpinner";
 import ErrorWrapper from "../../Error/ErrorWrapper";
+import { useReadSearch } from "@/app/_hooks/useFashion";
 
 export default function SearchFashionList() {
-  const { data: SearchData, isLoading } = useSearchFashion<ListItemType>();
+  const { data: SearchData, isLoading } = useReadSearch<ListItemType>();
 
   if (isLoading) return <LoadingSpinner />;
   if (SearchData?.length === 0 || !SearchData) {

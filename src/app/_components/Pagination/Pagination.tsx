@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Pagination } from "flowbite-react";
 
 import {
-  useChageQueryString,
+  useChangeQueryString,
   useQueryString,
 } from "@/app/_hooks/useQueryString";
 
@@ -14,7 +14,7 @@ export default function Paginations() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { page } = useQueryString();
-  const { changeQuery } = useChageQueryString();
+  const { changeQuery } = useChangeQueryString();
 
   useEffect(() => {
     setCurrentPage(Number(page));

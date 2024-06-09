@@ -17,7 +17,7 @@ export function useQueryString() {
   return { page, validStart, validEnd, q };
 }
 
-export function useChageQueryString() {
+export function useChangeQueryString() {
   const pathName = usePathname();
   const searchParams = useSearchParams();
 

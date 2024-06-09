@@ -28,8 +28,7 @@
     "react-icons": "^5.2.0",
     "react-toastify": "^10.0.5",
     "tailwind-scrollbar-hide": "^1.1.7",
-    "typescript": "5.4.3",
-    "zustand": "^4.5.2"
+    "typescript": "5.4.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",

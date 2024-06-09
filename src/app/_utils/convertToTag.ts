@@ -1,4 +1,4 @@
-import { TAG_NAME } from "./constant";
+import { TAG_NAME } from "../_constant/constant";
 
 export function convertToTag(tag: string) {
   if (tag === TAG_NAME.today) return "오늘 어때?";

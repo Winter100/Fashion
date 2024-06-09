@@ -4,16 +4,16 @@ import { useRouter } from "next/navigation";
 import { Spinner } from "flowbite-react";
 
 import Manage from "../Manage/Manage";
-import { useMyFashionList } from "@/app/_hooks/useFashionMethods";
+
+import { useReadMyFashionList } from "@/app/_hooks/useFashion";
 import { MyFashionListType } from "@/app/_types/type";
 import { tagCount } from "@/app/_utils/tagCount";
 import { removeFilteredValueForLocalStorage } from "@/app/_utils/localstorage";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
-import ErrorWrapper from "../Error/ErrorWrapper";
 
 export default function RecordInfo() {
   const router = useRouter();
-  const { data, isLoading } = useMyFashionList<MyFashionListType>();
+  const { data, isLoading } = useReadMyFashionList<MyFashionListType>();
 
   if (isLoading || !data) {
     return <LoadingSpinner />;

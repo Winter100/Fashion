@@ -6,12 +6,13 @@ import { useRouter } from "next/navigation";
 import LoadingSpinner from "@/app/_components/Spinner/LoadingSpinner";
 import ErrorWrapper from "@/app/_components/Error/ErrorWrapper";
 import Detail from "@/app/_components/Fashion/Detail/Detail";
-import { useDetail } from "@/app/_hooks/useFashionMethods";
+
 import CommentEntry from "@/app/_components/Comment/CommentEntry";
+import { useReadDetail } from "@/app/_hooks/useFashion";
 
 export default function Page() {
   const router = useRouter();
-  const { isLoading, data } = useDetail();
+  const { isLoading, data } = useReadDetail();
 
   if (isLoading) return <LoadingSpinner />;
 
