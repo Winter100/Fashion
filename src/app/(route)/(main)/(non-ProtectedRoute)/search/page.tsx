@@ -6,7 +6,7 @@ import {
 
 import Paginations from "@/app/_components/Pagination/Pagination";
 import SearchFashionList from "@/app/_components/Fashion/SearchFashion/SearchFashionList";
-import { searchFashion } from "@/app/_utils/apiFashion";
+import { readSearchFashionApi } from "@/app/_api/fashionApi";
 
 export default async function Page({
   searchParams,
@@ -24,7 +24,7 @@ export default async function Page({
 
   await queryClient.prefetchQuery({
     queryKey: ["search", page, q],
-    queryFn: () => searchFashion(q),
+    queryFn: () => readSearchFashionApi(q),
   });
 
   return (

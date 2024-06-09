@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
 
 import { useSignUp } from "@/app/_hooks/useAuth";
-
 import { signUpType } from "@/app/_types/type";
 
 export default function SignUp() {

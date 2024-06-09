@@ -2,14 +2,7 @@ import Image from "next/image";
 
 import { convertToKST } from "@/app/_utils/convertToKST";
 import DetailContentArea from "./DetailContentArea";
-
-interface DetailType {
-  user: string;
-  title: string;
-  content: string;
-  image: string;
-  created_at: Date;
-}
+import { DetailType } from "@/app/_types/type";
 
 export default function Detail({
   user,
@@ -27,8 +20,6 @@ export default function Detail({
               src={image}
               alt="패션 이미지"
               fill
-              quality={100}
-              sizes="100vw"
               className="object-contain"
             />
           </div>

@@ -15,7 +15,7 @@ import {
 
 import { usePreview } from "@/app/_hooks/usePreview";
 import { inputType } from "@/app/_types/type";
-import { IMAGE_MAX_SIZE, TAG_NAME } from "@/app/_utils/constant";
+import { IMAGE_MAX_SIZE, TAG_NAME } from "@/app/_constant/constant";
 
 export default function Write({
   onSubmit,
@@ -64,10 +64,11 @@ export default function Write({
   useEffect(() => {
     setIsSelectDisabled(!!item?.tag);
   }, [item?.tag]);
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex h-full w-full flex-col items-center"
+      className="h-full w-full flex-col items-center md:flex"
     >
       <div className="h-13  layout-max-width flex w-full items-center justify-between">
         <Button
@@ -95,16 +96,14 @@ export default function Write({
         </Button>
       </div>
 
-      <div className="flex-rows flex w-full items-center gap-2 p-4">
-        <div className="flex h-full flex-1 flex-col items-center rounded-xl border border-backgroundTwo">
-          <div className="image-parents-div-fill">
+      <div className="flex w-full flex-col items-center gap-2 p-2 md:flex-row">
+        <div className="flex h-96 w-full flex-col md:h-full md:flex-1">
+          <div className="relative h-full rounded-xl border border-backgroundTwo">
             {!errors?.imageFile && isImage && (
               <Image
                 src={preview || item?.image}
                 alt="업로드 이미지"
                 fill
-                quality={100}
-                sizes="100vw"
                 className="object-contain"
               />
             )}
@@ -139,7 +138,7 @@ export default function Write({
           </div>
         </div>
 
-        <div className=" flex h-full flex-1">
+        <div className=" flex h-full w-full rounded-xl border border-backgroundTwo md:flex-1">
           <div className=" flex h-full w-full flex-col justify-center gap-10">
             <div>
               <div className="block ">

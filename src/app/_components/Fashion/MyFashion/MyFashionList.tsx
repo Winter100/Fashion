@@ -2,9 +2,9 @@
 
 import MyFashionItem from "./MyFashionItem";
 
-import { useMyFashionList } from "@/app/_hooks/useFashionMethods";
 import { DeleteListType, MyFashionListType } from "@/app/_types/type";
 import LoadingSpinner from "../../Spinner/LoadingSpinner";
+import { useReadMyFashionList } from "@/app/_hooks/useFashion";
 
 export default function MyFashionList({
   checkedIds,
@@ -17,7 +17,7 @@ export default function MyFashionList({
   tagFilter: string;
   dateFilter: string;
 }) {
-  const { data, isLoading } = useMyFashionList<MyFashionListType>();
+  const { data, isLoading } = useReadMyFashionList<MyFashionListType>();
 
   if (isLoading || !data) {
     return <LoadingSpinner />;

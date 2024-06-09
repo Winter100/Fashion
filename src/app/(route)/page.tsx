@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-import HomeLayout from "../_components/Layout/HomeLayout";
-import { TAG_NAME } from "../_utils/constant";
 import { setFashionRoute } from "../_utils/setFashionRoute";
+import HomeLayout from "../_layouts/HomeLayout";
+import { TAG_NAME } from "../_constant/constant";
 
 export default async function page() {
   return (

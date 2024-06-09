@@ -1,9 +1,9 @@
 import Image from "next/image";
 
-import Item from "../Item/Item";
 import { ListItemType } from "@/app/_types/type";
 import { convertToKST } from "@/app/_utils/convertToKST";
 import { convertToTag } from "@/app/_utils/convertToTag";
+import Item from "../Fashion/Item/Item";
 
 export default function SearchItem({
   title,
@@ -18,7 +18,6 @@ export default function SearchItem({
         <Image
           className="rounded-xl object-cover"
           src={image}
-          quality={90}
           alt={title}
           fill
           priority

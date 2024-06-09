@@ -1,17 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { TextInput } from "flowbite-react";
 
 import Comment from "./Comment/Comment";
-import { usePostComment } from "@/app/_hooks/useFashionMethods";
+
 import { useUser } from "@/app/_hooks/useAuth";
+import { useCreateComment } from "@/app/_hooks/useFashion";
 
 export default function CommentWrite() {
-  const { postComment } = usePostComment();
-  const [rating, setRating] = useState(1);
+  const { createComment } = useCreateComment();
   const {
     register,
     handleSubmit,
@@ -32,11 +31,9 @@ export default function CommentWrite() {
     const data = {
       user,
       content: comment,
-      rating,
     };
-    postComment(data, {
+    createComment(data, {
       onSuccess: () => {
-        setRating(1);
         reset({ comment: "" });
       },
     });
@@ -58,7 +55,7 @@ export default function CommentWrite() {
           <Comment.Content className="flex flex-col gap-2  px-4">
             <TextInput
               {...register("comment", {
-                required: "내용과 별점을 확인해주세요",
+                required: "내용을 입력해주세요",
               })}
               style={{ fontSize: "0.75rem", lineHeight: "1rem" }}
               className="font-mono"

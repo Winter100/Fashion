@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import FashionItem from "./TagFashion/FashionItem";
+import FashionItem from "./Fashion/FashionItem";
 import SearchItem from "./SearchFashion/SearchItem";
 import { ListItemType } from "@/app/_types/type";
 

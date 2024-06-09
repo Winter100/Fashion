@@ -5,10 +5,9 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
 
-import { useLogin } from "@/app/_hooks/useAuth";
-import { useUserContextData } from "../Provider/UserContextProvider";
-
+import { useUserContextData } from "@/app/_provider/UserContextProvider";
 import { signInType } from "@/app/_types/type";
+import { useSignIn } from "@/app/_hooks/useAuth";
 
 export default function SignIn() {
   const {
@@ -23,7 +22,7 @@ export default function SignIn() {
     },
   });
 
-  const { login, isPending } = useLogin();
+  const { login, isPending } = useSignIn();
   const { setLoginData } = useUserContextData();
 
   const router = useRouter();

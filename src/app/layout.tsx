@@ -8,7 +8,7 @@ const dongle = Dongle({
 });
 
 const DynamicDarkModeProvider = dynamic(
-  () => import("./_components/Provider/DarkModeProvider"),
+  () => import("./_provider/DarkModeProvider"),
   { ssr: false },
 );
 

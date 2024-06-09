@@ -10,8 +10,8 @@ import LoadingSpinner from "@/app/_components/Spinner/LoadingSpinner";
 import { inputType } from "@/app/_types/type";
 
 import { useLoading } from "@/app/_hooks/useLoading";
-import { useEditData, useUpdate } from "@/app/_hooks/useFashionMethods";
-import { IMAGE_MAX_SIZE } from "@/app/_utils/constant";
+import { useReadFashionEditData, useUpdate } from "@/app/_hooks/useFashion";
+import { IMAGE_MAX_SIZE } from "@/app/_constant/constant";
 
 export default function Page() {
   const router = useRouter();
@@ -20,7 +20,7 @@ export default function Page() {
   const { isLoading: submitLoading, setLoading: setSubmitLoading } =
     useLoading();
 
-  const { isLoading, data, isError } = useEditData();
+  const { isLoading, data, isError } = useReadFashionEditData();
   const inititem = {
     title: data?.title,
     content: data?.content,

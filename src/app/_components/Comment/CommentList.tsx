@@ -4,11 +4,12 @@ import { useParams } from "next/navigation";
 import { Spinner } from "flowbite-react";
 
 import CommentView from "./CommentView";
-import { useComments, useDeleteComment } from "@/app/_hooks/useFashionMethods";
+
 import { useUser } from "@/app/_hooks/useAuth";
+import { useDeleteComment, useReadComments } from "@/app/_hooks/useFashion";
 
 export default function CommentList() {
-  const { isLoading, data } = useComments();
+  const { isLoading, data } = useReadComments();
   const { deleteComment, isLoading: commentLoading } = useDeleteComment();
   const { tag } = useParams();
   const { user_id } = useUser();
