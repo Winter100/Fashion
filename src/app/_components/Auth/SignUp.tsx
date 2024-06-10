@@ -44,14 +44,14 @@ export default function SignUp() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="m-auto mt-40 flex w-full max-w-md flex-col gap-4 "
+      className="m-auto mt-20 flex w-80 max-w-md flex-col gap-6 md:mt-40 md:w-full "
     >
-      <h1 className="m-auto text-8xl">회원가입</h1>
+      <h1 className="m-auto text-6xl md:text-8xl">회원가입</h1>
       <div>
         <div className="mb-2 block ">
           <Label className="text-2xl" htmlFor="email" value="이메일" />
           {errors?.email && (
-            <span className="ml-4 text-2xl text-red-500">
+            <span className="ml-4 text-xl text-red-500">
               {errors?.email?.message}
             </span>
           )}
@@ -73,7 +73,7 @@ export default function SignUp() {
         <div className="mb-2 block ">
           <Label className="text-2xl" htmlFor="name" value="닉네임" />
           {errors?.name && (
-            <span className="ml-4 text-2xl text-red-500">
+            <span className="ml-4 text-xl text-red-500">
               {errors?.name?.message}
             </span>
           )}
@@ -81,6 +81,7 @@ export default function SignUp() {
         <TextInput
           disabled={isPending}
           id="name"
+          type="nickname"
           style={{
             padding: "7px",
             fontFamily: "sans-serif",
@@ -93,12 +94,13 @@ export default function SignUp() {
         <div className="mb-2 block ">
           <Label className="text-2xl" htmlFor="password" value="비밀번호" />
           {errors?.password && (
-            <span className="ml-4 text-2xl text-red-500">
+            <span className="ml-4 text-xl text-red-500">
               {errors?.password?.message}
             </span>
           )}
         </div>
         <TextInput
+          autoComplete="new-password"
           disabled={isPending}
           id="password"
           type="password"
@@ -118,12 +120,13 @@ export default function SignUp() {
             value="비밀번호 확인"
           />
           {errors?.passwordConfirm && (
-            <span className="ml-4 text-2xl text-red-500">
+            <span className="ml-4 text-xl text-red-500">
               {errors?.passwordConfirm?.message}
             </span>
           )}
         </div>
         <TextInput
+          autoComplete="new-password"
           disabled={isPending}
           id="passwordConfirm"
           type="password"
@@ -140,10 +143,19 @@ export default function SignUp() {
         />
       </div>
       {errors.root && (
-        <span className=" m-auto text-2xl text-red-600">
+        <span className=" m-auto text-xl text-red-600">
           {errors.root.message}
         </span>
       )}
+
+      <Button disabled={isPending} type="submit">
+        {!isPending ? (
+          <span className=" text-2xl">회원가입</span>
+        ) : (
+          <Spinner aria-label="Spinner button example" size="sm" />
+        )}
+      </Button>
+
       {!isPending && (
         <button
           disabled={isPending}
@@ -154,13 +166,6 @@ export default function SignUp() {
           로그인
         </button>
       )}
-      <Button disabled={isPending} type="submit">
-        {!isPending ? (
-          <span className=" text-2xl">회원가입</span>
-        ) : (
-          <Spinner aria-label="Spinner button example" size="sm" />
-        )}
-      </Button>
     </form>
   );
 }

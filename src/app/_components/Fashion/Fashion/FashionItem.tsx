@@ -9,7 +9,6 @@ export default function FashionItem({
   image,
   user,
   created_at,
-  tag,
 }: ListItemType) {
   return (
     <Item>
@@ -23,7 +22,7 @@ export default function FashionItem({
         />
       </Item.Image>
       <Item.Body>
-        <Item.Title>{title}</Item.Title>
+        <Item.SubTitle>{title}</Item.SubTitle>
         <Item.SubTitle>{user}</Item.SubTitle>
         <Item.SubTitle>{convertToKST(created_at, false)}</Item.SubTitle>
       </Item.Body>

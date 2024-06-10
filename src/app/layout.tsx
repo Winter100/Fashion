@@ -15,6 +15,17 @@ const DynamicDarkModeProvider = dynamic(
 export const metadata = {
   title: "이 옷 어때?",
   description: "내 패션을 기록하고, 모두에게 자랑해 보세요.",
+  images: "/metaimages.png",
+  openGraph: {
+    title: "이 옷 어때?",
+    description: "내 패션을 기록하고, 모두에게 자랑해 보세요.",
+    images: "/metaimages.png",
+  },
+  twitter: {
+    title: "이 옷 어때?",
+    description: "내 패션을 기록하고, 모두에게 자랑해 보세요.",
+    images: "/metaimages.png",
+  },
 };
 
 export default function RootLayout({

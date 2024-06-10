@@ -6,10 +6,10 @@ export default function ItemBody({
   className?: string;
 }) {
   return (
-    <h3
-      className={`flex h-[5rem] flex-col items-center justify-center gap-1 sm:h-[6rem] ${className}`}
+    <div
+      className={`flex h-32 flex-col items-center justify-center ${className}`}
     >
       {children}
-    </h3>
+    </div>
   );
 }

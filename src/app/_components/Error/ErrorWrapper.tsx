@@ -1,11 +1,9 @@
 export default function ErrorWrapper({
   children,
+  className,
 }: {
   children: React.ReactNode;
+  className?: string;
 }) {
-  return (
-    <div className=" m-auto flex h-full items-center justify-center text-center text-5xl">
-      {children}
-    </div>
-  );
+  return <div className={` ${className}`}>{children}</div>;
 }

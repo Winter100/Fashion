@@ -8,7 +8,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import { useQueryString } from "@/app/_hooks/useQueryString";
 
 export default function Search() {
-  const { register, handleSubmit, setValue } = useForm<{ search: string }>();
+  const { register, handleSubmit } = useForm<{ search: string }>();
   const router = useRouter();
   const { page } = useQueryString();
 
@@ -18,7 +18,6 @@ export default function Search() {
     const encodedSearch = encodeURIComponent(search.replace(/\s+/g, ""));
 
     router.push(`/search?q=${encodedSearch}&page=${page}`);
-    setValue("search", "");
   }
 
   return (

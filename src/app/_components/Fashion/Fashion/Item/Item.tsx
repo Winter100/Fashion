@@ -1,7 +1,6 @@
 import ItemBody from "./ItemBody";
 import ItemImage from "./ItemImage";
 import ItemSubTitle from "./ItemSubTitle";
-import ItemTitle from "./ItemTitle";
 
 export default function Item({
   children,
@@ -21,5 +20,4 @@ export default function Item({
 
 Item.Image = ItemImage;
 Item.Body = ItemBody;
-Item.Title = ItemTitle;
 Item.SubTitle = ItemSubTitle;

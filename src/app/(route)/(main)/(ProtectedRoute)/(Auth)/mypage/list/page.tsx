@@ -49,24 +49,29 @@ export default function Page() {
   }, [dateFilter]);
 
   return (
-    <div className="cursor-default">
-      <h1 className="my-6 text-center text-5xl">기록 관리</h1>
-      <MyFashionListTitle
-        tagFilter={tagFilter}
-        setTagFilter={setTagFilter}
-        dateFilter={dateFilter}
-        setDateFilter={setDateFilter}
-        onDelete={handleDelete}
-        isLoading={isLoading}
-        disabled={checkedIds.length === 0}
-      />
-
-      <MyFashionList
-        tagFilter={tagFilter}
-        dateFilter={dateFilter}
-        checkedIds={checkedIds}
-        handleCheck={handleCheck}
-      />
+    <div className="flex h-full cursor-default flex-col">
+      <h1 className=" flex h-20 items-center justify-center text-5xl">
+        기록 관리
+      </h1>
+      <div>
+        <MyFashionListTitle
+          tagFilter={tagFilter}
+          setTagFilter={setTagFilter}
+          dateFilter={dateFilter}
+          setDateFilter={setDateFilter}
+          onDelete={handleDelete}
+          isLoading={isLoading}
+          disabled={checkedIds.length === 0}
+        />
+      </div>
+      <div className=" h-full">
+        <MyFashionList
+          tagFilter={tagFilter}
+          dateFilter={dateFilter}
+          checkedIds={checkedIds}
+          handleCheck={handleCheck}
+        />
+      </div>
     </div>
   );
 }

@@ -4,15 +4,24 @@ import ItemEntry from "../ItemEntry";
 import LoadingSpinner from "../../Spinner/LoadingSpinner";
 import ErrorWrapper from "../../Error/ErrorWrapper";
 import { useReadFashionList } from "@/app/_hooks/useFashion";
+import { useQueryString } from "@/app/_hooks/useQueryString";
+import { formatDateInDash } from "@/app/_utils/dateFn";
 
 export default function TagFashionList() {
   const { data, isLoading } = useReadFashionList();
+  const { validStart, validEnd } = useQueryString();
 
   if (isLoading) return <LoadingSpinner />;
+
   if (data?.length === 0 || !data) {
     return (
-      <ErrorWrapper>
-        <span>등록된 기록이 없습니다.</span>
+      <ErrorWrapper className="flex h-full w-full cursor-default flex-col items-center justify-center text-center text-5xl">
+        <p className=" my-2">등록된 기록이 없습니다.</p>
+        <div className=" text-2xl">
+          <p>
+            {formatDateInDash(validStart)} ~ {formatDateInDash(validEnd)}
+          </p>
+        </div>
       </ErrorWrapper>
     );
   }

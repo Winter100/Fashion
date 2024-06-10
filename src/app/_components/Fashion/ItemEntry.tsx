@@ -16,7 +16,7 @@ export default function ItemEntry({
   const Item = type === "fashion" ? FashionItem : SearchItem;
 
   return (
-    <ul className="grid grid-cols-2 justify-items-center gap-4 p-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8">
+    <ul className="grid grid-cols-2 justify-items-center gap-4 p-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8">
       {data?.map((item) => (
         <li key={item.id} className=" h-80 w-full ">
           <Link prefetch={false} href={`/detail/${item.tag}/${item.id}`}>

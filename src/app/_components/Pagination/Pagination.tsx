@@ -32,7 +32,7 @@ export default function Paginations() {
         previousLabel="이전"
         nextLabel="다음"
         currentPage={currentPage}
-        totalPages={100}
+        totalPages={9}
         onPageChange={onPageChange}
         showIcons
       />

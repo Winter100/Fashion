@@ -33,3 +33,15 @@ export function removeFilteredValueForLocalStorage() {
   localStorage.removeItem("tagFilter");
   localStorage.removeItem("dateFilter");
 }
+
+export function getExpiresAt() {
+  const tokenData = localStorage.getItem(localStorageUserKey);
+
+  if (!tokenData) return null;
+
+  const parsedTokenData = JSON.parse(tokenData);
+
+  const expiresAt = parsedTokenData?.expires_at;
+
+  return expiresAt;
+}
