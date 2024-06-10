@@ -16,5 +16,5 @@ export default function useReadFashionList() {
     staleTime: 0,
   });
 
-  return { data, isLoading };
+  return { data, isLoading, isError };
 }

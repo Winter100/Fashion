@@ -24,11 +24,10 @@ export default function SearchItem({
         />
       </Item.Image>
       <Item.Body>
-        <Item.Title>{title}</Item.Title>
-        <Item.SubTitle>
-          {convertToKST(created_at, false)} -{user}-
-        </Item.SubTitle>
+        <Item.SubTitle>{title}</Item.SubTitle>
         <Item.SubTitle>{convertToTag(tag)}</Item.SubTitle>
+        <Item.SubTitle>{user}</Item.SubTitle>
+        <Item.SubTitle>{convertToKST(created_at, false)}</Item.SubTitle>
       </Item.Body>
     </Item>
   );

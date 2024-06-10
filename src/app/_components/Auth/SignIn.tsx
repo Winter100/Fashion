@@ -33,8 +33,8 @@ export default function SignIn() {
     login(
       { email, password },
       {
-        onError: () => {
-          setError("root", { message: "아이디 또는 비밀번호를 확인해주세요." });
+        onError: (e) => {
+          setError("root", { message: e.message });
         },
         onSuccess: (e) => {
           setLoginData(e?.user);
@@ -51,14 +51,14 @@ export default function SignIn() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="m-auto mt-40 flex w-full max-w-md flex-col gap-4 "
+      className="m-auto mt-20 flex w-80 max-w-md flex-col gap-6 md:mt-40 md:w-full "
     >
-      <h1 className="m-auto text-8xl">로그인</h1>
+      <h1 className="text-center text-6xl md:text-8xl">로그인</h1>
       <div>
-        <div className="mb-2 block ">
+        <div className="mb-2">
           <Label className="text-2xl" htmlFor="email" value="이메일" />
           {errors?.email && (
-            <span className="ml-4 text-2xl text-red-500">
+            <span className="ml-4 text-xl text-red-500">
               {errors?.email?.message}
             </span>
           )}
@@ -77,10 +77,10 @@ export default function SignIn() {
         />
       </div>
       <div>
-        <div className="mb-2 block">
+        <div className="mb-2">
           <Label className="text-2xl" htmlFor="password" value="비밀번호" />
           {errors?.password && (
-            <span className="ml-4 text-2xl text-red-500">
+            <span className="ml-4 text-xl text-red-500">
               {errors?.password?.message}
             </span>
           )}
@@ -99,20 +99,11 @@ export default function SignIn() {
         />
       </div>
       {errors.root && (
-        <span className=" m-auto text-2xl text-red-600">
+        <span className=" m-auto text-xl text-red-600">
           {errors.root.message}
         </span>
       )}
-      {!isPending && (
-        <button
-          disabled={isPending}
-          type="button"
-          onClick={routeHandler}
-          className="m-auto inline-block text-center  text-2xl text-blue-600 hover:font-bold "
-        >
-          회원가입
-        </button>
-      )}
+
       <Button disabled={isPending} type="submit">
         {!isPending ? (
           <span className=" text-2xl">로그인</span>
@@ -120,6 +111,17 @@ export default function SignIn() {
           <Spinner aria-label="Spinner button example" size="sm" />
         )}
       </Button>
+
+      {!isPending && (
+        <button
+          disabled={isPending}
+          type="button"
+          onClick={routeHandler}
+          className="inline-block text-center  text-2xl text-blue-600 hover:font-bold "
+        >
+          회원가입
+        </button>
+      )}
     </form>
   );
 }

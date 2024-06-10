@@ -17,3 +17,5 @@ export const TAG_NAME = {
 export const IMAGE_MAX_SIZE = 1024 * 1024 * 5;
 
 export const AUTH_KEY = "auth";
+
+export const SUPABASE_USER_PROFILES = "user_profiles";

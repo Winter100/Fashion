@@ -6,10 +6,12 @@ export default function ItemSubTitle({
   className?: string;
 }) {
   return (
-    <p
-      className={`w-full overflow-hidden overflow-ellipsis whitespace-nowrap text-center text-xl ${className}`}
+    <div
+      className={`flex w-full items-center justify-center text-xl ${className}`}
     >
-      {children}
-    </p>
+      <p className="h-full w-full overflow-hidden overflow-ellipsis whitespace-nowrap text-center">
+        {children}
+      </p>
+    </div>
   );
 }

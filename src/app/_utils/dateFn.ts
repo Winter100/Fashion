@@ -51,3 +51,11 @@ export function isValidDateFormat(dateString: string | null): boolean {
   const regex = /^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/;
   return dateString !== null && regex.test(dateString);
 }
+
+export function formatDateInDash(dateString: string) {
+  const year = dateString.substring(0, 4);
+  const month = dateString.substring(4, 6);
+  const day = dateString.substring(6, 8);
+
+  return `${year}-${month}-${day}`;
+}
