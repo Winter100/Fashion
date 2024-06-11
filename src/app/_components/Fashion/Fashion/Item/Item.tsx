@@ -11,7 +11,7 @@ export default function Item({
 }) {
   return (
     <div
-      className={`duration-400 flex h-full w-full cursor-pointer flex-col ${className} transition-shadow ease-in-out hover:bg-backgroundOne hover:shadow-2xl ${className}`}
+      className={`duration-400 flex h-full w-full cursor-pointer flex-col transition-shadow ease-in-out hover:bg-backgroundOne hover:shadow-2xl ${className}`}
     >
       {children}
     </div>
