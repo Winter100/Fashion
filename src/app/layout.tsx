@@ -4,7 +4,8 @@ import { Dongle } from "next/font/google";
 import { getMetaData } from "./_utils/metadata";
 
 const dongle = Dongle({
-  weight: ["300", "400", "700"],
+  weight: ["400"],
+  // weight: ["300", "400", "700"],
   subsets: ["latin"],
 });
 
