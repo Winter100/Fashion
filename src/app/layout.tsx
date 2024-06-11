@@ -1,6 +1,7 @@
 import "./globals.css";
 import dynamic from "next/dynamic";
 import { Dongle } from "next/font/google";
+import { getMetaData } from "./_utils/metadata";
 
 const dongle = Dongle({
   weight: ["300", "400", "700"],
@@ -12,21 +13,7 @@ const DynamicDarkModeProvider = dynamic(
   { ssr: false },
 );
 
-export const metadata = {
-  title: "이 옷 어때?",
-  description: "내 패션을 기록하고, 모두에게 자랑해 보세요.",
-  images: "/metaimages.png",
-  openGraph: {
-    title: "이 옷 어때?",
-    description: "내 패션을 기록하고, 모두에게 자랑해 보세요.",
-    images: "/metaimages.png",
-  },
-  twitter: {
-    title: "이 옷 어때?",
-    description: "내 패션을 기록하고, 모두에게 자랑해 보세요.",
-    images: "/metaimages.png",
-  },
-};
+export const metadata = getMetaData();
 
 export default function RootLayout({
   children,
