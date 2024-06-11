@@ -12,6 +12,7 @@ export function CalendarFilter() {
   return (
     <>
       <Button
+        title="날짜 필터"
         aria-label="날짜 필터"
         color="light"
         onClick={() => setOpenModal(true)}

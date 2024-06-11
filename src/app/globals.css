@@ -7,6 +7,10 @@ body {
   list-style: none;
 }
 
+input {
+  outline: none;
+}
+
 @layer components {
   .layout-max-width {
     @apply max-w-6xl;
