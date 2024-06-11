@@ -11,7 +11,11 @@ export function CalendarFilter() {
 
   return (
     <>
-      <Button color="light" onClick={() => setOpenModal(true)}>
+      <Button
+        aria-label="날짜 필터"
+        color="light"
+        onClick={() => setOpenModal(true)}
+      >
         <FaRegCalendarAlt />
       </Button>
 
