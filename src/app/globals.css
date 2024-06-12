@@ -44,11 +44,9 @@ input {
   --backgroundTwo: 33, 35, 37;
   --btnHoverBackground: 30, 32, 34;
   --fontColor: 150, 163, 175;
-  /* --fontColor: 156, 163, 175; */
   --borderColor: 107, 114, 128;
   --borderColorOne: 255, 255, 255;
   --toggleBackground: 95, 98, 120;
-  /* --background: #808080; */ /* --gnbBackground: 100, 100, 100; */
 }
 
 /*리액트 캘린더 스타일*/
