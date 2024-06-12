@@ -22,7 +22,6 @@ module.exports = {
         backgroundOne: "rgba(var(--backgroundOne))",
         backgroundTwo: "rgba(var(--backgroundTwo))",
         btnHoverBackground: "rgba(var(--btnHoverBackground))",
-        // background: "var(--background)",
         fontColor: "rgba(var(--fontColor))",
         gnbBackground: "rgba(var(--gnbBackground))",
         borderColor: "rgba(var(--borderColor))",
