@@ -13,10 +13,12 @@ export default function CommentWrite({
   parent_id,
   handleClose,
   isView,
+  autoFocus = false,
 }: {
   parent_id?: string;
   handleClose?: () => void;
   isView: boolean;
+  autoFocus?: boolean;
 }) {
   const { createComment } = useCreateComment();
   const {
@@ -65,7 +67,7 @@ export default function CommentWrite({
                 </Comment.Header>
                 <Comment.Content className="flex flex-col gap-2  px-4">
                   <TextInput
-                    autoFocus
+                    autoFocus={autoFocus}
                     autoComplete="off"
                     {...register("comment", {
                       required: "내용을 입력해주세요",
