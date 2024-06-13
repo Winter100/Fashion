@@ -11,12 +11,12 @@ export default function DarkModeToggleBtn({
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   return (
-    <li
+    <div
       title="테마 바꾸기"
       className={`flex w-full cursor-pointer items-center justify-center rounded-2xl hover:bg-toggleBackground/90 ${className}`}
       onClick={toggleDarkMode}
     >
       {isDarkMode ? <PiSun /> : <PiMoon />}
-    </li>
+    </div>
   );
 }

@@ -7,30 +7,36 @@ import CommentView from "./CommentView";
 
 import { useUser } from "@/app/_hooks/useAuth";
 import { useDeleteComment, useReadComments } from "@/app/_hooks/useFashion";
+import { buildCommentsTree } from "@/app/_utils/buildCommentsTree";
 
 export default function CommentList() {
   const { isLoading, data } = useReadComments();
   const { deleteComment, isLoading: commentLoading } = useDeleteComment();
   const { tag } = useParams();
-  const { user_id } = useUser();
-
-  if (isLoading) return <Spinner className="m-auto mt-4 flex" />;
-  if (data?.length === 0)
-    return <p className="m-auto my-4">등록된 댓글이 없습니다</p>;
+  const { user_id: signInUser } = useUser();
 
   function onDelete(id: string, tag: string) {
     deleteComment({ id, tag });
   }
 
+  if (isLoading) return <Spinner className="m-auto mt-4 flex" />;
+
+  if (data?.length === 0)
+    return <p className="m-auto my-4">등록된 댓글이 없습니다</p>;
+
+  const commentTree = buildCommentsTree(data);
+
   return (
     <>
-      {data?.map((item) => (
-        <li key={item.id}>
+      {commentTree?.map((item) => (
+        <li className=" border-t border-backgroundTwo" key={item.id}>
           <CommentView
             {...item}
-            sameUser={user_id === item.user_id}
+            tag={tag as string}
+            isReplyCommentBtn={item.parent_id === null || false}
+            signInUser={signInUser || ""}
             commentLoading={commentLoading}
-            onDelete={() => onDelete(item.id, tag as string)}
+            onDelete={onDelete}
           />
         </li>
       ))}

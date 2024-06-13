@@ -9,6 +9,7 @@ export default function useReadMyFashionList<T>() {
   const { data, isLoading, isError } = useQuery<T[]>({
     queryKey: ["MyItemList"],
     queryFn: () => readMyFashionListApi(user?.user_metadata.name),
+    staleTime: Infinity,
   });
 
   return { data, isLoading };

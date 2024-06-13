@@ -10,8 +10,8 @@ export default function Page() {
   const router = useRouter();
 
   function handleRoute() {
-    router.push(setFashionRoute(TAG_NAME.fashion, TAG_NAME.today));
     autoSignOut();
+    router.push(setFashionRoute(TAG_NAME.fashion, TAG_NAME.today));
   }
   return (
     <HomeLayout>

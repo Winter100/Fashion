@@ -1,21 +1,19 @@
 "use client";
 
+import Link from "next/link";
 import MyFashionItem from "./MyFashionItem";
 
-import { DeleteListType, MyFashionListType } from "@/app/_types/type";
-import LoadingSpinner from "../../Spinner/LoadingSpinner";
 import { useReadMyFashionList } from "@/app/_hooks/useFashion";
-import ErrorWrapper from "../../Error/ErrorWrapper";
+import { MyFashionListType } from "@/app/_types/type";
 import { convertToTag } from "@/app/_utils/convertToTag";
-import Link from "next/link";
+import LoadingSpinner from "../../Spinner/LoadingSpinner";
+import ErrorWrapper from "../../Error/ErrorWrapper";
 
 export default function MyFashionList({
-  checkedIds,
   handleCheck,
   tagFilter,
   dateFilter,
 }: {
-  checkedIds: DeleteListType[];
   handleCheck: (id: string, tag: string) => void;
   tagFilter: string;
   dateFilter: string;
@@ -66,13 +64,7 @@ export default function MyFashionList({
           key={item.id}
           className="my-2 grid h-36 grid-cols-6 items-center justify-items-center text-base hover:bg-backgroundOne/70 md:text-xl"
         >
-          <MyFashionItem
-            isChecked={checkedIds.some(
-              (itemChecked) => itemChecked.id === item.id,
-            )}
-            item={item}
-            handleCheck={handleCheck}
-          />
+          <MyFashionItem item={item} handleCheck={handleCheck} />
         </li>
       ))}
     </ul>

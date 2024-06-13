@@ -25,7 +25,7 @@ export default function Page() {
   }
 
   return (
-    <div className="layout-max-width m-auto flex h-full w-full flex-col">
+    <div className="layout-max-width m-auto flex h-full w-full flex-col py-4">
       <div className="h-13 flex w-full items-center justify-between">
         <BackButton color="green" />
       </div>

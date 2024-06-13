@@ -6,13 +6,15 @@ export default async function createComment({
   content,
   fashionId,
   tag,
+  parent_id,
 }: CommentData) {
-  const { error } = await supabase.from(`fashion-${tag}-comments`).insert([
+  const { error } = await supabase.from(`fashion_${tag}_comments`).insert([
     {
       user: user?.user_metadata.name,
       content,
       fashion_id: fashionId,
       user_id: user?.id,
+      parent_id,
     },
   ]);
 

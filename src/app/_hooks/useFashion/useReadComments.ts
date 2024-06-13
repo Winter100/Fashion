@@ -9,7 +9,6 @@ export default function useReadComments() {
   const { data, isLoading } = useQuery({
     queryKey: [`comments`, tag, id],
     queryFn: () => readCommentsApi(id, tag),
-    staleTime: 3 * 1000,
   });
 
   return { data, isLoading };

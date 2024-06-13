@@ -1,6 +1,7 @@
 import { ChangeEventHandler, FormEvent } from "react";
 
 import { User } from "@supabase/supabase-js";
+import { Comment } from "../_utils/buildCommentsTree";
 
 export interface inputType {
   title: string;
@@ -32,17 +33,21 @@ export interface CommentData {
   content: string;
   fashionId: string;
   tag: string;
+  parent_id?: string | null;
 }
 
 export interface CommentType {
-  id: string;
-  created_at: string;
   user: string;
   content: string;
-  rating: number;
-  sameUser: boolean;
-  onDelete: (items: DeleteListType) => void;
+  created_at: string;
+  isReplyCommentBtn?: boolean;
+  signInUser: string;
+  user_id: string;
+  id: string;
+  onDelete: (id: string, tag: string) => void;
   commentLoading: boolean;
+  children?: Comment[];
+  tag: string;
 }
 
 export interface UpdateDataFn {
@@ -113,7 +118,6 @@ export interface MyFashionListType {
 }
 export interface MyItemType {
   item: MyFashionListType;
-  isChecked: boolean;
   handleCheck: (id: string, tag: string) => void;
 }
 

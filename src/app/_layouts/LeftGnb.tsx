@@ -1,14 +1,7 @@
-import dynamic from "next/dynamic";
 import Title from "../_components/Gnb/Title";
-import DarkModeToggleBtn from "../_components/Button/DarkModeToggleBtn";
+import LeftBarMenu from "../_components/Gnb/LeftBarMenu";
 import AuthMenu from "../_components/Gnb/AuthMenu";
-
-const DynamicLeftBarMenu = dynamic(
-  () => import("../_components/Gnb/LeftBarMenu"),
-  {
-    ssr: false,
-  },
-);
+import DarkModeToggleBtn from "../_components/Button/DarkModeToggleBtn";
 
 export default function LeftGnb() {
   return (
@@ -19,7 +12,7 @@ export default function LeftGnb() {
 
       <div className="flex h-full w-full flex-col">
         <ul className="flex w-full flex-1 flex-col items-center justify-center gap-20 text-3xl">
-          <DynamicLeftBarMenu />
+          <LeftBarMenu />
           <AuthMenu />
           <DarkModeToggleBtn />
         </ul>

@@ -10,8 +10,15 @@ export default function useCreateComment() {
   const { id: fashionId, tag }: { id: string; tag: string } = useParams();
 
   const { mutate: createComment } = useMutation({
-    mutationFn: ({ content, user }: { user: User; content: string }) =>
-      createCommentApi({ user, tag, content, fashionId }),
+    mutationFn: ({
+      content,
+      user,
+      parent_id,
+    }: {
+      user: User;
+      content: string;
+      parent_id: string | null;
+    }) => createCommentApi({ user, tag, content, fashionId, parent_id }),
     onSuccess: () => {
       toast.success("댓글을 기록했습니다!");
       queryClient.invalidateQueries({ queryKey: ["comments"] });
