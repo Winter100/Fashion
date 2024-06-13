@@ -12,9 +12,9 @@ export default function Comment({
   className?: string;
 }) {
   return (
-    <form onSubmit={onSubmit} className={`cursor-default ${className}`}>
+    <div onSubmit={onSubmit} className={`cursor-default ${className}`}>
       {children}
-    </form>
+    </div>
   );
 }
 

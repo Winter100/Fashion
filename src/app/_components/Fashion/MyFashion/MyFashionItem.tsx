@@ -1,4 +1,5 @@
 "use client";
+import React, { memo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -9,10 +10,9 @@ import { convertToKST } from "@/app/_utils/convertToKST";
 import { convertToTag } from "@/app/_utils/convertToTag";
 import { MyItemType } from "@/app/_types/type";
 
-export default function MyFashionItem({
+const MyFashionItem = memo(function MyFashionItem({
   item,
   handleCheck,
-  isChecked,
 }: MyItemType) {
   const { tag, id, created_at, image, title } = item;
 
@@ -33,11 +33,13 @@ export default function MyFashionItem({
       </p>
       <p>
         <Checkbox
-          checked={isChecked}
           id={id}
           onChange={() => handleCheck(id, tag)}
+          aria-label={`Select ${title}`}
         />
       </p>
     </>
   );
-}
+});
+
+export default MyFashionItem;

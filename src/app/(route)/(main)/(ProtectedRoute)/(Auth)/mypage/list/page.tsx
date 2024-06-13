@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { DeleteListType } from "@/app/_types/type";
 import {
@@ -21,14 +21,16 @@ export default function Page() {
     () => getFilteredValueForLocalStorage("dateFilter") || "down",
   );
 
-  function handleCheck(id: string, tag: string) {
-    const isAlreadyChecked = checkedIds.some((item) => item.id === id);
-    if (isAlreadyChecked) {
-      setCheckedIds(checkedIds.filter((item) => item.id !== id));
-    } else {
-      setCheckedIds([...checkedIds, { id, tag }]);
-    }
-  }
+  const handleCheck = useCallback((id: string, tag: string) => {
+    setCheckedIds((prevCheckedIds) => {
+      const isAlreadyChecked = prevCheckedIds.some((item) => item.id === id);
+      if (isAlreadyChecked) {
+        return prevCheckedIds.filter((item) => item.id !== id);
+      } else {
+        return [...prevCheckedIds, { id, tag }];
+      }
+    });
+  }, []);
 
   function handleDelete() {
     setLoading(true);
@@ -68,7 +70,6 @@ export default function Page() {
         <MyFashionList
           tagFilter={tagFilter}
           dateFilter={dateFilter}
-          checkedIds={checkedIds}
           handleCheck={handleCheck}
         />
       </div>

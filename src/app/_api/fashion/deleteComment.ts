@@ -2,7 +2,7 @@ import supabase from "../supabase";
 
 export default async function deleteComment(id: string, tag: string) {
   const { error } = await supabase
-    .from(`fashion-${tag}-comments`)
+    .from(`fashion_${tag}_comments`)
     .delete()
     .eq("id", id);
 
