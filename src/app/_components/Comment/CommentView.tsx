@@ -80,6 +80,7 @@ export default function CommentView({
           <div>
             <Comment.Content>
               <CommentWrite
+                autoFocus={true}
                 parent_id={id}
                 isView={replyComment}
                 handleClose={handleClose}
