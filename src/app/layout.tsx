@@ -5,7 +5,6 @@ import { getMetaData } from "./_utils/metadata";
 
 const dongle = Dongle({
   weight: ["400"],
-  // weight: ["300", "400", "700"],
   subsets: ["latin"],
 });
 
@@ -23,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" className="scrollbar-hide">
-      <body className={`${dongle.className}  bg-backgroundOne text-fontColor`}>
+      <body className={`${dongle.className} bg-backgroundOne text-fontColor`}>
         <DynamicDarkModeProvider>{children}</DynamicDarkModeProvider>
       </body>
     </html>

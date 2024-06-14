@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Image from "next/image";
 
 import { ListItemType } from "@/app/_types/type";
@@ -5,7 +6,7 @@ import { convertToKST } from "@/app/_utils/convertToKST";
 import { convertToTag } from "@/app/_utils/convertToTag";
 import Item from "../Fashion/Item/Item";
 
-export default function SearchItem({
+const SearchItem = memo(function SearchItem({
   title,
   image,
   user,
@@ -31,4 +32,5 @@ export default function SearchItem({
       </Item.Body>
     </Item>
   );
-}
+});
+export default SearchItem;

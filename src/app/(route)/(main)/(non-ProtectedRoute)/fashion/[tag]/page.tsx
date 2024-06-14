@@ -1,12 +1,11 @@
-import {
-  HydrationBoundary,
-  QueryClient,
-  dehydrate,
-} from "@tanstack/react-query";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
 import Paginations from "@/app/_components/Pagination/Pagination";
 import FashionList from "@/app/_components/Fashion/Fashion/FashionList";
 import { readFashionListApi } from "@/app/_api/fashionApi";
+import getQueryClient from "@/app/_utils/getQueryClient";
+
+export const dynamic = "force-dynamic";
 
 export default async function Page({
   params,
@@ -20,11 +19,8 @@ export default async function Page({
   const start = searchParams.start;
   const end = searchParams.end;
 
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {},
-    },
-  });
+  const queryClient = getQueryClient();
+
   await queryClient.prefetchQuery({
     queryKey: [tag, page, start, end],
     queryFn: () => readFashionListApi(tag, page, start, end),
