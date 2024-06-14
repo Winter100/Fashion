@@ -18,7 +18,6 @@ export default function LeftBarLink({
 
   return (
     <Link
-      prefetch={false}
       className={`auth-btn-hover ${pathName.includes(tag) ? "text-fontColor" : "text-fontColor/30"}`}
       href={href}
     >

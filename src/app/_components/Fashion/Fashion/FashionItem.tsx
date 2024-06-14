@@ -1,10 +1,11 @@
 import Image from "next/image";
+import { memo } from "react";
 
 import { ListItemType } from "@/app/_types/type";
 import { convertToKST } from "@/app/_utils/convertToKST";
 import Item from "./Item/Item";
 
-export default function FashionItem({
+const FashionItem = memo(function FashionItem({
   title,
   image,
   user,
@@ -28,4 +29,6 @@ export default function FashionItem({
       </Item.Body>
     </Item>
   );
-}
+});
+
+export default FashionItem;
