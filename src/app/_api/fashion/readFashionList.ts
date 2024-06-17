@@ -9,6 +9,7 @@ export default async function readFashionList(
   end: string = setDateFormat(),
 ) {
   const itemsPerPage = 30;
+
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = page * itemsPerPage - 1;
 
@@ -29,5 +30,6 @@ export default async function readFashionList(
 
   if (error) throw new Error(error.message);
 
-  return fashionList;
+  const totalPages = count !== null ? Math.ceil(count / itemsPerPage) : 1;
+  return { fashionList, totalPages };
 }
