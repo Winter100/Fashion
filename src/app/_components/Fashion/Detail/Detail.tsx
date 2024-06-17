@@ -1,48 +1,36 @@
-import Image from "next/image";
+"use client";
 
-import { convertToKST } from "@/app/_utils/convertToKST";
-import DetailContentArea from "./DetailContentArea";
-import { DetailType } from "@/app/_types/type";
+import LoadingSpinner from "@/app/_components/Spinner/LoadingSpinner";
+import ErrorWrapper from "@/app/_components/Error/ErrorWrapper";
+import DetailItem from "@/app/_components/Fashion/Detail/DetailItem";
 
-export default function Detail({
-  user,
-  title,
-  content,
-  image,
-  created_at,
-}: DetailType) {
+import CommentEntry from "@/app/_components/Comment/CommentEntry";
+import { useReadDetail } from "@/app/_hooks/useFashion";
+import BackButton from "@/app/_components/Button/BackButton";
+
+export default function Detail() {
+  const { isLoading, data } = useReadDetail();
+
+  if (isLoading) return <LoadingSpinner />;
+
+  if (!data) {
+    return (
+      <ErrorWrapper className="flex h-full w-full cursor-default flex-col items-center justify-center text-center text-5xl">
+        <p>존재하지 않는 기록입니다.</p>
+        <div className=" flex justify-center">
+          <BackButton className=" h-12" color="gray" />
+        </div>
+      </ErrorWrapper>
+    );
+  }
+
   return (
-    <div className="flex ">
-      <div className="flex w-full flex-col items-center gap-2 p-2 md:flex-row">
-        <div className="flex h-96 w-full flex-col md:h-full md:flex-1">
-          <div className="relative h-full rounded-xl border border-backgroundTwo">
-            <Image
-              src={image}
-              alt="패션 이미지"
-              fill
-              className="object-contain"
-            />
-          </div>
-        </div>
-
-        <div className="w-full flex-1">
-          <div className=" flex flex-col gap-2">
-            <DetailContentArea id="title" KrTitle="제목" value={title} />
-            <DetailContentArea id="user" KrTitle="글쓴이" value={user} />
-            <DetailContentArea
-              id="date"
-              KrTitle="작성일"
-              value={convertToKST(created_at)}
-            />
-            <DetailContentArea
-              className="h-60 overflow-y-auto"
-              id="content"
-              KrTitle="내용"
-              value={content}
-            />
-          </div>
-        </div>
+    <div className="layout-max-width m-auto flex h-full w-full flex-col py-4">
+      <div className="h-13 flex w-full items-center justify-between">
+        <BackButton color="green" />
       </div>
+      <DetailItem {...data} />
+      <CommentEntry />
     </div>
   );
 }

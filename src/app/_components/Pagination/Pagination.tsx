@@ -9,7 +9,11 @@ import {
   useQueryString,
 } from "@/app/_hooks/useQueryString";
 
-export default function Paginations() {
+export default function Paginations({
+  totalPages = 1,
+}: {
+  totalPages?: number;
+}) {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -28,11 +32,12 @@ export default function Paginations() {
   return (
     <div className="flex h-14 justify-center overflow-x-auto">
       <Pagination
+        layout="pagination"
         className="text-xl"
         previousLabel="이전"
         nextLabel="다음"
         currentPage={currentPage}
-        totalPages={9}
+        totalPages={totalPages || 1}
         onPageChange={onPageChange}
         showIcons
       />

@@ -1,34 +1,25 @@
 import { Metadata } from "next";
 
+import { META_DATA } from "../_constant/constant";
+import generateImageMetadata from "./generateImageMetadata";
+
 export function getMetaData() {
   const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_METADATA_BASE as string),
-    title: "이 옷 어때?",
-    description: "내 패션을 기록하고, 모두에게 자랑해 보세요.",
+    title: META_DATA.title,
+    description: META_DATA.content,
+    keywords: META_DATA.keywords,
+
     openGraph: {
-      title: "이 옷 어때?",
-      description: "내 패션을 기록하고, 모두에게 자랑해 보세요.",
+      title: META_DATA.title,
+      description: META_DATA.content,
       type: "website",
-      images: [
-        {
-          url: "/meta-image.png",
-          width: 800,
-          height: 600,
-          alt: "openGraph - Meta Image",
-        },
-      ],
+      images: [generateImageMetadata(META_DATA.image, META_DATA.title)],
     },
     twitter: {
-      title: "이 옷 어때?",
-      description: "내 패션을 기록하고, 모두에게 자랑해 보세요.",
-      images: [
-        {
-          url: "/meta-image.png",
-          width: 800,
-          height: 600,
-          alt: "twitter - Meta Image",
-        },
-      ],
+      title: META_DATA.title,
+      description: META_DATA.content,
+      images: [generateImageMetadata(META_DATA.image, META_DATA.title)],
     },
   };
 

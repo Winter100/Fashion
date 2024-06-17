@@ -12,7 +12,7 @@ export default function TanstackProvider({
     () =>
       new QueryClient({
         defaultOptions: {
-          queries: { retry: 1 },
+          queries: { retry: 0 },
         },
       }),
   );

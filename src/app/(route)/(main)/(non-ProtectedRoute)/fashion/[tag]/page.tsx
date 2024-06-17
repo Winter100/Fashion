@@ -1,10 +1,10 @@
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
-import Paginations from "@/app/_components/Pagination/Pagination";
 import FashionList from "@/app/_components/Fashion/Fashion/FashionList";
 import { readFashionListApi } from "@/app/_api/fashionApi";
 import getQueryClient from "@/app/_utils/getQueryClient";
 
+// export const revalidate = 0;
 export const dynamic = "force-dynamic";
 
 export default async function Page({
@@ -31,10 +31,6 @@ export default async function Page({
       <HydrationBoundary state={dehydrate(queryClient)}>
         <FashionList />
       </HydrationBoundary>
-
-      <div className=" h-16 w-full">
-        <Paginations />
-      </div>
     </div>
   );
 }
