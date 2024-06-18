@@ -3,11 +3,12 @@
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { Button, Label, Spinner, TextInput } from "flowbite-react";
+import { Button, Spinner, TextInput } from "flowbite-react";
 
 import { useUserContextData } from "@/app/_provider/UserContextProvider";
 import { signInType } from "@/app/_types/type";
 import { useSignIn } from "@/app/_hooks/useAuth";
+import Manage from "../Manage/Manage";
 
 export default function SignIn() {
   const {
@@ -30,6 +31,12 @@ export default function SignIn() {
   function onSubmit(value: signInType) {
     const { email, password } = value;
 
+    if (!email.trim() || !password.trim()) {
+      return setError("root", {
+        message: "이메일 또는 비밀번호를 입력해주세요.",
+      });
+    }
+
     login(
       { email, password },
       {
@@ -51,77 +58,99 @@ export default function SignIn() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="m-auto mt-20 flex w-80 max-w-md flex-col gap-6 md:mt-40 md:w-full "
+      className="m-auto mt-20 max-w-md md:mt-40 md:w-full "
     >
-      <h1 className="text-center text-6xl md:text-8xl">로그인</h1>
-      <div>
-        <div className="mb-2">
-          <Label className="text-2xl" htmlFor="email" value="이메일" />
-          {errors?.email && (
-            <span className="ml-4 text-xl text-red-500">
-              {errors?.email?.message}
-            </span>
-          )}
-        </div>
-        <TextInput
-          disabled={isPending}
-          autoFocus
-          style={{
-            padding: "7px",
-            fontFamily: "sans-serif",
-            fontSize: "0.75rem",
-          }}
-          id="email"
-          type="email"
-          {...register("email", { required: "이메일을 입력해주세요" })}
-        />
-      </div>
-      <div>
-        <div className="mb-2">
-          <Label className="text-2xl" htmlFor="password" value="비밀번호" />
-          {errors?.password && (
-            <span className="ml-4 text-xl text-red-500">
-              {errors?.password?.message}
-            </span>
-          )}
-        </div>
-        <TextInput
-          disabled={isPending}
-          autoComplete="off"
-          id="password"
-          type="password"
-          style={{
-            padding: "7px",
-            fontFamily: "sans-serif",
-            fontSize: "0.75rem",
-          }}
-          {...register("password", { required: "비밀번호를 입력해주세요" })}
-        />
-      </div>
-      {errors.root && (
-        <span className=" m-auto text-xl text-red-600">
-          {errors.root.message}
-        </span>
-      )}
+      <Manage>
+        <Manage.Title className="my-4 text-center text-6xl md:text-7xl">
+          이 옷 어때?
+        </Manage.Title>
+        <Manage.Description className="text-center text-xl">
+          하루의 패션을 기록해보세요!
+        </Manage.Description>
 
-      <Button disabled={isPending} type="submit">
-        {!isPending ? (
-          <span className=" text-2xl">로그인</span>
-        ) : (
-          <Spinner aria-label="Spinner button example" size="sm" />
-        )}
-      </Button>
+        <Manage.ContentWrapper className="my-4 flex gap-4">
+          <Manage.ContentArea>
+            <Manage.Label className="flex w-full items-center justify-center">
+              <div className="w-16 text-center">
+                {errors.email ? (
+                  <div className=" text-red-500">{errors.email.message}</div>
+                ) : (
+                  "이메일"
+                )}
+              </div>
+              <Manage.Content className=" w-full">
+                <TextInput
+                  disabled={isPending}
+                  autoFocus
+                  id="email"
+                  type="email"
+                  placeholder="이메일"
+                  style={{
+                    fontFamily: "sans-serif",
+                    fontSize: "0.75rem",
+                  }}
+                  {...register("email", { required: "이메일" })}
+                />
+              </Manage.Content>
+            </Manage.Label>
+          </Manage.ContentArea>
 
-      {!isPending && (
-        <button
-          disabled={isPending}
-          type="button"
-          onClick={routeHandler}
-          className="inline-block text-center  text-2xl text-blue-600 hover:font-bold "
-        >
-          회원가입
-        </button>
-      )}
+          <Manage.ContentArea>
+            <Manage.Label className="flex w-full items-center justify-center">
+              <div className="w-16 text-center">
+                {errors.password ? (
+                  <div className="text-red-500">{errors.password.message}</div>
+                ) : (
+                  "비밀번호"
+                )}
+              </div>
+              <Manage.Content className=" w-full">
+                <TextInput
+                  disabled={isPending}
+                  autoComplete="off"
+                  id="password"
+                  type="password"
+                  placeholder="비밀번호"
+                  style={{
+                    fontFamily: "sans-serif",
+                    fontSize: "0.75rem",
+                  }}
+                  {...register("password", { required: "비밀번호" })}
+                />
+              </Manage.Content>
+            </Manage.Label>
+          </Manage.ContentArea>
+
+          <Manage.ContentArea>
+            <Manage.Content className=" text-center text-lg text-red-500">
+              {errors.root && <span>{errors.root.message}</span>}
+            </Manage.Content>
+          </Manage.ContentArea>
+
+          <Manage.ContentArea>
+            <Button className="w-full" disabled={isPending} type="submit">
+              {!isPending ? (
+                <span className=" text-2xl">로그인</span>
+              ) : (
+                <Spinner aria-label="Spinner button example" size="sm" />
+              )}
+            </Button>
+          </Manage.ContentArea>
+
+          <Manage.ContentArea className="flex">
+            {!isPending && (
+              <button
+                disabled={isPending}
+                type="button"
+                onClick={routeHandler}
+                className=" m-auto w-20 text-center text-2xl hover:font-bold "
+              >
+                회원가입
+              </button>
+            )}
+          </Manage.ContentArea>
+        </Manage.ContentWrapper>
+      </Manage>
     </form>
   );
 }

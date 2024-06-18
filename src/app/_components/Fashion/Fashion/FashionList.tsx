@@ -29,7 +29,7 @@ export default function TagFashionList() {
 
   return (
     <>
-      <ItemEntry data={data.fashionList} type="fashion" />;
+      <ItemEntry data={data.fashionList} type="fashion" />
       <div className=" h-16 w-full">
         <Paginations totalPages={data?.totalPages ?? 1} />
       </div>

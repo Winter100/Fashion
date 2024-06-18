@@ -5,5 +5,5 @@ export default function ManageContent({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <p className={`flex-1 ${className}`}>{children}</p>;
+  return <div className={`flex-1 ${className}`}>{children}</div>;
 }

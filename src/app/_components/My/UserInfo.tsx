@@ -22,12 +22,12 @@ export default function UserInfo() {
           <Spinner className=" m-auto flex min-h-40" />
         ) : (
           <>
-            <Manage.ContentArea>
-              <Manage.Label>이메일</Manage.Label>
+            <Manage.ContentArea className="flex">
+              <Manage.Label className="w-40 text-center">이메일</Manage.Label>
               <Manage.Content>{email}</Manage.Content>
             </Manage.ContentArea>
-            <Manage.ContentArea>
-              <Manage.Label>이름</Manage.Label>
+            <Manage.ContentArea className="flex">
+              <Manage.Label className="w-40 text-center">이름</Manage.Label>
               <Manage.Content>{name}</Manage.Content>
             </Manage.ContentArea>
           </>
