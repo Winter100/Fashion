@@ -5,5 +5,5 @@ export default function ManageContentArea({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <li className={`flex ${className}`}>{children}</li>;
+  return <li className={`${className}`}>{children}</li>;
 }

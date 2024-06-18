@@ -38,20 +38,28 @@ export default function RecordInfo() {
           <Spinner className=" m-auto flex min-h-40" />
         ) : (
           <>
-            <Manage.ContentArea>
-              <Manage.Label>오늘 어때?</Manage.Label>
+            <Manage.ContentArea className="flex">
+              <Manage.Label className="w-40 text-center">
+                오늘 어때?
+              </Manage.Label>
               <Manage.Content>{todayCount} 개</Manage.Content>
             </Manage.ContentArea>
-            <Manage.ContentArea>
-              <Manage.Label>내일 어때?</Manage.Label>
+            <Manage.ContentArea className="flex">
+              <Manage.Label className="w-40 text-center">
+                내일 어때?
+              </Manage.Label>
               <Manage.Content>{tomorrowCount} 개</Manage.Content>
             </Manage.ContentArea>
-            <Manage.ContentArea>
-              <Manage.Label>이거 어때?</Manage.Label>
+            <Manage.ContentArea className="flex">
+              <Manage.Label className="w-40 text-center">
+                이거 어때?
+              </Manage.Label>
               <Manage.Content>{thisCount} 개</Manage.Content>
             </Manage.ContentArea>
-            <Manage.ContentArea>
-              <Manage.Label>모든 기록</Manage.Label>
+            <Manage.ContentArea className="flex">
+              <Manage.Label className="w-40 text-center">
+                모든 기록
+              </Manage.Label>
               <Manage.Content>{totalCount} 개</Manage.Content>
             </Manage.ContentArea>
           </>
