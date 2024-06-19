@@ -4,8 +4,8 @@ import FashionList from "@/app/_components/Fashion/Fashion/FashionList";
 import { readFashionListApi } from "@/app/_api/fashionApi";
 import getQueryClient from "@/app/_utils/getQueryClient";
 
-export const revalidate = 0;
-// export const dynamic = "force-dynamic";
+// export const revalidate = 0;
+export const dynamic = "force-dynamic";
 
 export default async function Page({
   params,
