@@ -27,6 +27,7 @@ module.exports = {
         borderColor: "rgba(var(--borderColor))",
         borderColorOne: "rgba(var(--borderColorOne))",
         toggleBackground: "rgba(var(--toggleBackground))",
+        deleteFontColor: "rgba(var(--deleteFontColor))",
       },
     },
   },

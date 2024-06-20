@@ -6,7 +6,7 @@ export default async function readFashionEditData(
   tag: string,
 ) {
   const { data: findItem, error } = await supabase
-    .from(`fashion-${tag}`)
+    .from(`fashion_${tag}`)
     .select("*")
     .eq("id", id)
     .single();

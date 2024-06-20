@@ -10,7 +10,7 @@ export default async function createFashion({
 }: PostData) {
   const imageName = `${Math.random()}-${image.name}`.replaceAll("/", "");
   const imagePath = `${supabaseUrl}/storage/v1/object/public/fashion-images/${imageName}`;
-  const { error } = await supabase.from(`fashion-${tag}`).insert([
+  const { error } = await supabase.from(`fashion_${tag}`).insert([
     {
       title,
       content,

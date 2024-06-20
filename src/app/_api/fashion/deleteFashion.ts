@@ -5,7 +5,7 @@ export default async function deleteFashion(items: DeleteListType[]) {
   try {
     await Promise.all(
       items.map(({ id, tag }) =>
-        supabase.from(`fashion-${tag}`).delete().eq("id", id),
+        supabase.from(`fashion_${tag}`).delete().eq("id", id),
       ),
     );
   } catch (error: any) {

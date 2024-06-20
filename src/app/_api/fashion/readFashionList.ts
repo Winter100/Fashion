@@ -20,7 +20,7 @@ export default async function readFashionList(
     error,
     count,
   } = await supabase
-    .from(`fashion-${tag}`)
+    .from(`fashion_${tag}`)
     .select("id,title,image,user,created_at,tag", { count: "exact" })
     .order("created_at", { ascending: false })
     .gte("created_at", startDate)
