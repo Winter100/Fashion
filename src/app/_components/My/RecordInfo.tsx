@@ -39,25 +39,25 @@ export default function RecordInfo() {
         ) : (
           <>
             <Manage.ContentArea className="flex">
-              <Manage.Label className="w-40 text-center">
+              <Manage.Label className="w-28 text-center">
                 오늘 어때?
               </Manage.Label>
               <Manage.Content>{todayCount} 개</Manage.Content>
             </Manage.ContentArea>
             <Manage.ContentArea className="flex">
-              <Manage.Label className="w-40 text-center">
+              <Manage.Label className="w-28 text-center">
                 내일 어때?
               </Manage.Label>
               <Manage.Content>{tomorrowCount} 개</Manage.Content>
             </Manage.ContentArea>
             <Manage.ContentArea className="flex">
-              <Manage.Label className="w-40 text-center">
+              <Manage.Label className="w-28 text-center">
                 이거 어때?
               </Manage.Label>
               <Manage.Content>{thisCount} 개</Manage.Content>
             </Manage.ContentArea>
             <Manage.ContentArea className="flex">
-              <Manage.Label className="w-40 text-center">
+              <Manage.Label className="w-28 text-center">
                 모든 기록
               </Manage.Label>
               <Manage.Content>{totalCount} 개</Manage.Content>

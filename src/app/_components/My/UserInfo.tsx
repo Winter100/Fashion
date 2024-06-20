@@ -23,11 +23,11 @@ export default function UserInfo() {
         ) : (
           <>
             <Manage.ContentArea className="flex">
-              <Manage.Label className="w-40 text-center">이메일</Manage.Label>
+              <Manage.Label className="w-28 text-center">이메일</Manage.Label>
               <Manage.Content>{email}</Manage.Content>
             </Manage.ContentArea>
             <Manage.ContentArea className="flex">
-              <Manage.Label className="w-40 text-center">이름</Manage.Label>
+              <Manage.Label className="w-28 text-center">이름</Manage.Label>
               <Manage.Content>{name}</Manage.Content>
             </Manage.ContentArea>
           </>
