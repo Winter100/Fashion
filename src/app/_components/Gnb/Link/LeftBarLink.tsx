@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { convertToTag } from "@/app/_utils/convertToTag";
 
@@ -15,20 +14,21 @@ export default function LeftBarLink({
   children: React.ReactNode;
 }) {
   const pathName = usePathname();
+  const router = useRouter();
 
   return (
-    <Link
+    <button
       className={`auth-btn-hover ${pathName.includes(tag) ? "text-fontColor" : "text-fontColor/30"}`}
-      href={href}
+      onClick={() => router.push(href)}
     >
-      <li>
+      <div>
         <span className=" flex items-center justify-center gap-2">
           <p>{children}</p>
           <p className="hidden text-2xl lg:block lg:text-2xl">
             {convertToTag(tag)}
           </p>
         </span>
-      </li>
-    </Link>
+      </div>
+    </button>
   );
 }

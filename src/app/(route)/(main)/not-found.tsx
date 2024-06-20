@@ -8,6 +8,7 @@ export default function NotFound() {
         alt="찾을 수 없는 페이지"
         width={400}
         height={500}
+        priority
       />
       <h2 className="text-2xl font-medium md:text-3xl">
         해당 페이지를 찾을 수 없습니다.

@@ -1,3 +1,5 @@
+"use client";
+
 import { IoShirtOutline } from "react-icons/io5";
 import { RiTShirtAirFill } from "react-icons/ri";
 import { GiClothes } from "react-icons/gi";
@@ -31,7 +33,7 @@ export default function LeftBarMenu() {
         <GiClothes />
       </LeftBarLink>
 
-      <LeftBarLink href="/write" tag="write">
+      <LeftBarLink href={`/${TAG_NAME.write}`} tag={TAG_NAME.write}>
         <GoPencil />
       </LeftBarLink>
     </>
