@@ -57,13 +57,15 @@ export default function MobileMenu() {
         <Dropdown.Item
           className=" flex flex-col items-center justify-center"
           key={menu.name}
-          onClick={() => handleRoute(setFashionRoute("fashion", menu.name))}
+          onClick={() =>
+            handleRoute(setFashionRoute(TAG_NAME.fashion, menu.name))
+          }
         >
           {convertToTag(menu?.name)}
         </Dropdown.Item>
       ))}
       <Dropdown.Item
-        onClick={() => handleRoute("/write")}
+        onClick={() => handleRoute(`/${TAG_NAME.write}`)}
         className="flex items-center justify-center"
       >
         기록 남기기
