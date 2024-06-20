@@ -26,11 +26,11 @@ export default function LoginInfo() {
         ) : (
           <>
             <Manage.ContentArea className="flex">
-              <Manage.Label className="w-40 text-center">가입일</Manage.Label>
+              <Manage.Label className="w-28 text-center">가입일</Manage.Label>
               <Manage.Content>{convert_Created_at}</Manage.Content>
             </Manage.ContentArea>
             <Manage.ContentArea className="flex">
-              <Manage.Label className="w-40 text-center">
+              <Manage.Label className="w-28 text-center">
                 마지막 로그인
               </Manage.Label>
               <Manage.Content>{convert_lastSignIn_at}</Manage.Content>
