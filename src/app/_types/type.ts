@@ -48,6 +48,7 @@ export interface CommentType {
   commentLoading: boolean;
   children?: Comment[];
   tag: string;
+  deleted?: boolean;
 }
 
 export interface UpdateDataFn {

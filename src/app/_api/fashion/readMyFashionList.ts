@@ -8,7 +8,7 @@ export default async function readMyFashionList(userName: string) {
 
   for (const tag of tags) {
     const { data, error } = await supabase
-      .from(`fashion-${tag}`)
+      .from(`fashion_${tag}`)
       .select("id,title,image,user,created_at,tag")
       .eq("user", userName);
 

@@ -13,7 +13,7 @@ export default async function updateFashion({
     const imagePath = `${supabaseUrl}/storage/v1/object/public/fashion-images/${imageName}`;
 
     const { error } = await supabase
-      .from(`fashion-${tag}`)
+      .from(`fashion_${tag}`)
       .update({ title, content, image: imagePath })
       .eq("id", id);
 

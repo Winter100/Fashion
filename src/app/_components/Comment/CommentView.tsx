@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { PiArrowElbowDownRightLight } from "react-icons/pi";
 
 import Comment from "./Comment/Comment";
@@ -21,12 +21,18 @@ export default function CommentView({
   children = [],
   tag,
   id,
+  deleted = false,
 }: CommentType) {
-  const [replyComment, setReplycomment] = useState(() => false);
+  const [replyComment, setReplycomment] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(deleted);
 
   const handleClose = useCallback(function handleClose() {
     setReplycomment(false);
   }, []);
+
+  useEffect(() => {
+    setIsDeleted(deleted);
+  }, [deleted]);
 
   return (
     <>
@@ -42,7 +48,7 @@ export default function CommentView({
           </Comment.Title>
           <Comment.Title>{convertToKST(created_at, false)}</Comment.Title>
 
-          {user_id === signInUser && (
+          {user_id === signInUser && !deleted && (
             <Comment.Title>
               <DeleteBtn
                 title="댓글"
@@ -61,7 +67,27 @@ export default function CommentView({
             </Comment.Title>
           )}
         </Comment.Header>
-        <Comment.Content className="px-5">{content}</Comment.Content>
+        <Comment.Content className="px-5">
+          <div>
+            {isDeleted ? (
+              <>
+                <span className=" text-deleteFontColor">
+                  삭제된 댓글 입니다.
+                </span>
+                <button
+                  className={`ml-4`}
+                  onClick={() => setIsDeleted((pre) => !pre)}
+                >
+                  [ 댓글 보기 ]
+                </button>
+              </>
+            ) : (
+              <span className={`${deleted ? "text-deleteFontColor" : ""}`}>
+                {content}
+              </span>
+            )}
+          </div>
+        </Comment.Content>
       </Comment>
 
       <div className=" mx-5 px-5">

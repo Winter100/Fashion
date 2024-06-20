@@ -8,7 +8,7 @@ export default async function readSearchFashion(titleValue: string) {
 
   for (const tag of tags) {
     const { data, error } = await supabase
-      .from(`fashion-${tag}`)
+      .from(`fashion_${tag}`)
       .select("id,title,image,user,created_at,tag")
       .ilike("title", `%${titleValue}%`)
       .order("created_at", { ascending: false });
