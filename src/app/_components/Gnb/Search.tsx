@@ -33,14 +33,18 @@ export default function Search() {
           <input
             spellCheck="false"
             autoComplete="off"
-            className="h-7 w-full border-none bg-inherit p-1 font-sans text-xs outline-none"
+            className="h-8 w-full border-none bg-inherit p-1 font-sans text-xs outline-none"
             {...register("search", { required: true })}
             title="검색어"
             id="search"
             placeholder="검색어를 입력해주세요."
           />
         </label>
-        <button className="w-5" type="submit" title="검색">
+        <button
+          className="flex h-8 w-8 items-center justify-center"
+          type="submit"
+          title="검색"
+        >
           <IoSearchSharp className=" text-xl" />
         </button>
       </div>

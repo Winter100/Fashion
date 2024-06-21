@@ -22,24 +22,30 @@ export default function AuthMenu() {
   return (
     <>
       {!isAuthenticated ? (
-        <LeftBarLink href="/auth/signin" tag={TAG_NAME.signin}>
-          <VscSignIn />
-        </LeftBarLink>
+        <li className="flex w-full items-center justify-center">
+          <LeftBarLink href="/auth/signin" tag={TAG_NAME.signin}>
+            <VscSignIn />
+          </LeftBarLink>
+        </li>
       ) : (
         <>
-          <LeftBarLink href="/mypage" tag={TAG_NAME.mypage}>
-            <CiHome />
-          </LeftBarLink>
+          <li className="flex w-full items-center justify-center">
+            <LeftBarLink href="/mypage" tag={TAG_NAME.mypage}>
+              <CiHome />
+            </LeftBarLink>
+          </li>
 
-          <div
-            className="auth-btn-hover flex cursor-pointer items-center justify-center gap-2 text-fontColor/30"
-            onClick={signOut}
-          >
-            <VscSignOut />
-            <span className="hidden text-2xl lg:block lg:text-2xl">
-              로그아웃
-            </span>
-          </div>
+          <li className="auth-btn-hover flex w-full cursor-pointer items-center justify-center text-neutral-400">
+            <button
+              className="flex items-center justify-center gap-2"
+              onClick={signOut}
+            >
+              <VscSignOut />
+              <span className="hidden text-2xl lg:block lg:text-2xl">
+                로그아웃
+              </span>
+            </button>
+          </li>
         </>
       )}
     </>

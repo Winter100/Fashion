@@ -12,30 +12,38 @@ import LeftBarLink from "./Link/LeftBarLink";
 export default function LeftBarMenu() {
   return (
     <>
-      <LeftBarLink
-        href={setFashionRoute(TAG_NAME.fashion, TAG_NAME.today, 1)}
-        tag={TAG_NAME.today}
-      >
-        <IoShirtOutline />
-      </LeftBarLink>
+      <li className="flex w-full items-center justify-center">
+        <LeftBarLink
+          href={setFashionRoute(TAG_NAME.fashion, TAG_NAME.today, 1)}
+          tag={TAG_NAME.today}
+        >
+          <IoShirtOutline />
+        </LeftBarLink>
+      </li>
 
-      <LeftBarLink
-        href={setFashionRoute(TAG_NAME.fashion, TAG_NAME.tomorrow, 1)}
-        tag={TAG_NAME.tomorrow}
-      >
-        <RiTShirtAirFill />
-      </LeftBarLink>
+      <li className="flex w-full items-center justify-center">
+        <LeftBarLink
+          href={setFashionRoute(TAG_NAME.fashion, TAG_NAME.tomorrow, 1)}
+          tag={TAG_NAME.tomorrow}
+        >
+          <RiTShirtAirFill />
+        </LeftBarLink>
+      </li>
 
-      <LeftBarLink
-        href={setFashionRoute(TAG_NAME.fashion, TAG_NAME.this, 1)}
-        tag={TAG_NAME.this}
-      >
-        <GiClothes />
-      </LeftBarLink>
+      <li className="flex w-full items-center justify-center">
+        <LeftBarLink
+          href={setFashionRoute(TAG_NAME.fashion, TAG_NAME.this, 1)}
+          tag={TAG_NAME.this}
+        >
+          <GiClothes />
+        </LeftBarLink>
+      </li>
 
-      <LeftBarLink href={`/${TAG_NAME.write}`} tag={TAG_NAME.write}>
-        <GoPencil />
-      </LeftBarLink>
+      <li className="flex w-full items-center justify-center">
+        <LeftBarLink href={`/${TAG_NAME.write}`} tag={TAG_NAME.write}>
+          <GoPencil />
+        </LeftBarLink>
+      </li>
     </>
   );
 }

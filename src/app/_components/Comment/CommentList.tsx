@@ -27,7 +27,7 @@ export default function CommentList() {
   const commentTree = buildCommentsTree(data);
 
   return (
-    <>
+    <ul>
       {commentTree?.map((item) => (
         <li className=" border-t border-backgroundTwo" key={item.id}>
           <CommentView
@@ -40,6 +40,6 @@ export default function CommentList() {
           />
         </li>
       ))}
-    </>
+    </ul>
   );
 }
