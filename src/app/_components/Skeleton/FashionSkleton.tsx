@@ -25,4 +25,5 @@ const FashionSkleton = (props: PropsType) => (
     })}
   </div>
 );
+
 export default FashionSkleton;

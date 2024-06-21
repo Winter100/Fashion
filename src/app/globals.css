@@ -37,6 +37,7 @@ input {
   --backgroundOne: 255, 255, 255;
   --borderColorOne: 25, 25, 25;
   --deleteFontColor: 224 36 36;
+  --leftMenuColor: 26, 86, 219;
 }
 
 .dark {
@@ -49,6 +50,7 @@ input {
   --borderColorOne: 255, 255, 255;
   --toggleBackground: 95, 98, 120;
   --deleteFontColor: 249 128 128;
+  --leftMenuColor: 118, 169, 250;
 }
 
 /*리액트 캘린더 스타일*/

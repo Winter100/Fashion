@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 import ManageDescription from "./ManageDescription";
 import ManageTitle from "./ManageTitle";
 import ManageContentWrapper from "./ManageContentWrapper";
@@ -17,9 +19,9 @@ export default function Manage({
   );
 }
 
-Manage.Title = ManageTitle;
-Manage.Description = ManageDescription;
-Manage.ContentWrapper = ManageContentWrapper;
-Manage.ContentArea = ManageContentArea;
-Manage.Label = ManageLabel;
-Manage.Content = ManageContent;
+Manage.Title = memo(ManageTitle);
+Manage.Description = memo(ManageDescription);
+Manage.ContentWrapper = memo(ManageContentWrapper);
+Manage.ContentArea = memo(ManageContentArea);
+Manage.Label = memo(ManageLabel);
+Manage.Content = memo(ManageContent);

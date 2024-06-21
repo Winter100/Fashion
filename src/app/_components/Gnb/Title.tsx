@@ -24,7 +24,7 @@ export default function Title() {
         <span> 어때?</span>
       </div>
       <div
-        className={`hidden text-center text-xl opacity-70 transition-colors duration-500 xl:block ${hover}`}
+        className={`hidden text-center text-xl transition-colors duration-500 xl:block ${hover}`}
       >
         하루의 패션을 기록해보세요!
       </div>
