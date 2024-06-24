@@ -8,7 +8,7 @@ export interface inputType {
   tag: string;
   content: string;
   preview: string;
-  imageFile: { 0: File };
+  imageFile: { 0: File } | null;
 }
 
 export interface PostData {

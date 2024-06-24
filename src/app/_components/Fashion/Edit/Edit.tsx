@@ -4,18 +4,13 @@ import Image from "next/image";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import {
-  Button,
-  Label,
-  Select,
-  Spinner,
-  TextInput,
-  Textarea,
-} from "flowbite-react";
+import { Button, Select, Spinner, TextInput, Textarea } from "flowbite-react";
 
 import { usePreview } from "@/app/_hooks/usePreview";
 import { inputType } from "@/app/_types/type";
 import { IMAGE_MAX_SIZE, TAG_NAME } from "@/app/_constant/constant";
+import { convertToTag } from "@/app/_utils/convertToTag";
+import Manage from "../../Manage/Manage";
 
 export default function Write({
   onSubmit,
@@ -33,6 +28,7 @@ export default function Write({
     handleSubmit,
     setError,
     clearErrors,
+    setValue,
     formState: { errors },
   } = useForm<inputType>({
     defaultValues: {
@@ -52,7 +48,8 @@ export default function Write({
     const file = e.target.files[0];
     clearErrors("imageFile");
     if (file?.size >= IMAGE_MAX_SIZE) {
-      setError("imageFile", {
+      setValue("imageFile", null);
+      return setError("imageFile", {
         type: "custom",
         message: "이미지는 5MB를 초과할 수 없습니다.",
       });
@@ -68,7 +65,7 @@ export default function Write({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="h-full w-full flex-col items-center md:flex"
+      className="h-full  w-full flex-col items-center md:flex"
     >
       <div className="h-13  layout-max-width flex w-full items-center justify-between">
         <Button
@@ -96,9 +93,9 @@ export default function Write({
         </Button>
       </div>
 
-      <div className="flex w-full flex-col items-center gap-2 p-2 md:flex-row">
+      <div className="mt-10 flex min-h-[500px] w-full flex-col items-center gap-2 p-1 md:flex-row">
         <div className="flex h-96 w-full flex-col md:h-full md:flex-1">
-          <div className="relative h-full rounded-xl border border-backgroundTwo">
+          <div className="relative flex h-full items-center justify-center rounded-xl">
             {!errors?.imageFile && isImage && (
               <Image
                 src={preview || item?.image}
@@ -138,80 +135,86 @@ export default function Write({
           </div>
         </div>
 
-        <div className=" flex h-full w-full rounded-xl border border-backgroundTwo md:flex-1">
-          <div className=" flex h-full w-full flex-col justify-center gap-10">
-            <div>
-              <div className="block ">
-                <Label
-                  htmlFor="title"
-                  className=" m-auto text-2xl"
-                  value="제목"
-                />
-                <span className=" ml-4 text-2xl text-red-500">
-                  {errors?.title && errors?.title.message}
-                </span>
-              </div>
-              <TextInput
-                {...register("title", {
-                  required: "제목을 입력해주세요.",
-                })}
-                style={{ fontSize: "0.75rem", lineHeight: "1rem" }}
-                disabled={submitLoading}
-                spellCheck={false}
-                id="title"
-                name="title"
-                type="text"
-                maxLength={40}
-                className=" font-mono  font-bold"
-              />
-            </div>
+        <div className="  h-full w-full md:flex-1">
+          <Manage className="w-full">
+            <Manage.ContentWrapper className=" flex gap-6">
+              <Manage.ContentArea>
+                <Manage.Label className=" flex">
+                  <span className="flex w-16 items-center justify-center text-xl">
+                    제목
+                  </span>
+                  <Manage.Content>
+                    <TextInput
+                      {...register("title", {
+                        required: true,
+                      })}
+                      style={{ fontSize: "0.75rem", lineHeight: "1rem" }}
+                      disabled={submitLoading}
+                      spellCheck={false}
+                      id="title"
+                      name="title"
+                      type="text"
+                      maxLength={40}
+                      className=" font-mono  "
+                    />
+                  </Manage.Content>
+                </Manage.Label>
+              </Manage.ContentArea>
 
-            <div className="w-full ">
-              <div className="block">
-                <Label htmlFor="tag" className="text-2xl" value="게시판 선택" />
-                <span className=" ml-4 text-2xl text-red-500">
-                  {errors?.tag && errors?.tag.message}
-                </span>
-              </div>
-              <Select
-                {...register("tag", {
-                  required: "게시판을 선택해주세요.",
-                })}
-                style={{ fontSize: "20px" }}
-                id="tag"
-                name="tag"
-                disabled={isSelectDisabled || submitLoading}
-              >
-                <option disabled value="">
-                  게시판을 선택해주세요
-                </option>
-                <option value={TAG_NAME.today}>오늘 어때?</option>
-                <option value={TAG_NAME.tomorrow}>내일 어때?</option>
-                <option value={TAG_NAME.this}>이거 어때?</option>
-              </Select>
-            </div>
-            <div>
-              <div className="block ">
-                <Label
-                  htmlFor="content"
-                  className=" m-auto text-2xl"
-                  value="내용"
-                />
-                <span className=" ml-4 text-2xl text-red-500">
-                  {errors?.content && errors?.content.message}
-                </span>
-              </div>
-              <Textarea
-                disabled={submitLoading}
-                {...register("content", { required: "내용을 입력해주세요." })}
-                id="content"
-                name="content"
-                spellCheck={false}
-                className="resize-none font-mono text-xs font-bold"
-                rows={15}
-              />
-            </div>
-          </div>
+              <Manage.ContentArea>
+                <Manage.Label className=" flex">
+                  <span className="flex w-16 items-center justify-center text-xl">
+                    태그
+                  </span>
+                  <Manage.Content>
+                    <Select
+                      {...register("tag", {
+                        required: true,
+                      })}
+                      style={{ fontSize: "20px" }}
+                      id="tag"
+                      name="tag"
+                      disabled={isSelectDisabled || submitLoading}
+                    >
+                      <option disabled value="">
+                        게시판을 선택해주세요
+                      </option>
+                      <option value={TAG_NAME.today}>
+                        {convertToTag(TAG_NAME.today)}
+                      </option>
+                      <option value={TAG_NAME.tomorrow}>
+                        {convertToTag(TAG_NAME.tomorrow)}
+                      </option>
+                      <option value={TAG_NAME.this}>
+                        {convertToTag(TAG_NAME.this)}
+                      </option>
+                    </Select>
+                  </Manage.Content>
+                </Manage.Label>
+              </Manage.ContentArea>
+
+              <Manage.ContentArea>
+                <Manage.Label className=" flex ">
+                  <span className="flex w-16 items-center justify-center text-xl">
+                    내용
+                  </span>
+                  <Manage.Content>
+                    <Textarea
+                      disabled={submitLoading}
+                      {...register("content", {
+                        required: true,
+                      })}
+                      id="content"
+                      name="content"
+                      spellCheck={false}
+                      className="resize-none font-mono text-xs "
+                      rows={17}
+                    />
+                  </Manage.Content>
+                </Manage.Label>
+              </Manage.ContentArea>
+            </Manage.ContentWrapper>
+          </Manage>
         </div>
       </div>
     </form>
