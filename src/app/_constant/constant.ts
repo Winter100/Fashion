@@ -38,13 +38,3 @@ export const META_DATA = {
     "프론트 엔드 프로젝트",
   ],
 };
-
-/**
- * 이메일 형식이 올바른지 확인
- */
-export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-/**
- * 닉네임에 숫자, 특수문자, 공백 비허용
- */
-export const NAME_REGEX = /^[a-zA-Z가-힣]+$/;

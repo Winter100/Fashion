@@ -3,6 +3,10 @@ import { ChangeEvent, useEffect, useState } from "react";
 export function usePreview() {
   const [preview, setPreview] = useState("");
 
+  function resetPreview() {
+    setPreview("");
+  }
+
   async function handlePreview(e: ChangeEvent<HTMLInputElement>) {
     if (!e.target.files) return;
 
@@ -20,5 +24,5 @@ export function usePreview() {
     };
   }, [preview]);
 
-  return { preview, handlePreview };
+  return { preview, handlePreview, resetPreview };
 }

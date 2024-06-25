@@ -25,7 +25,7 @@ export default async function updateFashion({
     if (imageError) throw new Error(imageError.message);
   } else {
     const { error } = await supabase
-      .from(`fashion-${tag}`)
+      .from(`fashion_${tag}`)
       .update({ title, content })
       .eq("id", id);
 

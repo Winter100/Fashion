@@ -90,7 +90,7 @@ export default function CommentView({
         </Comment.Content>
       </Comment>
 
-      <div className=" mx-5 px-5">
+      <div className=" mx-3 px-4">
         {children?.map((item) => (
           <div className="  my-1 bg-backgroundOne shadow-sm" key={item.id}>
             <CommentView

@@ -35,7 +35,6 @@ export default function CommentWrite({
 
   function onSubmit(value: { comment: string }) {
     if (!user) return;
-
     const { comment } = value;
     const data = {
       user,
@@ -70,7 +69,7 @@ export default function CommentWrite({
                     autoFocus={autoFocus}
                     autoComplete="off"
                     {...register("comment", {
-                      required: "내용을 입력해주세요",
+                      required: true,
                     })}
                     style={{ fontSize: "0.75rem", lineHeight: "1rem" }}
                     className="font-mono"
