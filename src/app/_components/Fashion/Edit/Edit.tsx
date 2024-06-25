@@ -6,11 +6,11 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { Button, Select, Spinner, TextInput, Textarea } from "flowbite-react";
 
+import Manage from "../../Manage/Manage";
 import { usePreview } from "@/app/_hooks/usePreview";
 import { inputType } from "@/app/_types/type";
 import { IMAGE_MAX_SIZE, TAG_NAME } from "@/app/_constant/constant";
 import { convertToTag } from "@/app/_utils/convertToTag";
-import Manage from "../../Manage/Manage";
 
 export default function Write({
   onSubmit,
@@ -37,7 +37,7 @@ export default function Write({
       tag: item?.tag || "",
     },
   });
-  const { preview, handlePreview } = usePreview();
+  const { preview, handlePreview, resetPreview } = usePreview();
   const [isSelectDisabled, setIsSelectDisabled] = useState(!!item?.tag);
   const router = useRouter();
 
@@ -46,12 +46,15 @@ export default function Write({
   function handleImageChange(e: ChangeEvent<HTMLInputElement>) {
     if (!e.target.files) return;
     const file = e.target.files[0];
+
+    if (!file) return resetPreview();
+
     clearErrors("imageFile");
     if (file?.size >= IMAGE_MAX_SIZE) {
       setValue("imageFile", null);
       return setError("imageFile", {
         type: "custom",
-        message: "이미지는 5MB를 초과할 수 없습니다.",
+        message: "이미지는 5MB를 넘을 수 없습니다.",
       });
     } else {
       handlePreview(e);
@@ -93,15 +96,15 @@ export default function Write({
         </Button>
       </div>
 
-      <div className="mt-10 flex min-h-[500px] w-full flex-col items-center gap-2 p-1 md:flex-row">
-        <div className="flex h-96 w-full flex-col md:h-full md:flex-1">
-          <div className="relative flex h-full items-center justify-center rounded-xl">
+      <div className="mt-10 flex w-full flex-col items-center gap-2 md:mt-28 md:flex-row">
+        <div className="flex h-96 w-full flex-col rounded-xl border border-gray-400 p-1 md:h-full md:flex-1">
+          <div className="relative flex h-full items-center justify-center">
             {!errors?.imageFile && isImage && (
               <Image
                 src={preview || item?.image}
                 alt="업로드 이미지"
                 fill
-                className="object-contain"
+                className="object-contain "
               />
             )}
             {
@@ -135,12 +138,14 @@ export default function Write({
           </div>
         </div>
 
-        <div className="  h-full w-full md:flex-1">
-          <Manage className="w-full">
-            <Manage.ContentWrapper className=" flex gap-6">
+        <div className="h-full w-full md:flex-1">
+          <Manage className="flex w-full justify-center">
+            <Manage.ContentWrapper className="flex gap-6">
               <Manage.ContentArea>
                 <Manage.Label className=" flex">
-                  <span className="flex w-16 items-center justify-center text-xl">
+                  <span
+                    className={`flex w-16 items-center justify-center text-xl ${errors.title ? " text-red-500" : ""}`}
+                  >
                     제목
                   </span>
                   <Manage.Content>
@@ -163,7 +168,9 @@ export default function Write({
 
               <Manage.ContentArea>
                 <Manage.Label className=" flex">
-                  <span className="flex w-16 items-center justify-center text-xl">
+                  <span
+                    className={`flex w-16 items-center justify-center text-xl ${errors.tag ? " text-red-500" : ""}`}
+                  >
                     태그
                   </span>
                   <Manage.Content>
@@ -195,7 +202,9 @@ export default function Write({
 
               <Manage.ContentArea>
                 <Manage.Label className=" flex ">
-                  <span className="flex w-16 items-center justify-center text-xl">
+                  <span
+                    className={`flex w-16 items-center justify-center text-xl ${errors.content ? " text-red-500" : ""}`}
+                  >
                     내용
                   </span>
                   <Manage.Content>

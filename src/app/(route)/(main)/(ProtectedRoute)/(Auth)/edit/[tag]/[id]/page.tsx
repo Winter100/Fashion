@@ -25,7 +25,7 @@ export default function Page() {
     title: data?.title,
     content: data?.content,
     tag: data?.tag,
-    image: data?.image,
+    image: data?.image || "",
   };
 
   useEffect(() => {
@@ -38,34 +38,22 @@ export default function Page() {
   if (isLoading || isError) return <LoadingSpinner />;
 
   async function onSubmit(value: inputType) {
-    const { title, content, imageFile } = value;
-    if (imageFile[0]?.size >= IMAGE_MAX_SIZE) {
-      return alert("이미지가 5MB를 초과했습니다 다른 이미지를 선택해주세요.");
-    }
     setSubmitLoading(true);
 
-    let updateData;
-
-    try {
-      if (imageFile[0]) {
-        // 새로운 이미지 등록
+    const { title, content, imageFile } = value;
+    if (imageFile === null || !imageFile[0]) {
+      try {
+        updateFashion({ title, content });
+      } catch (e) {}
+    } else if (imageFile[0]?.size >= IMAGE_MAX_SIZE) {
+      return alert("이미지가 5MB를 초과했습니다 다른 이미지를 선택해주세요.");
+    } else {
+      try {
         const compressionImage = await imgCompression(imageFile[0]);
-        updateData = {
-          title,
-          content,
-          image: compressionImage,
-        };
-      } else {
-        // 기존 이미지 사용
-        updateData = {
-          title,
-          content,
-        };
-      }
-      updateFashion(updateData);
-    } catch {
-      setSubmitLoading(false);
+        updateFashion({ title, content, image: compressionImage });
+      } catch (e) {}
     }
+    return setSubmitLoading(false);
   }
 
   return (

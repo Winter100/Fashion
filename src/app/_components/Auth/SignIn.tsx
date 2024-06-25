@@ -5,10 +5,11 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { Button, Spinner, TextInput } from "flowbite-react";
 
+import Manage from "../Manage/Manage";
 import { useUserContextData } from "@/app/_provider/UserContextProvider";
 import { signInType } from "@/app/_types/type";
 import { useSignIn } from "@/app/_hooks/useAuth";
-import Manage from "../Manage/Manage";
+import { isValidSignValue } from "@/app/_utils/isValid";
 
 export default function SignIn() {
   const {
@@ -30,12 +31,6 @@ export default function SignIn() {
 
   function onSubmit(value: signInType) {
     const { email, password } = value;
-
-    if (!email.trim() || !password.trim()) {
-      return setError("root", {
-        message: "이메일 또는 비밀번호를 입력해주세요.",
-      });
-    }
 
     login(
       { email, password },
@@ -71,12 +66,10 @@ export default function SignIn() {
         <Manage.ContentWrapper className="my-4 flex gap-4">
           <Manage.ContentArea>
             <Manage.Label className="flex w-full items-center justify-center">
-              <div className="w-16 text-center">
-                {errors.email ? (
-                  <div className=" text-red-500">{errors.email.message}</div>
-                ) : (
-                  "이메일"
-                )}
+              <div
+                className={`w-16 text-center ${errors.email ? "text-red-500" : ""}`}
+              >
+                이메일
               </div>
               <Manage.Content className=" w-full">
                 <TextInput
@@ -89,7 +82,10 @@ export default function SignIn() {
                     fontFamily: "sans-serif",
                     fontSize: "0.75rem",
                   }}
-                  {...register("email", { required: "이메일" })}
+                  {...register("email", {
+                    required: true,
+                    validate: (value) => isValidSignValue(value, "email"),
+                  })}
                 />
               </Manage.Content>
             </Manage.Label>
@@ -97,12 +93,10 @@ export default function SignIn() {
 
           <Manage.ContentArea>
             <Manage.Label className="flex w-full items-center justify-center">
-              <div className="w-16 text-center">
-                {errors.password ? (
-                  <div className="text-red-500">{errors.password.message}</div>
-                ) : (
-                  "비밀번호"
-                )}
+              <div
+                className={`w-16 text-center ${errors.password ? "text-red-500" : ""}`}
+              >
+                비밀번호
               </div>
               <Manage.Content className=" w-full">
                 <TextInput
@@ -115,7 +109,10 @@ export default function SignIn() {
                     fontFamily: "sans-serif",
                     fontSize: "0.75rem",
                   }}
-                  {...register("password", { required: "비밀번호" })}
+                  {...register("password", {
+                    required: true,
+                    validate: (value) => isValidSignValue(value, "password"),
+                  })}
                 />
               </Manage.Content>
             </Manage.Label>

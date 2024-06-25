@@ -5,9 +5,7 @@ import { useRouter } from "next/navigation";
 import Write from "@/app/_components/Fashion/Edit/Edit";
 import imgCompression from "@/app/_utils/imgCompression";
 import { inputType } from "@/app/_types/type";
-
 import { useLoading } from "@/app/_hooks/useLoading";
-
 import { useUser } from "@/app/_hooks/useAuth";
 import { useCreate } from "@/app/_hooks/useFashion";
 
@@ -22,6 +20,8 @@ export default function Page() {
     const { title, content, tag, imageFile } = value;
 
     setSubmitLoading(true);
+
+    if (imageFile === null) return;
 
     const compressionImage = await imgCompression(imageFile[0]);
 
