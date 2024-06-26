@@ -1,9 +1,11 @@
+import { ComponentProps } from "react";
+
+interface ManageContentAreaProps extends ComponentProps<"li"> {
+  children: React.ReactNode;
+}
 export default function ManageContentArea({
   children,
-  className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return <li className={`${className}`}>{children}</li>;
+  ...props
+}: ManageContentAreaProps) {
+  return <li {...props}>{children}</li>;
 }

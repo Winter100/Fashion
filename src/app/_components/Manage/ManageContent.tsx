@@ -1,9 +1,13 @@
+import { ManageDivProps } from "./Manage";
+
 export default function ManageContent({
   children,
   className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return <div className={`flex-1 ${className}`}>{children}</div>;
+  ...props
+}: ManageDivProps) {
+  return (
+    <div className={`flex-1 ${className}`} {...props}>
+      {children}
+    </div>
+  );
 }

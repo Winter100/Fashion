@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { ComponentProps, memo } from "react";
 
 import ManageDescription from "./ManageDescription";
 import ManageTitle from "./ManageTitle";
@@ -7,15 +7,20 @@ import ManageLabel from "./ManageLabel";
 import ManageContentArea from "./ManageContentArea";
 import ManageContent from "./ManageContent";
 
+export interface ManageDivProps extends ComponentProps<"div"> {
+  children: React.ReactNode;
+  className?: string;
+}
+
 export default function Manage({
   children,
   className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+  ...props
+}: ManageDivProps) {
   return (
-    <div className={`flex h-full flex-col p-2 ${className}`}>{children}</div>
+    <div className={`flex h-full flex-col p-2 ${className}`} {...props}>
+      {children}
+    </div>
   );
 }
 

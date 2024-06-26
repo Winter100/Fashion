@@ -1,9 +1,9 @@
-export default function ManageLabel({
-  children,
-  className = "",
-}: {
+import { ComponentProps } from "react";
+
+interface ManageLabelProps extends ComponentProps<"label"> {
   children: React.ReactNode;
-  className?: string;
-}) {
-  return <label className={`${className}`}>{children}</label>;
+}
+
+export default function ManageLabel({ children, ...props }: ManageLabelProps) {
+  return <label {...props}>{children}</label>;
 }

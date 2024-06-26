@@ -1,9 +1,16 @@
-export default function ErrorWrapper({
+import { memo } from "react";
+import { ManageDivProps } from "../Manage/Manage";
+
+const ErrorWrapper = memo(function ErrorWrapper({
   children,
   className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return <div className={` ${className}`}>{children}</div>;
-}
+  ...props
+}: ManageDivProps) {
+  return (
+    <div className={className} {...props}>
+      {children}
+    </div>
+  );
+});
+
+export default memo(ErrorWrapper);
