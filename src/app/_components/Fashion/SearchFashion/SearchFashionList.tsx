@@ -14,11 +14,8 @@ export default function SearchFashionList() {
   if (isLoading) return <LoadingSpinner />;
   if (SearchData?.length === 0 || !SearchData) {
     return (
-      <ErrorWrapper className="flex h-full w-full cursor-default flex-col items-center justify-center text-center text-5xl">
-        <p className="my-2">등록된 기록이 없습니다.</p>
-        <div className=" text-2xl">
-          <p>검색어: {q}</p>
-        </div>
+      <ErrorWrapper>
+        <p className="text-2xl">검색어: {q}</p>
       </ErrorWrapper>
     );
   }

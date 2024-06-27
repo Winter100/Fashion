@@ -15,8 +15,7 @@ export default function Detail() {
 
   if (!data) {
     return (
-      <ErrorWrapper className="flex h-full w-full cursor-default flex-col items-center justify-center text-center text-5xl">
-        <p>존재하지 않는 기록입니다.</p>
+      <ErrorWrapper>
         <div className=" flex justify-center">
           <BackButton className=" h-12" color="gray" />
         </div>

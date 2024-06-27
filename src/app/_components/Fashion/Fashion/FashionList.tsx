@@ -16,13 +16,10 @@ export default function TagFashionList() {
 
   if (data?.fashionList.length === 0 || !data) {
     return (
-      <ErrorWrapper className="flex h-full w-full cursor-default flex-col items-center justify-center text-center text-5xl">
-        <p className=" my-2">등록된 기록이 없습니다.</p>
-        <div className=" text-2xl">
-          <p>
-            {formatDateInDash(validStart)} ~ {formatDateInDash(validEnd)}
-          </p>
-        </div>
+      <ErrorWrapper>
+        <p className=" text-2xl">
+          {formatDateInDash(validStart)} ~ {formatDateInDash(validEnd)}
+        </p>
       </ErrorWrapper>
     );
   }
