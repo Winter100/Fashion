@@ -11,8 +11,8 @@ export default async function readFashionEditData(
     .eq("id", id)
     .single();
 
-  if (error) throw new Error(error.message);
   if (findItem?.user_id !== userId) throw new Error("권한이 없습니다");
+  if (error) throw new Error(error.message);
 
   return findItem;
 }

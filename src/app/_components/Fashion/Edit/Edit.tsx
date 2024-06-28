@@ -68,9 +68,9 @@ export default function Write({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="h-full  w-full flex-col items-center md:flex"
+      className="mt-0 h-full w-full flex-col items-center md:mt-10 md:flex"
     >
-      <div className="h-13  layout-max-width flex w-full items-center justify-between">
+      <div className="h-13 flex w-full items-center justify-between">
         <Button
           className="h-full"
           onClick={() => router.back()}
@@ -96,7 +96,7 @@ export default function Write({
         </Button>
       </div>
 
-      <div className="mt-10 flex w-full flex-col items-center gap-2 md:mt-28 md:flex-row">
+      <div className="mt-2 flex w-full flex-col items-center gap-2 md:mt-10 md:flex-row">
         <div className="flex h-96 w-full flex-col rounded-xl border border-gray-400 p-1 md:h-full md:flex-1">
           <div className="relative flex h-full items-center justify-center">
             {!errors?.imageFile && isImage && (

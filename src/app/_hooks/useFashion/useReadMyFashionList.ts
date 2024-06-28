@@ -12,5 +12,5 @@ export default function useReadMyFashionList<T>() {
     staleTime: Infinity,
   });
 
-  return { data, isLoading };
+  return { data, isLoading, isError };
 }

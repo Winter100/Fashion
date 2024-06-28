@@ -10,7 +10,7 @@ import { useDeleteComment, useReadComments } from "@/app/_hooks/useFashion";
 import { buildCommentsTree } from "@/app/_utils/buildCommentsTree";
 
 export default function CommentList() {
-  const { isLoading, data } = useReadComments();
+  const { isLoading, data, isError, error } = useReadComments();
   const { deleteComment, isLoading: commentLoading } = useDeleteComment();
   const { tag } = useParams();
   const { user_id: signInUser } = useUser();
@@ -23,6 +23,14 @@ export default function CommentList() {
 
   if (data?.length === 0)
     return <p className="m-auto my-4">등록된 댓글이 없습니다</p>;
+
+  if (isError)
+    return (
+      <>
+        <p className="m-auto my-4 text-red-400">댓글을 가져오지 못했습니다.</p>
+        <p className="m-auto text-red-400">{error?.message}</p>
+      </>
+    );
 
   const commentTree = buildCommentsTree(data);
 

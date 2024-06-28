@@ -11,10 +11,10 @@ export default function useReadFashionList() {
 
   const tag = params?.tag as string;
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: [tag, page, validStart, validEnd],
     queryFn: () => readFashionListApi(tag, page, validStart, validEnd),
   });
 
-  return { data, isLoading, isError };
+  return { data, isLoading, isError, error };
 }

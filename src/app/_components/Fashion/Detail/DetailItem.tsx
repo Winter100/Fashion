@@ -12,9 +12,9 @@ export default function DetailItem({
   created_at,
 }: DetailType) {
   return (
-    <div className="flex ">
-      <div className="flex min-h-[500px] w-full flex-col items-center gap-2 p-2 md:flex-row">
-        <div className="flex h-96 w-full flex-col md:h-full md:flex-1">
+    <div className="flex">
+      <div className="my-1 flex min-h-[500px] w-full flex-col items-center gap-2 md:flex-row">
+        <div className="flex h-96 w-full flex-col  md:h-full md:flex-1">
           <div className="relative h-full">
             <Image
               src={image}
