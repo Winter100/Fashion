@@ -3,23 +3,34 @@
 import { ListItemType } from "@/app/_types/type";
 import ItemEntry from "../ItemEntry";
 import LoadingSpinner from "../../Spinner/LoadingSpinner";
-import ErrorWrapper from "../../Error/ErrorWrapper";
+import AlertWrapper from "../../Error/AlertWrapper";
 import { useReadSearch } from "@/app/_hooks/useFashion";
 import { useQueryString } from "@/app/_hooks/useQueryString";
 
 export default function SearchFashionList() {
-  const { data: SearchData, isLoading } = useReadSearch<ListItemType>();
+  const {
+    data: SearchData,
+    isLoading,
+    isError,
+    error,
+  } = useReadSearch<ListItemType>();
   const { q } = useQueryString();
 
   if (isLoading) return <LoadingSpinner />;
+
   if (SearchData?.length === 0 || !SearchData) {
     return (
-      <ErrorWrapper className="flex h-full w-full cursor-default flex-col items-center justify-center text-center text-5xl">
-        <p className="my-2">등록된 기록이 없습니다.</p>
-        <div className=" text-2xl">
-          <p>검색어: {q}</p>
-        </div>
-      </ErrorWrapper>
+      <AlertWrapper description="등록된 기록이 없습니다.">
+        <p className="text-2xl">검색어: {q}</p>
+      </AlertWrapper>
+    );
+  }
+
+  if (isError) {
+    return (
+      <AlertWrapper description="에러가 발생했습니다.">
+        <p className="text-2xl">{error?.message}</p>
+      </AlertWrapper>
     );
   }
 

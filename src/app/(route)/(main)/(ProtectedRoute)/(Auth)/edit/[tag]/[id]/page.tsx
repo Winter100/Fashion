@@ -20,7 +20,7 @@ export default function Page() {
   const { isLoading: submitLoading, setLoading: setSubmitLoading } =
     useLoading();
 
-  const { isLoading, data, isError } = useReadFashionEditData();
+  const { isLoading, data, isError, error } = useReadFashionEditData();
   const inititem = {
     title: data?.title,
     content: data?.content,
@@ -30,12 +30,12 @@ export default function Page() {
 
   useEffect(() => {
     if (isError) {
-      toast.error("권한이 없습니다.");
+      toast.error(error?.message);
       router.replace("/mypage/list");
     }
-  }, [isError, router]);
+  }, [isError, router, error]);
 
-  if (isLoading || isError) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner />;
 
   async function onSubmit(value: inputType) {
     setSubmitLoading(true);

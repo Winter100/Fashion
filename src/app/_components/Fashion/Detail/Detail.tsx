@@ -1,33 +1,49 @@
 "use client";
 
 import LoadingSpinner from "@/app/_components/Spinner/LoadingSpinner";
-import ErrorWrapper from "@/app/_components/Error/ErrorWrapper";
+import AlertWrapper from "@/app/_components/Error/AlertWrapper";
 import DetailItem from "@/app/_components/Fashion/Detail/DetailItem";
 
 import CommentEntry from "@/app/_components/Comment/CommentEntry";
 import { useReadDetail } from "@/app/_hooks/useFashion";
 import BackButton from "@/app/_components/Button/BackButton";
+import { useRouter } from "next/navigation";
+import { setFashionRoute } from "@/app/_utils/setFashionRoute";
+import { TAG_NAME } from "@/app/_constant/constant";
 
 export default function Detail() {
-  const { isLoading, data } = useReadDetail();
+  const { isLoading, data, isError, error } = useReadDetail();
+  const router = useRouter();
 
   if (isLoading) return <LoadingSpinner />;
 
   if (!data) {
     return (
-      <ErrorWrapper className="flex h-full w-full cursor-default flex-col items-center justify-center text-center text-5xl">
-        <p>존재하지 않는 기록입니다.</p>
-        <div className=" flex justify-center">
-          <BackButton className=" h-12" color="gray" />
-        </div>
-      </ErrorWrapper>
+      <AlertWrapper description="등록된 기록이 없습니다.">
+        <BackButton
+          value="홈으로"
+          className=" h-12"
+          color="gray"
+          onClick={() =>
+            router.replace(setFashionRoute(TAG_NAME.fashion, TAG_NAME.today))
+          }
+        />
+      </AlertWrapper>
+    );
+  }
+
+  if (isError) {
+    return (
+      <AlertWrapper description="에러가 발생했습니다.">
+        <p className="text-2xl">{error?.message}</p>
+      </AlertWrapper>
     );
   }
 
   return (
-    <div className="layout-max-width m-auto flex h-full w-full flex-col py-4">
-      <div className="h-13 flex w-full items-center justify-between">
-        <BackButton color="green" />
+    <div className="layout-max-width m-auto flex h-full w-full flex-col">
+      <div className="h-13 my-0 flex w-full items-center justify-between md:my-10">
+        <BackButton color="green" onClick={router.back} />
       </div>
       <DetailItem {...data} />
       <CommentEntry />

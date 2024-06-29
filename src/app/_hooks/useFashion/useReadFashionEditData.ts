@@ -8,11 +8,11 @@ export default function useReadFashionEditData() {
   const { tag, id }: { tag: string; id: string } = useParams();
   const { user } = useUser();
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: [`detail`, tag, id],
     queryFn: () => readFashionEditDataApi(id, user?.id, tag),
     staleTime: 1000,
   });
 
-  return { id, data, isLoading, isError };
+  return { id, data, isLoading, isError, error };
 }

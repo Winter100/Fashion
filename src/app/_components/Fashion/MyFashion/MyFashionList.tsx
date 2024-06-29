@@ -7,7 +7,7 @@ import { useReadMyFashionList } from "@/app/_hooks/useFashion";
 import { MyFashionListType } from "@/app/_types/type";
 import { convertToTag } from "@/app/_utils/convertToTag";
 import LoadingSpinner from "../../Spinner/LoadingSpinner";
-import ErrorWrapper from "../../Error/ErrorWrapper";
+import AlertWrapper from "../../Error/AlertWrapper";
 
 export default function MyFashionList({
   handleCheck,
@@ -42,18 +42,13 @@ export default function MyFashionList({
 
   if (!isLoading && sortedData.length === 0) {
     return (
-      <ErrorWrapper className="flex h-full w-full items-center justify-center text-4xl">
-        <div>
-          <div>
-            <span>{convertToTag(tagFilter)}</span> 에 기록된 정보가 없습니다.
-          </div>
-          <div className=" text-center">
-            <Link prefetch={false} href="/write" className=" text-xl">
-              기록 남기기
-            </Link>
-          </div>
-        </div>
-      </ErrorWrapper>
+      <AlertWrapper
+        description={`${convertToTag(tagFilter)} 의 기록이 없습니다.`}
+      >
+        <Link className="m-auto text-xl" href="/write">
+          기록 남기기
+        </Link>
+      </AlertWrapper>
     );
   }
 
