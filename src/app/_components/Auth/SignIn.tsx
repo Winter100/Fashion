@@ -80,7 +80,7 @@ export default function SignIn() {
                   placeholder="이메일"
                   style={{
                     fontFamily: "sans-serif",
-                    fontSize: "0.75rem",
+                    fontSize: "16px",
                   }}
                   {...register("email", {
                     required: true,
@@ -107,7 +107,7 @@ export default function SignIn() {
                   placeholder="비밀번호"
                   style={{
                     fontFamily: "sans-serif",
-                    fontSize: "0.75rem",
+                    fontSize: "16px",
                   }}
                   {...register("password", {
                     required: true,

@@ -13,7 +13,7 @@ input {
 
 @layer components {
   .layout-max-width {
-    @apply max-w-6xl;
+    @apply m-auto flex w-full max-w-7xl;
   }
 
   .image-parents-div-fill {
