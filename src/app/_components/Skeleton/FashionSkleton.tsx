@@ -4,7 +4,7 @@ import ContentLoader from "react-content-loader";
 interface PropsType extends React.HTMLAttributes<SVGAElement> {}
 
 const FashionSkleton = (props: PropsType) => (
-  <div className="grid grid-cols-2 justify-items-center gap-4 p-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8">
+  <div className="fashion-item-grid">
     {Array.from({ length: 8 }, (_, index) => {
       return (
         <ContentLoader

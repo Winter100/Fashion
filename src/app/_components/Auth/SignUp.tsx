@@ -54,11 +54,11 @@ export default function SignUp() {
           하루를 기록할 준비하기
         </Manage.Description>
 
-        <Manage.ContentWrapper className="my-4 flex gap-4">
+        <Manage.ContentWrapper className="my-4 flex gap-4 text-xl">
           <Manage.ContentArea>
             <Manage.Label className="flex w-full items-center justify-center">
               <div
-                className={`w-16 text-center ${errors.email ? "text-red-500" : ""}`}
+                className={`w-20 text-center ${errors.email ? "text-red-500" : ""}`}
               >
                 이메일
               </div>
@@ -71,8 +71,7 @@ export default function SignUp() {
                   type="email"
                   placeholder="이메일"
                   style={{
-                    fontFamily: "sans-serif",
-                    fontSize: "16px",
+                    fontSize: "20px",
                   }}
                   {...register("email", {
                     required: true,
@@ -86,7 +85,7 @@ export default function SignUp() {
           <Manage.ContentArea>
             <Manage.Label className="flex w-full items-center justify-center">
               <div
-                className={`w-16 text-center ${errors.name ? "text-red-500" : ""}`}
+                className={`w-20 text-center ${errors.name ? "text-red-500" : ""}`}
               >
                 닉네임
               </div>
@@ -98,8 +97,7 @@ export default function SignUp() {
                   type="nickname"
                   placeholder="닉네임"
                   style={{
-                    fontFamily: "sans-serif",
-                    fontSize: "16px",
+                    fontSize: "20px",
                   }}
                   {...register("name", {
                     required: true,
@@ -113,7 +111,7 @@ export default function SignUp() {
           <Manage.ContentArea>
             <Manage.Label className="flex w-full items-center justify-center">
               <div
-                className={`w-16 text-center ${errors.password ? "text-red-500" : ""}`}
+                className={`w-20 text-center ${errors.password ? "text-red-500" : ""}`}
               >
                 비밀번호
               </div>
@@ -125,8 +123,7 @@ export default function SignUp() {
                   id="password"
                   type="password"
                   style={{
-                    fontFamily: "sans-serif",
-                    fontSize: "16px",
+                    fontSize: "20px",
                   }}
                   {...register("password", {
                     required: true,
@@ -140,7 +137,7 @@ export default function SignUp() {
           <Manage.ContentArea>
             <Manage.Label className="flex w-full items-center justify-center">
               <div
-                className={`w-16 text-center ${errors.passwordConfirm ? "text-red-500" : ""}`}
+                className={`w-20 text-center ${errors.passwordConfirm ? "text-red-500" : ""}`}
               >
                 비밀번호 확인
               </div>
@@ -152,8 +149,7 @@ export default function SignUp() {
                   id="passwordConfirm"
                   type="password"
                   style={{
-                    fontFamily: "sans-serif",
-                    fontSize: "16px",
+                    fontSize: "20px",
                   }}
                   {...register("passwordConfirm", {
                     required: true,

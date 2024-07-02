@@ -1,99 +1,104 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Dropdown } from "flowbite-react";
 import { IoMenuOutline } from "react-icons/io5";
+
+import DarkModeToggleBtn from "../Button/DarkModeToggleBtn";
 
 import { TAG_NAME } from "@/app/_constant/constant";
 import { convertToTag } from "@/app/_utils/convertToTag";
 import { setFashionRoute } from "@/app/_utils/setFashionRoute";
 import { useRouteName } from "@/app/_hooks/useQueryString";
 import { useSignOut } from "@/app/_hooks/useAuth";
-
 import { useUserContextData } from "@/app/_provider/UserContextProvider";
-import DarkModeToggleBtn from "../Button/DarkModeToggleBtn";
+import { useRouteChange } from "@/app/_hooks/useRouteChange";
 
-const MenuName = [
+const MENU_ITEMS = [
   { name: TAG_NAME.today },
   { name: TAG_NAME.tomorrow },
   { name: TAG_NAME.this },
 ];
 
+const AUTH_ITEMS = [
+  { name: TAG_NAME.signin, auth: false },
+  { name: TAG_NAME.mypage, auth: true },
+  { name: TAG_NAME.signout, auth: true },
+];
+
 export default function MobileMenu() {
-  const router = useRouter();
+  const navigateTo = useRouteChange();
   const { routeName } = useRouteName();
-  const convertTagName = convertToTag(routeName);
   const pathName = usePathname();
   const [labelValue, setLabelValue] = useState("");
-
-  function handleRoute(url: string) {
-    router.push(url);
-  }
 
   const { signout: signoutMutation } = useSignOut();
   const { userData, clearLoginData } = useUserContextData();
 
-  function signOut() {
-    signoutMutation();
-    clearLoginData();
-  }
   const isAuthenticated = userData?.aud === "authenticated";
 
-  const labelTag = labelValue && (
-    <span className="text-leftMenuColor w-16 text-xl">{labelValue}</span>
-  );
-
   useEffect(() => {
-    setLabelValue(convertTagName);
-  }, [convertTagName]);
+    setLabelValue(convertToTag(routeName));
+  }, [routeName]);
 
-  function accentTextColor(tag: string) {
-    return pathName.includes(tag) ? "text-leftMenuColor" : "";
+  function handleItemClick(tag: string) {
+    if (tag === TAG_NAME.signout) {
+      signoutMutation();
+      clearLoginData();
+    } else if (tag === TAG_NAME.write) {
+      navigateTo(`/${TAG_NAME.write}`);
+    } else {
+      navigateTo(
+        tag === TAG_NAME.signin
+          ? `/auth/${tag}`
+          : tag === TAG_NAME.mypage
+            ? `/${tag}`
+            : setFashionRoute(TAG_NAME.fashion, tag),
+      );
+    }
+  }
+
+  function renderMenuItem(item: { name: string }) {
+    return (
+      <Dropdown.Item
+        key={item.name}
+        onClick={() => handleItemClick(item.name)}
+        className="flex  flex-col items-center justify-center"
+      >
+        <span
+          className={
+            pathName.includes(item.name) ? "text-selectedOrHoverColor" : ""
+          }
+        >
+          {convertToTag(item.name)}
+        </span>
+      </Dropdown.Item>
+    );
   }
 
   return (
-    <Dropdown label={labelTag || <IoMenuOutline />} inline>
-      <Dropdown.Item className="flex items-center justify-center p-1">
-        <DarkModeToggleBtn className="text-xl" />
-      </Dropdown.Item>
-
-      <Dropdown.Divider />
-      {MenuName.map((menu) => (
-        <Dropdown.Item
-          className="flex flex-col items-center justify-center"
-          key={menu.name}
-          onClick={() =>
-            handleRoute(setFashionRoute(TAG_NAME.fashion, menu.name))
-          }
-        >
-          <span className={accentTextColor(menu.name)}>
-            {convertToTag(menu?.name)}
+    <Dropdown
+      label={
+        labelValue ? (
+          <span className="text-selectedOrHoverColor w-16 text-xl">
+            {labelValue}
           </span>
-        </Dropdown.Item>
-      ))}
-      <Dropdown.Item
-        onClick={() => handleRoute(`/${TAG_NAME.write}`)}
-        className="flex items-center justify-center"
-      >
-        <span className={accentTextColor("/write")}>기록 남기기</span>
+        ) : (
+          <IoMenuOutline />
+        )
+      }
+      inline
+    >
+      <Dropdown.Item className="flex items-center justify-center p-1">
+        <DarkModeToggleBtn as="span" />
       </Dropdown.Item>
       <Dropdown.Divider />
-      {!isAuthenticated ? (
-        <Dropdown.Item
-          className=" flex flex-col items-center justify-center"
-          onClick={() => handleRoute("/auth/signin")}
-        >
-          <span className={accentTextColor("/signin")}>로그인</span>
-        </Dropdown.Item>
-      ) : (
-        <div className=" flex flex-col items-center justify-center">
-          <Dropdown.Item onClick={() => handleRoute("/mypage")}>
-            <span className={accentTextColor("/mypage")}>My</span>
-          </Dropdown.Item>
-
-          <Dropdown.Item onClick={signOut}>로그아웃</Dropdown.Item>
-        </div>
+      {MENU_ITEMS.map(renderMenuItem)}
+      {isAuthenticated && renderMenuItem({ name: TAG_NAME.write })}
+      <Dropdown.Divider />
+      {AUTH_ITEMS.filter((item) => item.auth === isAuthenticated).map(
+        renderMenuItem,
       )}
     </Dropdown>
   );

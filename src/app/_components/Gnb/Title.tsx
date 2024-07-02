@@ -17,7 +17,7 @@ export default function Title() {
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       href={setFashionRoute(TAG_NAME.fashion, TAG_NAME.today)}
-      className="flex flex-col items-center justify-center text-6xl "
+      className="flex flex-col items-center justify-center"
     >
       <div className=" text-3xl">
         <span className="text-blue-600">이 옷</span>

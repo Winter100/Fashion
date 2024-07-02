@@ -16,6 +16,10 @@ input {
     @apply m-auto flex w-full max-w-7xl;
   }
 
+  .fashion-item-grid {
+    @apply grid grid-cols-2 justify-items-center gap-4 p-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5;
+  }
+
   .image-parents-div-fill {
     @apply relative m-auto flex h-[100%] w-full items-center justify-center;
   }
@@ -37,7 +41,7 @@ input {
   --backgroundOne: 255, 255, 255;
   --borderColorOne: 25, 25, 25;
   --deleteFontColor: 224 36 36;
-  --leftMenuColor: 26, 86, 219;
+  --selectedOrHoverColor: 26, 86, 219;
 }
 
 .dark {
@@ -50,7 +54,7 @@ input {
   --borderColorOne: 255, 255, 255;
   --toggleBackground: 95, 98, 120;
   --deleteFontColor: 249 128 128;
-  --leftMenuColor: 118, 169, 250;
+  --selectedOrHoverColor: 118, 169, 250;
 }
 
 /*리액트 캘린더 스타일*/
