@@ -22,7 +22,7 @@ export default function NavList() {
   return (
     <>
       {NAV_ITEMS.map(({ tag, Icon }) => (
-        <li key={tag} className="flex flex-1 items-center justify-center">
+        <li key={tag} className="flex items-center justify-center">
           <MenuItem
             label={tag}
             onClick={() => navigateTo(setFashionRoute(TAG_NAME.fashion, tag))}

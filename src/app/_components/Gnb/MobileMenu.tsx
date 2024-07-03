@@ -81,7 +81,7 @@ export default function MobileMenu() {
     <Dropdown
       label={
         labelValue ? (
-          <span className="text-selectedOrHoverColor w-16 text-xl">
+          <span className="w-16 text-xl text-selectedOrHoverColor">
             {labelValue}
           </span>
         ) : (
