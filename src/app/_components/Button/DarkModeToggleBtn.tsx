@@ -2,21 +2,23 @@
 
 import { useDarkMode } from "@/app/_provider/DarkModeProvider";
 import { PiSun, PiMoon } from "react-icons/pi";
+import MenuItem from "../Gnb/Link/MenuItem";
 
 export default function DarkModeToggleBtn({
-  className = "text-3xl",
+  as = "button",
 }: {
-  className?: string;
+  as?: "button" | "span";
 }) {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   return (
-    <div
+    <MenuItem
+      className="flex h-6 w-6 items-center justify-center"
       title="테마 바꾸기"
-      className={`flex w-full cursor-pointer items-center justify-center rounded-2xl hover:bg-toggleBackground/90 ${className}`}
+      as={as}
       onClick={toggleDarkMode}
     >
       {isDarkMode ? <PiSun /> : <PiMoon />}
-    </div>
+    </MenuItem>
   );
 }

@@ -63,25 +63,23 @@ export default function SignIn() {
           하루의 패션을 기록해보세요!
         </Manage.Description>
 
-        <Manage.ContentWrapper className="my-4 flex gap-4">
+        <Manage.ContentWrapper className="my-4 flex gap-4 text-xl">
           <Manage.ContentArea>
             <Manage.Label className="flex w-full items-center justify-center">
               <div
-                className={`w-16 text-center ${errors.email ? "text-red-500" : ""}`}
+                className={`w-20 text-center ${errors.email ? "text-red-500" : ""}`}
               >
                 이메일
               </div>
               <Manage.Content className=" w-full">
                 <TextInput
+                  style={{ fontSize: "20px" }}
                   disabled={isPending}
                   autoFocus
                   id="email"
                   type="email"
+                  autoComplete="off"
                   placeholder="이메일"
-                  style={{
-                    fontFamily: "sans-serif",
-                    fontSize: "0.75rem",
-                  }}
                   {...register("email", {
                     required: true,
                     validate: (value) => isValidSignValue(value, "email"),
@@ -94,7 +92,7 @@ export default function SignIn() {
           <Manage.ContentArea>
             <Manage.Label className="flex w-full items-center justify-center">
               <div
-                className={`w-16 text-center ${errors.password ? "text-red-500" : ""}`}
+                className={`w-20 text-center ${errors.password ? "text-red-500" : ""}`}
               >
                 비밀번호
               </div>
@@ -106,8 +104,7 @@ export default function SignIn() {
                   type="password"
                   placeholder="비밀번호"
                   style={{
-                    fontFamily: "sans-serif",
-                    fontSize: "0.75rem",
+                    fontSize: "20px",
                   }}
                   {...register("password", {
                     required: true,

@@ -23,7 +23,7 @@ export default function Search() {
   }
 
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <form className="mx-1 w-full" onSubmit={handleSubmit(submit)}>
       <div
         onFocus={() => setOnFocus(true)}
         onBlur={() => setOnFocus(false)}

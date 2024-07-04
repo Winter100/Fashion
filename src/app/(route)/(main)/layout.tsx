@@ -2,9 +2,8 @@ import ToastProvider from "@/app/_provider/ToastProvider";
 import TanstackProvider from "@/app/_provider/TanstackProvider";
 import UserContextProvider from "@/app/_provider/UserContextProvider";
 
-import TopGnb from "@/app/_layouts/TopGnb";
-import LeftGnb from "@/app/_layouts/LeftGnb";
 import DarkMode from "@/app/_provider/DarkModeProvider";
+import TopGnb from "@/app/_components/Gnb/TopGnb";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -13,12 +12,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <UserContextProvider>
           <DarkMode>
             <TopGnb />
-            <div className=" flex min-h-screen w-full">
-              <nav className="z-20 hidden h-full w-28 md:fixed md:block xl:w-40">
-                <LeftGnb />
-              </nav>
-              <main className="mx-0 mt-16 w-full bg-background p-2 md:ml-28 xl:ml-40">
-                {children}
+            <div className="flex w-full bg-background">
+              <main className="layout-max-width min-h-screen p-1">
+                <div className="mx-0 mt-16 w-full p-1 md:mt-28 md:p-4">
+                  {children}
+                </div>
               </main>
             </div>
           </DarkMode>

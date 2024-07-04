@@ -9,9 +9,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      maxWidth: {
-        1900: "1900px",
-      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -28,7 +25,7 @@ module.exports = {
         borderColorOne: "rgba(var(--borderColorOne))",
         toggleBackground: "rgba(var(--toggleBackground))",
         deleteFontColor: "rgba(var(--deleteFontColor))",
-        leftMenuColor: "rgba(var(--leftMenuColor))",
+        selectedOrHoverColor: "rgba(var(--selectedOrHoverColor))",
       },
     },
   },

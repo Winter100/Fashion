@@ -1,12 +1,8 @@
 import "./globals.css";
 import dynamic from "next/dynamic";
-import { Dongle } from "next/font/google";
-import { getMetaData } from "./_utils/metadata";
+import localFont from "next/font/local";
 
-const dongle = Dongle({
-  weight: ["400"],
-  subsets: ["latin"],
-});
+import { getMetaData } from "./_utils/metadata";
 
 const DynamicDarkModeProvider = dynamic(
   () => import("./_provider/DarkModeProvider"),
@@ -15,6 +11,12 @@ const DynamicDarkModeProvider = dynamic(
 
 export const metadata = getMetaData();
 
+const myfont = localFont({
+  src: [
+    { path: "./_fonts/Dongle-Regular.ttf", weight: "normal", style: "normal" },
+  ],
+});
+
 export default function RootLayout({
   children,
 }: {
@@ -22,7 +24,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" className="scrollbar-hide">
-      <body className={`${dongle.className} bg-backgroundOne text-fontColor`}>
+      <body
+        className={`${myfont.className} font-Dongle bg-backgroundOne text-fontColor`}
+      >
         <DynamicDarkModeProvider>{children}</DynamicDarkModeProvider>
       </body>
     </html>
