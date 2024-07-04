@@ -70,32 +70,6 @@ export default function Write({
       onSubmit={handleSubmit(onSubmit)}
       className="mt-0 h-full w-full flex-col items-center md:mt-10 md:flex"
     >
-      <div className="h-13 flex w-full items-center justify-between">
-        <Button
-          className="h-full"
-          onClick={() => router.back()}
-          size="md"
-          color="green"
-          disabled={submitLoading}
-        >
-          <span className="text-xl">뒤로가기</span>
-        </Button>
-        <Button
-          className="h-full"
-          color="green"
-          disabled={submitLoading}
-          type="submit"
-        >
-          {!submitLoading ? (
-            <span className="text-xl">{btnText}</span>
-          ) : (
-            <span>
-              <Spinner size="md" />
-            </span>
-          )}
-        </Button>
-      </div>
-
       <div className="mt-2 flex w-full flex-col items-center gap-2 md:mt-10 md:flex-row">
         <div className="flex h-96 w-full flex-col rounded-xl border border-gray-400 p-1 md:h-full md:flex-1">
           <div className="relative flex h-full items-center justify-center">
@@ -225,6 +199,31 @@ export default function Write({
             </Manage.ContentWrapper>
           </Manage>
         </div>
+      </div>
+      <div className="h-13 my-10 flex items-center justify-center gap-12">
+        <Button
+          className="h-full"
+          onClick={() => router.back()}
+          size="md"
+          color="light"
+          disabled={submitLoading}
+        >
+          <span className="text-xl">취 소</span>
+        </Button>
+        <Button
+          className="h-full"
+          color="success"
+          disabled={submitLoading}
+          type="submit"
+        >
+          {!submitLoading ? (
+            <span className="text-xl">{btnText}</span>
+          ) : (
+            <span>
+              <Spinner size="md" />
+            </span>
+          )}
+        </Button>
       </div>
     </form>
   );

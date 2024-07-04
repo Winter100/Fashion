@@ -10,7 +10,7 @@ import DarkModeToggleBtn from "../Button/DarkModeToggleBtn";
 import { TAG_NAME } from "@/app/_constant/constant";
 import { convertToTag } from "@/app/_utils/convertToTag";
 import { setFashionRoute } from "@/app/_utils/setFashionRoute";
-import { useRouteName } from "@/app/_hooks/useQueryString";
+import { useQueryString, useRouteName } from "@/app/_hooks/useQueryString";
 import { useSignOut } from "@/app/_hooks/useAuth";
 import { useUserContextData } from "@/app/_provider/UserContextProvider";
 import { useRouteChange } from "@/app/_hooks/useRouteChange";
@@ -28,6 +28,7 @@ const AUTH_ITEMS = [
 ];
 
 export default function MobileMenu() {
+  const { page, validStart, validEnd } = useQueryString();
   const navigateTo = useRouteChange();
   const { routeName } = useRouteName();
   const pathName = usePathname();
@@ -54,7 +55,13 @@ export default function MobileMenu() {
           ? `/auth/${tag}`
           : tag === TAG_NAME.mypage
             ? `/${tag}`
-            : setFashionRoute(TAG_NAME.fashion, tag),
+            : setFashionRoute(
+                TAG_NAME.fashion,
+                tag,
+                page,
+                validStart,
+                validEnd,
+              ),
       );
     }
   }
@@ -90,7 +97,7 @@ export default function MobileMenu() {
       }
       inline
     >
-      <Dropdown.Item className="flex items-center justify-center p-1">
+      <Dropdown.Item className="flex items-center justify-center">
         <DarkModeToggleBtn as="span" />
       </Dropdown.Item>
       <Dropdown.Divider />

@@ -27,6 +27,7 @@ export default function AuthMenu() {
     <>
       {!isAuthenticated ? (
         <MenuItem
+          as="span"
           label={TAG_NAME.signin}
           onClick={() => navigateTo(`/auth/${TAG_NAME.signin}`)}
         >
@@ -37,7 +38,7 @@ export default function AuthMenu() {
         </MenuItem>
       ) : (
         <>
-          <MenuItem label={TAG_NAME.signout} onClick={signOut}>
+          <MenuItem as="span" label={TAG_NAME.signout} onClick={signOut}>
             <span className="flex items-center gap-1">
               <VscSignOut />
               {convertToTag(TAG_NAME.signout)}
