@@ -33,11 +33,6 @@ export function CalendarFilter() {
             <MainCalendar setOpenModal={setOpenModal} />
           </div>
         </Modal.Body>
-        <Modal.Footer className="flex items-center justify-center">
-          <Button color="gray" onClick={() => setOpenModal(false)}>
-            취소
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

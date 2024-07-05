@@ -83,6 +83,7 @@ NEXT_PUBLIC_SUPABASE_KEY = 본인의 Supbase Key가 필요합니다.
 ```
 fashion
 ├─ .eslintrc.json
+├─ .git
 ├─ .gitignore
 ├─ .prettierrc.json
 ├─ next.config.js
@@ -104,8 +105,10 @@ fashion
 │     │  │  │  │        └─ page.tsx
 │     │  │  │  ├─ fashion
 │     │  │  │  │  └─ [tag]
+│     │  │  │  │     ├─ loading.tsx
 │     │  │  │  │     └─ page.tsx
 │     │  │  │  └─ search
+│     │  │  │     ├─ loading.tsx
 │     │  │  │     └─ page.tsx
 │     │  │  ├─ (ProtectedRoute)
 │     │  │  │  ├─ (Auth)
@@ -176,11 +179,11 @@ fashion
 │     │  │  ├─ CommentView.tsx
 │     │  │  └─ CommentWrite.tsx
 │     │  ├─ Error
-│     │  │  └─ ErrorWrapper.tsx
+│     │  │  └─ AlertWrapper.tsx
 │     │  ├─ Fashion
 │     │  │  ├─ Detail
 │     │  │  │  ├─ Detail.tsx
-│     │  │  │  └─ DetailContentArea.tsx
+│     │  │  │  └─ DetailItem.tsx
 │     │  │  ├─ Edit
 │     │  │  │  ├─ Edit.tsx
 │     │  │  │  └─ EditBtn.tsx
@@ -202,12 +205,13 @@ fashion
 │     │  │     └─ SearchItem.tsx
 │     │  ├─ Gnb
 │     │  │  ├─ AuthMenu.tsx
-│     │  │  ├─ LeftBarMenu.tsx
 │     │  │  ├─ Link
-│     │  │  │  └─ LeftBarLink.tsx
+│     │  │  │  └─ MenuItem.tsx
 │     │  │  ├─ MobileMenu.tsx
+│     │  │  ├─ PcMenu.tsx
 │     │  │  ├─ Search.tsx
-│     │  │  └─ Title.tsx
+│     │  │  ├─ Title.tsx
+│     │  │  └─ TopGnb.tsx
 │     │  ├─ Manage
 │     │  │  ├─ Manage.tsx
 │     │  │  ├─ ManageContent.tsx
@@ -225,10 +229,14 @@ fashion
 │     │  │  └─ UserInfo.tsx
 │     │  ├─ Pagination
 │     │  │  └─ Pagination.tsx
+│     │  ├─ Skeleton
+│     │  │  └─ FashionSkleton.tsx
 │     │  └─ Spinner
 │     │     └─ LoadingSpinner.tsx
 │     ├─ _constant
 │     │  └─ constant.ts
+│     ├─ _fonts
+│     │  └─ Dongle-Regular.ttf
 │     ├─ _hooks
 │     │  ├─ useAuth
 │     │  │  ├─ useSignIn.ts
@@ -253,14 +261,13 @@ fashion
 │     │  ├─ useLoading.ts
 │     │  ├─ useLocalStorageState.ts
 │     │  ├─ usePreview.ts
-│     │  └─ useQueryString.ts
+│     │  ├─ useQueryString.ts
+│     │  └─ useRouteChange.ts
 │     ├─ _layouts
 │     │  ├─ HomeLayout.tsx
-│     │  ├─ LeftGnb.tsx
-│     │  ├─ Protected
-│     │  │  ├─ AuthProtectedRoute.tsx
-│     │  │  └─ NoAuthProtectedRoute.tsx
-│     │  └─ TopGnb.tsx
+│     │  └─ Protected
+│     │     ├─ AuthProtectedRoute.tsx
+│     │     └─ NoAuthProtectedRoute.tsx
 │     ├─ _provider
 │     │  ├─ DarkModeProvider.tsx
 │     │  ├─ TanstackProvider.tsx
@@ -273,7 +280,10 @@ fashion
 │        ├─ convertToKST.ts
 │        ├─ convertToTag.ts
 │        ├─ dateFn.ts
+│        ├─ generateImageMetadata.ts
+│        ├─ getQueryClient.ts
 │        ├─ imgCompression.ts
+│        ├─ isValid.ts
 │        ├─ localstorage.ts
 │        ├─ metadata.ts
 │        ├─ setFashionRoute.ts
@@ -289,23 +299,21 @@ fashion
 
 | 회원가입 검증                                                                                           | - 로그인 검증                                                                                         |
 | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| ![회원가입](https://github.com/Winter100/Fashion/assets/119467710/e75d64dd-5cfe-48d4-9805-b2d21aa3f229) | ![로그인](https://github.com/Winter100/Fashion/assets/119467710/6116c8e9-4ce5-4c54-ba91-b74bbfc52033) |
+| ![회원가입](https://github.com/Winter100/Fashion/assets/119467710/f1b404d0-bf9f-4ca3-9674-7fd961fbb96f) | ![로그인](https://github.com/Winter100/Fashion/assets/119467710/7af46cf7-ebcb-4be7-b637-4e5149c82954) |
 
-|
+| 게시글 등록                                                                                               | 댓글 작성 및 삭제                                                                                                |
+| --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| ![게시글작성](https://github.com/Winter100/Fashion/assets/119467710/eb95b0bd-9b9d-4643-8f10-788665912125) | ![댓글 작성 및 삭제](https://github.com/Winter100/Fashion/assets/119467710/6be9b0b8-a45b-4408-9ccb-d8bcb8ecf673) |
+|                                                                                                           |                                                                                                                  |
 
-| 게시글 등록                                                                                            | 댓글 작성 및 삭제                                                                                                |
-| ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| ![글 작성](https://github.com/Winter100/Fashion/assets/119467710/3b716102-24ba-43e2-a491-d357598a9887) | ![댓글 작성 및 삭제](https://github.com/Winter100/Fashion/assets/119467710/6beaea72-5745-403d-9168-3de2de642b8e) |
-|                                                                                                        |                                                                                                                  |
-
-| 게시글 필터                                                                                                | 마이페이지 필터                                                                                                |
-| ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| ![게시글 필터](https://github.com/Winter100/Fashion/assets/119467710/8512e515-c1c9-4e57-a3fe-29da88dc87cf) | ![마이페이지 필터](https://github.com/Winter100/Fashion/assets/119467710/fb53d618-43f9-4e1f-afb6-1908eec029b8) |
-|                                                                                                            |                                                                                                                |
+| 게시글 필터                                                                                               | 마이페이지 필터                                                                                                |
+| --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| ![게시글필터](https://github.com/Winter100/Fashion/assets/119467710/b08b3f06-3e8b-4cdf-ab76-35214701cda3) | ![마이페이지 필터](https://github.com/Winter100/Fashion/assets/119467710/ec188062-7725-45f9-91fe-25718fefa079) |
+|                                                                                                           |                                                                                                                |
 
 | 게시글 수정                                                                                                | 게시글 삭제                                                                                                | 게시글 검색                                                                                         |
 | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| ![게시글 수정](https://github.com/Winter100/Fashion/assets/119467710/2ce63513-3265-4bec-b8fb-84ac04dd1b54) | ![게시글 삭제](https://github.com/Winter100/Fashion/assets/119467710/fdda6329-bffa-4d69-95f1-df07b3382084) | ![검색](https://github.com/Winter100/Fashion/assets/119467710/3840cc7d-43fe-40db-ae05-9afc4f1c44c9) |
+| ![게시글 수정](https://github.com/Winter100/Fashion/assets/119467710/d35b9f13-d3e8-432f-bb8d-26805ff1104b) | ![게시글 삭제](https://github.com/Winter100/Fashion/assets/119467710/0da9c070-ae7d-48e4-a896-38be22d5e270) | ![검색](https://github.com/Winter100/Fashion/assets/119467710/512186ea-b4c1-4fc8-8056-6ff1f24e2ac4) |
 |                                                                                                            |                                                                                                            |                                                                                                     |
 
 ## 프로젝트를 진행하며 발생한 문제 및 해결
