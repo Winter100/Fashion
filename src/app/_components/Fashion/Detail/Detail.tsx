@@ -42,7 +42,7 @@ export default function Detail() {
 
   return (
     <div className="layout-max-width m-auto flex h-full w-full flex-col">
-      <div className="h-13 my-0 flex w-full items-center justify-between md:my-10">
+      <div className="h-13 my-0 flex w-full items-center justify-between md:my-4">
         <BackButton color="light" onClick={router.back} />
       </div>
       <DetailItem {...data} />
