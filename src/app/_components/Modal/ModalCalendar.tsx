@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Button, Modal } from "flowbite-react";
 import { FaRegCalendarAlt } from "react-icons/fa";
 
@@ -8,17 +9,24 @@ import MainCalendar from "../Calendar/MainCalendar";
 
 export function CalendarFilter() {
   const [openModal, setOpenModal] = useState(false);
+  const pathName = usePathname();
+
+  const isFashionRoute = pathName.includes("/fashion");
 
   return (
     <>
-      <Button
-        title="날짜 필터"
-        aria-label="날짜 필터"
-        color="light"
-        onClick={() => setOpenModal(true)}
-      >
-        <FaRegCalendarAlt />
-      </Button>
+      <div className=" visible ml-1 flex h-[40px] min-w-14 items-center justify-center">
+        {isFashionRoute && (
+          <Button
+            title="날짜 필터"
+            aria-label="날짜 필터"
+            color="light"
+            onClick={() => setOpenModal(true)}
+          >
+            <FaRegCalendarAlt />
+          </Button>
+        )}
+      </div>
 
       <Modal
         size="2xl"
