@@ -1,7 +1,8 @@
-import { ChangeEventHandler, FormEvent } from "react";
+import { ChangeEvent, ChangeEventHandler, FormEvent } from "react";
 
 import { User } from "@supabase/supabase-js";
 import { Comment } from "../_utils/buildCommentsTree";
+import { FieldError, UseFormRegister } from "react-hook-form";
 
 export interface inputType {
   title: string;
@@ -151,4 +152,21 @@ export interface DeletePropsType {
     | "yellow";
   size: "xs" | "sm" | "md" | "lg" | "xl";
   disabled?: boolean;
+}
+
+export interface EditInputProps {
+  register: UseFormRegister<inputType>;
+  error: FieldError | undefined;
+  disabled: boolean;
+}
+
+export interface ImageUploadProps extends Omit<EditInputProps, "error"> {
+  preview: string;
+  itemImage: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  error: FieldError | undefined;
+  // error:
+  //   | FieldError
+  //   | undefined
+  //   | Merge<FieldError, FieldErrorsImpl<{ 0: File }>>;
 }

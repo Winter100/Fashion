@@ -99,7 +99,7 @@ export default function SignIn() {
               <Manage.Content className=" w-full">
                 <TextInput
                   disabled={isPending}
-                  autoComplete="off"
+                  autoComplete="current-password"
                   id="password"
                   type="password"
                   placeholder="비밀번호"
