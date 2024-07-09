@@ -5,12 +5,11 @@ import LoadingSpinner from "../../Spinner/LoadingSpinner";
 import AlertWrapper from "../../Error/AlertWrapper";
 import Paginations from "../../Pagination/Pagination";
 import { useReadFashionList } from "@/app/_hooks/useFashion";
-import { useQueryString } from "@/app/_hooks/useQueryString";
 import { formatDateInDash } from "@/app/_utils/dateFn";
 
 export default function TagFashionList() {
-  const { data, isLoading, isError, error } = useReadFashionList();
-  const { validStart, validEnd } = useQueryString();
+  const { data, isLoading, isError, error, validStart, validEnd } =
+    useReadFashionList();
 
   if (isLoading) return <LoadingSpinner />;
   if (data?.fashionList.length === 0 || !data) {

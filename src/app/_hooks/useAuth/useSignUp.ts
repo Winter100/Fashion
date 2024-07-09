@@ -1,12 +1,24 @@
+import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
 import { signUpApi } from "@/app/_api/authApi";
 import { removeUserDataForLocalSotarge } from "@/app/_utils/localstorage";
+import { signUpType } from "@/app/_types/type";
 
 export default function useSignUp() {
   const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+    setError,
+  } = useForm<signUpType>();
+
   const { mutate: signUp, isPending } = useMutation({
     mutationFn: ({
       email,
@@ -23,5 +35,33 @@ export default function useSignUp() {
       router.replace("/auth/signin");
     },
   });
-  return { signUp, isPending };
+
+  async function onSubmit(value: signUpType) {
+    const { email, name, password } = value;
+    if (!name) return;
+    signUp(
+      { email, name, password },
+      {
+        onError: (e) => {
+          setError("root", { message: e.message }, { shouldFocus: true });
+        },
+      },
+    );
+  }
+
+  function routeToSignIn(e: FormEvent) {
+    e.preventDefault();
+    router.push("/auth/signin");
+  }
+
+  return {
+    isPending,
+    register,
+    handleSubmit,
+    getValues,
+    setError,
+    routeToSignIn,
+    errors,
+    onSubmit,
+  };
 }

@@ -11,5 +11,5 @@ export default function useReadSearch<T>() {
     queryFn: () => readSearchFashionApi(q),
   });
 
-  return { data, isLoading, isError, error };
+  return { data, isLoading, isError, error, q };
 }

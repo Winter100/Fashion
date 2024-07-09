@@ -1,7 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-
 import Manage from "../../Manage/Manage";
 import ImageUpload from "./ImageUpload";
 import TitleInput from "./TitleInput";
@@ -13,17 +11,19 @@ import { useWriteForm } from "@/app/_hooks/useWriteForm";
 import { inputType } from "@/app/_types/type";
 import { FieldError } from "react-hook-form";
 
+interface WriteProps {
+  onSubmit: (value: inputType) => void;
+  submitLoading: boolean;
+  btnText: string;
+  item?: any;
+}
+
 export default function Write({
   onSubmit,
   item,
   btnText,
   submitLoading,
-}: {
-  onSubmit: (value: inputType) => void;
-  submitLoading: boolean;
-  btnText: string;
-  item?: any;
-}) {
+}: WriteProps) {
   const {
     errors,
     handleImageChange,
@@ -31,8 +31,8 @@ export default function Write({
     isSelectDisabled,
     preview,
     register,
+    router,
   } = useWriteForm(item);
-  const router = useRouter();
 
   return (
     <form

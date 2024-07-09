@@ -7,13 +7,11 @@ import DetailItem from "@/app/_components/Fashion/Detail/DetailItem";
 import CommentEntry from "@/app/_components/Comment/CommentEntry";
 import { useReadDetail } from "@/app/_hooks/useFashion";
 import BackButton from "@/app/_components/Button/BackButton";
-import { useRouter } from "next/navigation";
 import { setFashionRoute } from "@/app/_utils/setFashionRoute";
 import { TAG_NAME } from "@/app/_constant/constant";
 
 export default function Detail() {
-  const { isLoading, data, isError, error } = useReadDetail();
-  const router = useRouter();
+  const { isLoading, data, isError, error, router } = useReadDetail();
 
   if (isLoading) return <LoadingSpinner />;
 

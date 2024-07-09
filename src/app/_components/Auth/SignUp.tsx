@@ -1,45 +1,22 @@
 "use client";
 
-import { FormEvent } from "react";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { Button, Spinner, TextInput } from "flowbite-react";
+import { Button, Spinner } from "flowbite-react";
 
 import Manage from "../Manage/Manage";
+import InputField from "./InputField";
 import { useSignUp } from "@/app/_hooks/useAuth";
-import { signUpType } from "@/app/_types/type";
 import { isValidSignValue } from "@/app/_utils/isValid";
 
 export default function SignUp() {
-  const router = useRouter();
-
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
+    isPending,
+    errors,
     getValues,
-    setError,
-  } = useForm<signUpType>();
-
-  const { signUp, isPending } = useSignUp();
-
-  async function onSubmit(value: signUpType) {
-    const { email, name, password } = value;
-
-    signUp(
-      { email, name, password },
-      {
-        onError: (e) => {
-          setError("root", { message: e.message }, { shouldFocus: true });
-        },
-      },
-    );
-  }
-
-  function routeHandler(e: FormEvent) {
-    e.preventDefault();
-    router.push("/auth/signin");
-  }
+    handleSubmit,
+    register,
+    routeToSignIn,
+    onSubmit,
+  } = useSignUp();
 
   return (
     <form
@@ -56,108 +33,72 @@ export default function SignUp() {
 
         <Manage.ContentWrapper className="my-4 flex gap-4 text-xl">
           <Manage.ContentArea>
-            <Manage.Label className="flex w-full items-center justify-center">
-              <div
-                className={`w-20 text-center ${errors.email ? "text-red-500" : ""}`}
-              >
-                이메일
-              </div>
-              <Manage.Content className=" w-full">
-                <TextInput
-                  autoComplete="off"
-                  disabled={isPending}
-                  autoFocus
-                  id="email"
-                  type="email"
-                  placeholder="이메일"
-                  style={{
-                    fontSize: "20px",
-                  }}
-                  {...register("email", {
-                    required: true,
-                    validate: (value) => isValidSignValue(value, "email"),
-                  })}
-                />
-              </Manage.Content>
-            </Manage.Label>
+            <InputField
+              id="email"
+              label="이메일"
+              type="email"
+              placeholder="이메일"
+              register={register}
+              disabled={isPending}
+              autoComplete="off"
+              errors={errors}
+              validation={{
+                required: true,
+                validate: (value: string) => isValidSignValue(value, "email"),
+              }}
+            />
           </Manage.ContentArea>
 
           <Manage.ContentArea>
-            <Manage.Label className="flex w-full items-center justify-center">
-              <div
-                className={`w-20 text-center ${errors.name ? "text-red-500" : ""}`}
-              >
-                닉네임
-              </div>
-              <Manage.Content className=" w-full">
-                <TextInput
-                  autoComplete="off"
-                  disabled={isPending}
-                  id="name"
-                  type="nickname"
-                  placeholder="닉네임"
-                  style={{
-                    fontSize: "20px",
-                  }}
-                  {...register("name", {
-                    required: true,
-                    validate: (value) => isValidSignValue(value, "name"),
-                  })}
-                />
-              </Manage.Content>
-            </Manage.Label>
+            <InputField
+              id="name"
+              label="닉네임"
+              type="name"
+              placeholder="닉네임"
+              register={register}
+              disabled={isPending}
+              autoComplete="off"
+              errors={errors}
+              validation={{
+                required: true,
+                validate: (value: string) => isValidSignValue(value, "name"),
+              }}
+            />
           </Manage.ContentArea>
 
           <Manage.ContentArea>
-            <Manage.Label className="flex w-full items-center justify-center">
-              <div
-                className={`w-20 text-center ${errors.password ? "text-red-500" : ""}`}
-              >
-                비밀번호
-              </div>
-              <Manage.Content className=" w-full ">
-                <TextInput
-                  autoComplete="new-password"
-                  disabled={isPending}
-                  placeholder="비밀번호"
-                  id="password"
-                  type="password"
-                  style={{
-                    fontSize: "20px",
-                  }}
-                  {...register("password", {
-                    required: true,
-                    validate: (value) => isValidSignValue(value, "password"),
-                  })}
-                />
-              </Manage.Content>
-            </Manage.Label>
+            <InputField
+              id="password"
+              label="비밀번호"
+              type="password"
+              placeholder="비밀번호"
+              register={register}
+              disabled={isPending}
+              autoComplete="new-password"
+              errors={errors}
+              validation={{
+                required: true,
+                validate: (value: string) =>
+                  isValidSignValue(value, "password"),
+              }}
+            />
           </Manage.ContentArea>
 
           <Manage.ContentArea>
-            <Manage.Label className="flex w-full items-center justify-center">
-              <div
-                className={`w-20 text-center ${errors.passwordConfirm ? "text-red-500" : ""}`}
-              >
-                비밀번호 확인
-              </div>
-              <Manage.Content className=" w-full">
-                <TextInput
-                  autoComplete="new-password"
-                  disabled={isPending}
-                  placeholder="비밀번호 확인"
-                  id="passwordConfirm"
-                  type="password"
-                  style={{
-                    fontSize: "20px",
-                  }}
-                  {...register("passwordConfirm", {
-                    required: true,
-                    validate: (value) => value === getValues().password,
-                  })}
-                />
-              </Manage.Content>
-            </Manage.Label>
+            <InputField
+              id="passwordConfirm"
+              label="비밀번호 확인"
+              type="password"
+              placeholder="비밀번호 확인"
+              register={register}
+              disabled={isPending}
+              autoComplete="off"
+              errors={errors}
+              validation={{
+                required: true,
+                validate: (value: string) => value === getValues().password,
+              }}
+            />
           </Manage.ContentArea>
 
           <Manage.ContentArea>
@@ -181,7 +122,7 @@ export default function SignUp() {
               <button
                 disabled={isPending}
                 type="button"
-                onClick={routeHandler}
+                onClick={routeToSignIn}
                 className="m-auto inline-block text-center  text-2xl hover:font-bold "
               >
                 로그인

@@ -78,8 +78,8 @@ export type signInType = {
 };
 
 export type signUpType = signInType & {
-  name: string;
-  passwordConfirm: string;
+  name?: string;
+  passwordConfirm?: string;
 };
 
 export interface ListItemType {
@@ -165,8 +165,4 @@ export interface ImageUploadProps extends Omit<EditInputProps, "error"> {
   itemImage: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   error: FieldError | undefined;
-  // error:
-  //   | FieldError
-  //   | undefined
-  //   | Merge<FieldError, FieldErrorsImpl<{ 0: File }>>;
 }

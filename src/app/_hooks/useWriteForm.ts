@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { usePreview } from "@/app/_hooks/usePreview";
 import { inputType } from "@/app/_types/type";
 import { IMAGE_MAX_SIZE } from "@/app/_constant/constant";
+import { useRouter } from "next/navigation";
 
 interface ItemProps {
   title: string;
@@ -27,6 +28,7 @@ export const useWriteForm = (item?: ItemProps) => {
   });
   const { preview, handlePreview, resetPreview } = usePreview();
   const [isSelectDisabled, setIsSelectDisabled] = useState(!!item?.tag);
+  const router = useRouter();
 
   function handleImageChange(e: ChangeEvent<HTMLInputElement>) {
     if (!e.target.files) return;
@@ -57,5 +59,6 @@ export const useWriteForm = (item?: ItemProps) => {
     isSelectDisabled,
     preview,
     handleImageChange,
+    router,
   };
 };

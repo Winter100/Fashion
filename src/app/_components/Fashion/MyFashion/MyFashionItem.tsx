@@ -18,11 +18,19 @@ const MyFashionItem = memo(function MyFashionItem({
 
   return (
     <>
-      <p className=" relative h-full w-full ">
-        <Link href={`/detail/${tag}/${id}`}>
-          <Image src={image} alt={title} fill className="object-contain" />
-        </Link>
-      </p>
+      <div className=" h-full w-full ">
+        <div className="relative flex h-full items-center justify-center">
+          <Link href={`/detail/${tag}/${id}`}>
+            <Image
+              src={image}
+              alt={title}
+              fill
+              className=" h-full w-full object-contain"
+              priority
+            />
+          </Link>
+        </div>
+      </div>
       <p>{title}</p>
       <p>{convertToKST(created_at, false)}</p>
       <p>{convertToTag(tag)}</p>
