@@ -13,7 +13,7 @@ export default function TopGnb() {
 
         <div className="flex items-center md:hidden">
           <CalendarFilter />
-          <Search />
+          <Search id="mobileSearch" />
           <MobileMenu />
         </div>
       </div>

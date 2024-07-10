@@ -1,30 +1,22 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { Spinner } from "flowbite-react";
 
 import Manage from "../Manage/Manage";
-
 import { useReadMyFashionList } from "@/app/_hooks/useFashion";
 import { MyFashionListType } from "@/app/_types/type";
 import { tagCount } from "@/app/_utils/tagCount";
-import { removeFilteredValueForLocalStorage } from "@/app/_utils/localstorage";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
 
 export default function RecordInfo() {
-  const router = useRouter();
-  const { data, isLoading } = useReadMyFashionList<MyFashionListType>();
+  const { data, isLoading, handleRoute } =
+    useReadMyFashionList<MyFashionListType>();
 
   if (isLoading || !data) {
     return <LoadingSpinner />;
   }
 
   const { todayCount, tomorrowCount, thisCount, totalCount } = tagCount(data);
-
-  function handleRoute() {
-    router.push("/mypage/list");
-    removeFilteredValueForLocalStorage();
-  }
 
   return (
     <Manage className="mt-12">

@@ -2,7 +2,6 @@
 import { Spinner } from "flowbite-react";
 
 import Manage from "../Manage/Manage";
-
 import { useUser } from "@/app/_hooks/useAuth";
 
 export default function UserInfo() {

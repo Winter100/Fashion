@@ -16,5 +16,5 @@ export default function useReadFashionList() {
     queryFn: () => readFashionListApi(tag, page, validStart, validEnd),
   });
 
-  return { data, isLoading, isError, error };
+  return { data, isLoading, isError, error, validStart, validEnd };
 }

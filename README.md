@@ -80,10 +80,9 @@ NEXT_PUBLIC_SUPABASE_KEY = 본인의 Supbase Key가 필요합니다.
 <details>
 <summary>프로젝트 구조</summary>
 
-```
+```bash
 fashion
 ├─ .eslintrc.json
-├─ .git
 ├─ .gitignore
 ├─ .prettierrc.json
 ├─ next.config.js
@@ -161,6 +160,7 @@ fashion
 │     │  └─ supabase.ts
 │     ├─ _components
 │     │  ├─ Auth
+│     │  │  ├─ InputField.tsx
 │     │  │  ├─ SignIn.tsx
 │     │  │  └─ SignUp.tsx
 │     │  ├─ Button
@@ -182,11 +182,18 @@ fashion
 │     │  │  └─ AlertWrapper.tsx
 │     │  ├─ Fashion
 │     │  │  ├─ Detail
+│     │  │  │  ├─ ContentSection.tsx
 │     │  │  │  ├─ Detail.tsx
-│     │  │  │  └─ DetailItem.tsx
+│     │  │  │  ├─ DetailItem.tsx
+│     │  │  │  ├─ ImageSection.tsx
+│     │  │  │  └─ LabelContent.tsx
 │     │  │  ├─ Edit
+│     │  │  │  ├─ ContentTextarea.tsx
 │     │  │  │  ├─ Edit.tsx
-│     │  │  │  └─ EditBtn.tsx
+│     │  │  │  ├─ ImageUpload.tsx
+│     │  │  │  ├─ SubmitButtons.tsx
+│     │  │  │  ├─ TagSelect.tsx
+│     │  │  │  └─ TitleInput.tsx
 │     │  │  ├─ Fashion
 │     │  │  │  ├─ FashionItem.tsx
 │     │  │  │  ├─ FashionList.tsx
@@ -256,13 +263,15 @@ fashion
 │     │  │  ├─ useReadFashionList.ts
 │     │  │  ├─ useReadMyFashionList.ts
 │     │  │  ├─ useReadSearch.ts
+│     │  │  ├─ useSearch.ts
 │     │  │  └─ useUpdate.ts
 │     │  ├─ useFashion.ts
 │     │  ├─ useLoading.ts
 │     │  ├─ useLocalStorageState.ts
 │     │  ├─ usePreview.ts
 │     │  ├─ useQueryString.ts
-│     │  └─ useRouteChange.ts
+│     │  ├─ useRouteChange.ts
+│     │  └─ useWriteForm.ts
 │     ├─ _layouts
 │     │  ├─ HomeLayout.tsx
 │     │  └─ Protected

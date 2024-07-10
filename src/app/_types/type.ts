@@ -1,7 +1,8 @@
-import { ChangeEventHandler, FormEvent } from "react";
+import { ChangeEvent, ChangeEventHandler, FormEvent } from "react";
 
 import { User } from "@supabase/supabase-js";
 import { Comment } from "../_utils/buildCommentsTree";
+import { FieldError, UseFormRegister } from "react-hook-form";
 
 export interface inputType {
   title: string;
@@ -77,8 +78,8 @@ export type signInType = {
 };
 
 export type signUpType = signInType & {
-  name: string;
-  passwordConfirm: string;
+  name?: string;
+  passwordConfirm?: string;
 };
 
 export interface ListItemType {
@@ -151,4 +152,17 @@ export interface DeletePropsType {
     | "yellow";
   size: "xs" | "sm" | "md" | "lg" | "xl";
   disabled?: boolean;
+}
+
+export interface EditInputProps {
+  register: UseFormRegister<inputType>;
+  error: FieldError | undefined;
+  disabled: boolean;
+}
+
+export interface ImageUploadProps extends Omit<EditInputProps, "error"> {
+  preview: string;
+  itemImage: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  error: FieldError | undefined;
 }

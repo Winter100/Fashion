@@ -1,54 +1,15 @@
 "use client";
 
-import { FormEvent } from "react";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { Button, Spinner, TextInput } from "flowbite-react";
+import { Button, Spinner } from "flowbite-react";
 
 import Manage from "../Manage/Manage";
-import { useUserContextData } from "@/app/_provider/UserContextProvider";
-import { signInType } from "@/app/_types/type";
+import InputField from "./InputField";
 import { useSignIn } from "@/app/_hooks/useAuth";
 import { isValidSignValue } from "@/app/_utils/isValid";
 
 export default function SignIn() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setError,
-  } = useForm<signInType>({
-    defaultValues: {
-      email: "test@test.com",
-      password: "test1234",
-    },
-  });
-
-  const { login, isPending } = useSignIn();
-  const { setLoginData } = useUserContextData();
-
-  const router = useRouter();
-
-  function onSubmit(value: signInType) {
-    const { email, password } = value;
-
-    login(
-      { email, password },
-      {
-        onError: (e) => {
-          setError("root", { message: e.message });
-        },
-        onSuccess: (e) => {
-          setLoginData(e?.user);
-        },
-      },
-    );
-  }
-
-  function routeHandler(e: FormEvent) {
-    e.preventDefault();
-    router.push("/auth/signup");
-  }
+  const { isPending, routeToSignUp, errors, handleSubmit, onSubmit, register } =
+    useSignIn();
 
   return (
     <form
@@ -65,54 +26,38 @@ export default function SignIn() {
 
         <Manage.ContentWrapper className="my-4 flex gap-4 text-xl">
           <Manage.ContentArea>
-            <Manage.Label className="flex w-full items-center justify-center">
-              <div
-                className={`w-20 text-center ${errors.email ? "text-red-500" : ""}`}
-              >
-                이메일
-              </div>
-              <Manage.Content className=" w-full">
-                <TextInput
-                  style={{ fontSize: "20px" }}
-                  disabled={isPending}
-                  autoFocus
-                  id="email"
-                  type="email"
-                  autoComplete="off"
-                  placeholder="이메일"
-                  {...register("email", {
-                    required: true,
-                    validate: (value) => isValidSignValue(value, "email"),
-                  })}
-                />
-              </Manage.Content>
-            </Manage.Label>
+            <InputField
+              register={register}
+              id="email"
+              placeholder="이메일"
+              label="이메일"
+              errors={errors}
+              disabled={isPending}
+              type="email"
+              autoComplete="off"
+              validation={{
+                required: true,
+                validate: (value: string) => isValidSignValue(value, "email"),
+              }}
+            />
           </Manage.ContentArea>
 
           <Manage.ContentArea>
-            <Manage.Label className="flex w-full items-center justify-center">
-              <div
-                className={`w-20 text-center ${errors.password ? "text-red-500" : ""}`}
-              >
-                비밀번호
-              </div>
-              <Manage.Content className=" w-full">
-                <TextInput
-                  disabled={isPending}
-                  autoComplete="off"
-                  id="password"
-                  type="password"
-                  placeholder="비밀번호"
-                  style={{
-                    fontSize: "20px",
-                  }}
-                  {...register("password", {
-                    required: true,
-                    validate: (value) => isValidSignValue(value, "password"),
-                  })}
-                />
-              </Manage.Content>
-            </Manage.Label>
+            <InputField
+              register={register}
+              id="password"
+              placeholder="비밀번호"
+              label="비밀번호"
+              errors={errors}
+              disabled={isPending}
+              type="password"
+              autoComplete="current-password"
+              validation={{
+                required: true,
+                validate: (value: string) =>
+                  isValidSignValue(value, "password"),
+              }}
+            />
           </Manage.ContentArea>
 
           <Manage.ContentArea>
@@ -136,7 +81,7 @@ export default function SignIn() {
               <button
                 disabled={isPending}
                 type="button"
-                onClick={routeHandler}
+                onClick={routeToSignUp}
                 className=" m-auto w-20 text-center text-2xl hover:font-bold "
               >
                 회원가입

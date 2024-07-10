@@ -13,8 +13,8 @@ export default function SearchFashionList() {
     isLoading,
     isError,
     error,
+    q,
   } = useReadSearch<ListItemType>();
-  const { q } = useQueryString();
 
   if (isLoading) return <LoadingSpinner />;
 
