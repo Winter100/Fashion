@@ -2,11 +2,11 @@
 
 import { Spinner } from "flowbite-react";
 
-import Manage from "../Manage/Manage";
+import Manage from "../Common/Manage/Manage";
+import LoadingSpinner from "../Common/LoadingSpinner";
 import { useReadMyFashionList } from "@/app/_hooks/useFashion";
+import { tagCount } from "@/app/_lib/utils/tagCount";
 import { MyFashionListType } from "@/app/_types/type";
-import { tagCount } from "@/app/_utils/tagCount";
-import LoadingSpinner from "../Spinner/LoadingSpinner";
 
 export default function RecordInfo() {
   const { data, isLoading, handleRoute } =

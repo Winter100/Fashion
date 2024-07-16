@@ -1,14 +1,13 @@
 "use client";
 
-import LoadingSpinner from "@/app/_components/Spinner/LoadingSpinner";
-import AlertWrapper from "@/app/_components/Error/AlertWrapper";
 import DetailItem from "@/app/_components/Fashion/Detail/DetailItem";
-
-import CommentEntry from "@/app/_components/Comment/CommentEntry";
 import { useReadDetail } from "@/app/_hooks/useFashion";
-import BackButton from "@/app/_components/Button/BackButton";
-import { setFashionRoute } from "@/app/_utils/setFashionRoute";
 import { TAG_NAME } from "@/app/_constant/constant";
+import LoadingSpinner from "../../Common/LoadingSpinner";
+import AlertWrapper from "../../Common/AlertWrapper";
+import BackButton from "../../Common/BackButton";
+import { setFashionRoute } from "@/app/_lib/utils/setFashionRoute";
+import CommentEntry from "../../Comments/CommentEntry";
 
 export default function Detail() {
   const { isLoading, data, isError, error, router } = useReadDetail();

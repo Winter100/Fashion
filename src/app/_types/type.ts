@@ -1,8 +1,7 @@
 import { ChangeEvent, ChangeEventHandler, FormEvent } from "react";
-
 import { User } from "@supabase/supabase-js";
-import { Comment } from "../_utils/buildCommentsTree";
 import { FieldError, UseFormRegister } from "react-hook-form";
+import { Comment } from "../_lib/utils/buildCommentsTree";
 
 export interface inputType {
   title: string;

@@ -1,7 +1,8 @@
-import PcMenu from "./PcMenu";
-import MobileMenu from "./MobileMenu";
-import Search from "./Search";
+import PcMenu from "../Menu/PcMenu";
+
 import { CalendarFilter } from "../Modal/ModalCalendar";
+import Search from "../Common/Search";
+import MobileMenu from "../Menu/MobileMenu";
 
 export default function TopGnb() {
   return (

@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { AUTH_KEY } from "@/app/_constant/constant";
-import { getUserApi } from "@/app/_api/authApi";
+import { getUser as getUserLib } from "@/app/_lib/supabase/auth";
 
 export default function useUser() {
   const { data: user, isLoading } = useQuery({
     queryKey: [AUTH_KEY],
-    queryFn: getUserApi,
+    queryFn: getUserLib,
     staleTime: Infinity,
   });
 

@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 
-import { readFashionApi } from "@/app/_api/fashionApi";
+import generateImageMetadata from "@/app/_lib/utils/generateImageMetadata";
 import Detail from "@/app/_components/Fashion/Detail/Detail";
 import { META_DATA } from "@/app/_constant/constant";
-import generateImageMetadata from "@/app/_utils/generateImageMetadata";
-import { getMetaData } from "@/app/_utils/metadata";
+import { readFashion } from "@/app/_lib/supabase/fashion";
+import { getMetaData } from "@/app/_lib/utils/metadata";
 
 type Props = {
   params: { tag: string; id: string };
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const { tag, id } = params;
 
-    const detailData = await readFashionApi(id, tag);
+    const detailData = await readFashion(id, tag);
     const { title, image, content, user } = detailData;
 
     const titleMetaData = title ?? META_DATA.title;

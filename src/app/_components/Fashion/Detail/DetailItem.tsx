@@ -1,5 +1,4 @@
 import { DetailType } from "@/app/_types/type";
-
 import ImageSection from "./ImageSection";
 import ContentSection from "./ContentSection";
 

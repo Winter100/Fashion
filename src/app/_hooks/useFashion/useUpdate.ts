@@ -1,13 +1,13 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+import imgCompression from "@/app/_lib/utils/imgCompression";
+import { updateFashion as updateFashionLib } from "@/app/_lib/supabase/fashion";
 import { IMAGE_MAX_SIZE, TAG_NAME } from "@/app/_constant/constant";
 import { inputType, UpdateDataFn } from "@/app/_types/type";
-import { setFashionRoute } from "@/app/_utils/setFashionRoute";
-import { updateFashionApi } from "@/app/_api/fashionApi";
 import { useLoading } from "../useLoading";
-import imgCompression from "@/app/_utils/imgCompression";
+import { setFashionRoute } from "@/app/_lib/utils/setFashionRoute";
 
 export default function useUpdate() {
   const { tag, id } = useParams<{ tag: string; id: string }>();
@@ -19,7 +19,7 @@ export default function useUpdate() {
 
   const { mutate: updateFashion } = useMutation({
     mutationFn: ({ title, content, image }: UpdateDataFn) =>
-      updateFashionApi({ title, content, tag, image, id }),
+      updateFashionLib({ title, content, tag, image, id }),
     onSuccess: () => {
       toast.success("수정이 완료되었습니다.");
       queryClient.invalidateQueries();

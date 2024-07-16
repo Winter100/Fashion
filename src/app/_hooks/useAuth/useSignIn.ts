@@ -1,15 +1,15 @@
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { signInApi } from "@/app/_api/authApi";
-import { AUTH_KEY, TAG_NAME } from "@/app/_constant/constant";
-import { setFashionRoute } from "@/app/_utils/setFashionRoute";
-import { useQueryString } from "../useQueryString";
-import { signInType } from "@/app/_types/type";
+import { signIn as signInLib } from "@/app/_lib/supabase/auth";
 import { useUserContextData } from "@/app/_provider/UserContextProvider";
+import { useQueryString } from "../useQueryString";
+import { AUTH_KEY, TAG_NAME } from "@/app/_constant/constant";
+import { setFashionRoute } from "@/app/_lib/utils/setFashionRoute";
+import { signInType } from "@/app/_types/type";
 
 const DEFAULT_VALUES = {
   email: "test@test.com",
@@ -31,9 +31,9 @@ export default function useSignIn() {
     defaultValues: DEFAULT_VALUES,
   });
 
-  const { mutate: login, isPending } = useMutation({
+  const { mutate: signIn, isPending } = useMutation({
     mutationFn: ({ email, password }: signInType) =>
-      signInApi({ email, password }),
+      signInLib({ email, password }),
     onSuccess: (user) => {
       queryClient.setQueryData([AUTH_KEY], user?.user);
       toast.success(`반갑습니다! ${user.user.user_metadata?.name || " "} 님`);
@@ -50,7 +50,7 @@ export default function useSignIn() {
   });
 
   function onSubmit(value: signInType) {
-    login(value, {
+    signIn(value, {
       onError: (e) => {
         setError("root", { message: e.message });
       },

@@ -1,6 +1,6 @@
-import { convertToKST } from "@/app/_utils/convertToKST";
-import Manage from "../../Manage/Manage";
+import Manage from "../../Common/Manage/Manage";
 import LabelContent from "./LabelContent";
+import { convertToKST } from "@/app/_lib/utils/convertToKST";
 import { DetailType } from "@/app/_types/type";
 
 type ContentSectionProps = Omit<DetailType, "image">;

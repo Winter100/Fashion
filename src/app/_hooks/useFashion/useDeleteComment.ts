@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+import { deleteComment as deleteCommentLib } from "@/app/_lib/supabase/fashion";
 import { useLoading } from "../useLoading";
-import { deleteCommentApi } from "@/app/_api/fashionApi";
 
 export default function useDeleteComment() {
   const queryClient = useQueryClient();
@@ -10,7 +10,7 @@ export default function useDeleteComment() {
 
   const { mutate: deleteComment } = useMutation({
     mutationFn: ({ id, tag }: { id: string; tag: string }) =>
-      deleteCommentApi(id, tag),
+      deleteCommentLib(id, tag),
     onSuccess: () => {
       toast.success("댓글이 삭제 됐습니다!");
       queryClient.invalidateQueries({ queryKey: ["comments"] });

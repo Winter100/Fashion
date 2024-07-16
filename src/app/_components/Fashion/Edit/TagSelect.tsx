@@ -1,10 +1,10 @@
 import React from "react";
 import { Select } from "flowbite-react";
 
-import Manage from "../../Manage/Manage";
+import Manage from "../../Common/Manage/Manage";
 import { TAG_NAME } from "@/app/_constant/constant";
-import { convertToTag } from "@/app/_utils/convertToTag";
 import { EditInputProps } from "@/app/_types/type";
+import { convertToTag } from "@/app/_lib/utils/convertToTag";
 
 export default function TagSelect({
   register,

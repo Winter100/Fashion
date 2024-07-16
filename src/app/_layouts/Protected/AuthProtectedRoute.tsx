@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 import { useUser } from "@/app/_hooks/useAuth";
-import LoadingSpinner from "@/app/_components/Spinner/LoadingSpinner";
+import LoadingSpinner from "@/app/_components/Common/LoadingSpinner";
 
 // 비로그인시 들어올 수 없는 페이지 (글쓰기, 수정, 마이페이지)
 export default function AuthProtectedRoute({

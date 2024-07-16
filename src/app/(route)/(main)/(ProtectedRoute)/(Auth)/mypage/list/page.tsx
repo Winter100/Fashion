@@ -1,54 +1,20 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-
-import { DeleteListType } from "@/app/_types/type";
-import {
-  getFilteredValueForLocalStorage,
-  setFilterValueForLocalStorage,
-} from "@/app/_utils/localstorage";
+import { useDelete } from "@/app/_hooks/useFashion";
 import MyFashionListTitle from "@/app/_components/Fashion/MyFashion/MyFashionListTitle";
 import MyFashionList from "@/app/_components/Fashion/MyFashion/MyFashionList";
-import { useDelete } from "@/app/_hooks/useFashion";
 
 export default function Page() {
-  const { deleteFashion, isLoading, setLoading } = useDelete();
-  const [checkedIds, setCheckedIds] = useState<DeleteListType[]>([]);
-  const [tagFilter, setTagFilter] = useState(
-    () => getFilteredValueForLocalStorage("tagFilter") || "all",
-  );
-  const [dateFilter, setDateFilter] = useState(
-    () => getFilteredValueForLocalStorage("dateFilter") || "down",
-  );
-
-  const handleCheck = useCallback((id: string, tag: string) => {
-    setCheckedIds((prevCheckedIds) => {
-      const isAlreadyChecked = prevCheckedIds.some((item) => item.id === id);
-      if (isAlreadyChecked) {
-        return prevCheckedIds.filter((item) => item.id !== id);
-      } else {
-        return [...prevCheckedIds, { id, tag }];
-      }
-    });
-  }, []);
-
-  function handleDelete() {
-    setLoading(true);
-    deleteFashion(checkedIds, {
-      onSuccess: () => {
-        setCheckedIds([]);
-        setLoading(false);
-      },
-    });
-  }
-
-  useEffect(() => {
-    setFilterValueForLocalStorage("tagFilter", tagFilter);
-  }, [tagFilter]);
-
-  useEffect(() => {
-    setFilterValueForLocalStorage("dateFilter", dateFilter);
-  }, [dateFilter]);
+  const {
+    isLoading,
+    handleCheck,
+    handleDelete,
+    setDateFilter,
+    setTagFilter,
+    dateFilter,
+    tagFilter,
+    checkedIds,
+  } = useDelete();
 
   return (
     <div className="flex h-full cursor-default flex-col">

@@ -2,9 +2,9 @@
 
 import { Spinner } from "flowbite-react";
 
-import Manage from "../Manage/Manage";
 import { useUser } from "@/app/_hooks/useAuth";
-import { convertToKST } from "@/app/_utils/convertToKST";
+import { convertToKST } from "@/app/_lib/utils/convertToKST";
+import Manage from "../Common/Manage/Manage";
 
 export default function LoginInfo() {
   const { user, isLoading } = useUser();

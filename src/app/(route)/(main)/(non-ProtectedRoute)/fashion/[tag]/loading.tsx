@@ -1,4 +1,4 @@
-import FashionSkleton from "@/app/_components/Skeleton/FashionSkleton";
+import FashionSkleton from "@/app/_components/Common/FashionSkleton";
 
 export default function Loading() {
   return (
