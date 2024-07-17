@@ -4,9 +4,9 @@ import {
   dehydrate,
 } from "@tanstack/react-query";
 
-import Paginations from "@/app/_components/Pagination/Pagination";
-import SearchFashionList from "@/app/_components/Fashion/SearchFashion/SearchFashionList";
-import { readSearchFashionApi } from "@/app/_api/fashionApi";
+import { readSearchFashion } from "@/app/_lib/supabase/fashion";
+import SearchFashionList from "@/app/_components/Fashion/FashionList/SearchFashion/SearchFashionList";
+import Paginations from "@/app/_components/Common/Pagination";
 
 export default async function Page({
   searchParams,
@@ -24,7 +24,7 @@ export default async function Page({
 
   await queryClient.prefetchQuery({
     queryKey: ["search", page, q],
-    queryFn: () => readSearchFashionApi(q),
+    queryFn: () => readSearchFashion(q),
   });
 
   return (

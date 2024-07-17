@@ -1,8 +1,8 @@
 import React from "react";
 import { Textarea } from "flowbite-react";
 
+import Manage from "../../Common/Manage/Manage";
 import { EditInputProps } from "@/app/_types/type";
-import Manage from "../../Manage/Manage";
 
 export default function ContentTextarea({
   register,

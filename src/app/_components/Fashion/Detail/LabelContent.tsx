@@ -1,5 +1,6 @@
 import { ComponentProps } from "react";
-import Manage from "../../Manage/Manage";
+
+import Manage from "../../Common/Manage/Manage";
 
 type LabelContentProps = ComponentProps<"div"> & {
   label: string;

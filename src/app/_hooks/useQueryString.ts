@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
-import { setDateFormat, isValidDateFormat } from "../_utils/dateFn";
+import { isValidDateFormat, setDateFormat } from "../_lib/utils/dateFn";
 
 export function useQueryString() {
   const searchParams = useSearchParams();

@@ -4,8 +4,8 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-import { signUpApi } from "@/app/_api/authApi";
-import { removeUserDataForLocalSotarge } from "@/app/_utils/localstorage";
+import { signUp as signUpLib } from "@/app/_lib/supabase/auth";
+import { removeUserDataForLocalSotarge } from "@/app/_lib/utils/localstorage";
 import { signUpType } from "@/app/_types/type";
 
 export default function useSignUp() {
@@ -28,7 +28,7 @@ export default function useSignUp() {
       email: string;
       password: string;
       name: string;
-    }) => signUpApi({ email, password, name }),
+    }) => signUpLib({ email, password, name }),
     onSuccess: (user) => {
       toast.success("회원가입이 완료되었습니다.");
       removeUserDataForLocalSotarge();

@@ -1,14 +1,14 @@
 "use client";
+
 import React, { memo } from "react";
 import Link from "next/link";
-import Image from "next/image";
-
 import { Checkbox } from "flowbite-react";
 import { CiEdit } from "react-icons/ci";
 
-import { convertToKST } from "@/app/_utils/convertToKST";
-import { convertToTag } from "@/app/_utils/convertToTag";
+import { convertToKST } from "@/app/_lib/utils/convertToKST";
+import { convertToTag } from "@/app/_lib/utils/convertToTag";
 import { MyItemType } from "@/app/_types/type";
+import FashionImage from "../../Common/FashionImage";
 
 const MyFashionItem = memo(function MyFashionItem({
   item,
@@ -21,13 +21,7 @@ const MyFashionItem = memo(function MyFashionItem({
       <div className=" h-full w-full ">
         <div className="relative flex h-full items-center justify-center">
           <Link href={`/detail/${tag}/${id}`}>
-            <Image
-              src={image}
-              alt={title}
-              fill
-              className=" h-full w-full object-contain"
-              priority
-            />
+            <FashionImage className=" object-cover" src={image} alt={title} />
           </Link>
         </div>
       </div>

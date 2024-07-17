@@ -1,18 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import useUser from "../useAuth/useUser";
-
-import { readMyFashionListApi } from "@/app/_api/fashionApi";
 import { useRouter } from "next/navigation";
-import { removeFilteredValueForLocalStorage } from "@/app/_utils/localstorage";
+
+import useUser from "../useAuth/useUser";
+import { readMyFashionList as readMyFashionListLib } from "@/app/_lib/supabase/fashion";
+import { removeFilteredValueForLocalStorage } from "@/app/_lib/utils/localstorage";
 
 export default function useReadMyFashionList<T>() {
   const { user } = useUser();
-
   const router = useRouter();
 
   const { data, isLoading, isError } = useQuery<T[]>({
     queryKey: ["MyItemList"],
-    queryFn: () => readMyFashionListApi(user?.user_metadata.name),
+    queryFn: () => readMyFashionListLib(user?.user_metadata.name),
     staleTime: Infinity,
   });
 

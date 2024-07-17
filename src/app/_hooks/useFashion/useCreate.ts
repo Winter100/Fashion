@@ -1,14 +1,14 @@
 import { useRouter } from "next/navigation";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { inputType, PostData } from "@/app/_types/type";
-import { setFashionRoute } from "@/app/_utils/setFashionRoute";
-import { TAG_NAME } from "@/app/_constant/constant";
-import { createFashionApi } from "@/app/_api/fashionApi";
+import { createFashion as createFashionLib } from "@/app/_lib/supabase/fashion";
+import imgCompression from "@/app/_lib/utils/imgCompression";
 import { useLoading } from "../useLoading";
 import { useUser } from "../useAuth";
-import imgCompression from "@/app/_utils/imgCompression";
+import { setFashionRoute } from "@/app/_lib/utils/setFashionRoute";
+import { TAG_NAME } from "@/app/_constant/constant";
+import { inputType, PostData } from "@/app/_types/type";
 
 export default function useCreate() {
   const router = useRouter();
@@ -19,7 +19,7 @@ export default function useCreate() {
 
   const { mutate: createFashion } = useMutation({
     mutationFn: ({ user, title, content, tag, image }: PostData) =>
-      createFashionApi({ user, title, content, tag, image }),
+      createFashionLib({ user, title, content, tag, image }),
     onSuccess: (tag) => {
       toast.success("패션을 기록했습니다!");
       queryClient.invalidateQueries();

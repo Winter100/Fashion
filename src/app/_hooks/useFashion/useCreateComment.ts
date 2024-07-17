@@ -1,9 +1,9 @@
 import { useParams } from "next/navigation";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-
 import { User } from "@supabase/supabase-js";
-import { createCommentApi } from "@/app/_api/fashionApi";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import { createComment as createCommentLib } from "@/app/_lib/supabase/fashion";
 
 export default function useCreateComment() {
   const queryClient = useQueryClient();
@@ -18,7 +18,7 @@ export default function useCreateComment() {
       user: User;
       content: string;
       parent_id: string | null;
-    }) => createCommentApi({ user, tag, content, fashionId, parent_id }),
+    }) => createCommentLib({ user, tag, content, fashionId, parent_id }),
     onSuccess: () => {
       toast.success("댓글을 기록했습니다!");
       queryClient.invalidateQueries({ queryKey: ["comments"] });

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Button, Modal } from "flowbite-react";
 import { FaRegCalendarAlt } from "react-icons/fa";
 
-import MainCalendar from "../Calendar/MainCalendar";
+import MainCalendar from "../Common/MainCalendar";
 
 export function CalendarFilter() {
   const [openModal, setOpenModal] = useState(false);

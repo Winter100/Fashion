@@ -1,7 +1,7 @@
 "use client";
 
-import Write from "@/app/_components/Fashion/Edit/Edit";
 import { useCreate } from "@/app/_hooks/useFashion";
+import Write from "@/app/_components/Fashion/Edit/Edit";
 
 export default function Page() {
   const { onSubmit, submitLoading } = useCreate();

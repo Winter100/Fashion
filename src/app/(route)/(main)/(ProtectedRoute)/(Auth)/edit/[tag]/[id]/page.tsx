@@ -1,8 +1,8 @@
 "use client";
 
-import Edit from "@/app/_components/Fashion/Edit/Edit";
-import LoadingSpinner from "@/app/_components/Spinner/LoadingSpinner";
 import { useReadFashionEditData, useUpdate } from "@/app/_hooks/useFashion";
+import LoadingSpinner from "@/app/_components/Common/LoadingSpinner";
+import Edit from "@/app/_components/Fashion/Edit/Edit";
 
 export default function Page() {
   const { onSubmit, submitLoading } = useUpdate();

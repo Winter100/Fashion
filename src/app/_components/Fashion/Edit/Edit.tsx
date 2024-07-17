@@ -1,15 +1,15 @@
 "use client";
 
-import Manage from "../../Manage/Manage";
+import { FieldError } from "react-hook-form";
+
+import Manage from "../../Common/Manage/Manage";
 import ImageUpload from "./ImageUpload";
 import TitleInput from "./TitleInput";
 import TagSelect from "./TagSelect";
 import ContentTextarea from "./ContentTextarea";
 import SubmitButtons from "./SubmitButtons";
-
-import { useWriteForm } from "@/app/_hooks/useWriteForm";
+import useWriteForm from "@/app/_hooks/useWriteForm";
 import { inputType } from "@/app/_types/type";
-import { FieldError } from "react-hook-form";
 
 interface WriteProps {
   onSubmit: (value: inputType) => void;

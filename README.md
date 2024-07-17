@@ -21,29 +21,28 @@ git clone https://github.com/Winter100/Fashion.git
 2. 필요한 패키지를 설치합니다.
 
 ```bash
-npm install
-```
-
-```bash
 yarn
 ```
 
-3. 프로젝트를 실행합니다.
+3. 프로젝트를 빌드합니다.
 
 ```bash
-npm run dev
+yarn build
 ```
 
+4. 프로젝트를 실행합니다.
+
 ```bash
-yarn run dev
+yarn start
 ```
 
-4. 환경변수 설정
+5. 환경변수 설정
+
+- 로컬에서 실행하기 위해서는 Supabase의 Key가 필요합니다.
+- 최상위 디렉토리에 .env.local을 생성후 키를 입력합니다.
 
 ```bash
-# 로컬에서 실행하기 위해서는 Supabase의 Key가 필요합니다.
-# 최상위 디렉토리에 .env.local을 생성후 키를 입력합니다.
-
+# .env.local
 NEXT_PUBLIC_SUPABASE_KEY = 본인의 Supbase Key가 필요합니다.
 ```
 
@@ -53,24 +52,18 @@ NEXT_PUBLIC_SUPABASE_KEY = 본인의 Supbase Key가 필요합니다.
 
 ## 프로젝트 소개
 
-혼자 만든 프로젝트이며, 오늘 하루 입었던 패션을 기록하고 다른 사람에게 자랑하는 사이트 입니다.
+개인 프로젝트이며, 오늘 하루 입었던 패션을 기록하고 다른 사람에게 자랑하는 웹사이트 입니다.
 
 1. 프로젝트 이름: <b>이 옷 어때?</b>
 2. 프로젝트 기간: <b>2024/05/01 ~ 2024/06/11</b>
 3. 기술스택
 
-![react](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![next.js](<https://img.shields.io/badge/Next.js(app)-000?logo=nextdotjs&logoColor=fff&style=for-the-badge>)
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-
 ![tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![react-calendar](https://img.shields.io/badge/react_calendar-01?logo=react-calendar&logoColor=fff&style=for-the-badge)
-![react-toastify](https://img.shields.io/badge/react_toastify-002?logo=react-toastify&logoColor=fff&style=for-the-badge)
-![react-icons](https://img.shields.io/badge/react_icons-000?logo=react-icons&logoColor=fff&style=for-the-badge)
 
 ![React-hook-form](https://img.shields.io/badge/React_hook_form-007ACC?style=for-the-badge&logo=react-hook-form&logoColor=white)
 ![tanstack-query](https://img.shields.io/badge/tanstack_query-005?logo=tanstack_query&logoColor=fff&style=for-the-badge)
-
 ![Supabase](https://img.shields.io/badge/Supabase-181818?style=for-the-badge&logo=supabase&logoColor=white)
 
 <hr>
@@ -80,13 +73,12 @@ NEXT_PUBLIC_SUPABASE_KEY = 본인의 Supbase Key가 필요합니다.
 <details>
 <summary>프로젝트 구조</summary>
 
-```bash
+```
 fashion
 ├─ .eslintrc.json
 ├─ .gitignore
 ├─ .prettierrc.json
 ├─ next.config.js
-├─ package-lock.json
 ├─ package.json
 ├─ postcss.config.js
 ├─ public
@@ -137,49 +129,46 @@ fashion
 │     ├─ globals.css
 │     ├─ icon.ico
 │     ├─ layout.tsx
-│     ├─ _api
-│     │  ├─ auth
-│     │  │  ├─ getUser.ts
-│     │  │  ├─ signIn.ts
-│     │  │  ├─ signOut.ts
-│     │  │  └─ signUp.ts
-│     │  ├─ authApi.ts
-│     │  ├─ fashion
-│     │  │  ├─ createComment.ts
-│     │  │  ├─ createFashion.ts
-│     │  │  ├─ deleteComment.ts
-│     │  │  ├─ deleteFashion.ts
-│     │  │  ├─ readComments.ts
-│     │  │  ├─ readFashion.ts
-│     │  │  ├─ readFashionEditData.ts
-│     │  │  ├─ readFashionList.ts
-│     │  │  ├─ readMyFashionList.ts
-│     │  │  ├─ readSearchFashion.ts
-│     │  │  └─ updateFashion.ts
-│     │  ├─ fashionApi.ts
-│     │  └─ supabase.ts
 │     ├─ _components
 │     │  ├─ Auth
-│     │  │  ├─ InputField.tsx
 │     │  │  ├─ SignIn.tsx
 │     │  │  └─ SignUp.tsx
-│     │  ├─ Button
+│     │  ├─ Comments
+│     │  │  ├─ CommentEntry.tsx
+│     │  │  ├─ CommentList.tsx
+│     │  │  ├─ CommentView.tsx
+│     │  │  └─ CommentWrite.tsx
+│     │  ├─ Common
+│     │  │  ├─ AlertWrapper.tsx
+│     │  │  ├─ AuthMenu.tsx
 │     │  │  ├─ BackButton.tsx
-│     │  │  └─ DarkModeToggleBtn.tsx
-│     │  ├─ Calendar
-│     │  │  └─ MainCalendar.tsx
-│     │  ├─ Comment
 │     │  │  ├─ Comment
 │     │  │  │  ├─ Comment.tsx
 │     │  │  │  ├─ CommentContent.tsx
 │     │  │  │  ├─ CommentHeader.tsx
 │     │  │  │  └─ CommentTitle.tsx
-│     │  │  ├─ CommentEntry.tsx
-│     │  │  ├─ CommentList.tsx
-│     │  │  ├─ CommentView.tsx
-│     │  │  └─ CommentWrite.tsx
-│     │  ├─ Error
-│     │  │  └─ AlertWrapper.tsx
+│     │  │  ├─ DarkModeToggleBtn.tsx
+│     │  │  ├─ FashionSkleton.tsx
+│     │  │  ├─ InputField.tsx
+│     │  │  ├─ Item
+│     │  │  │  ├─ Item.tsx
+│     │  │  │  ├─ ItemBody.tsx
+│     │  │  │  ├─ ItemImage.tsx
+│     │  │  │  └─ ItemSubTitle.tsx
+│     │  │  ├─ LoadingSpinner.tsx
+│     │  │  ├─ MainCalendar.tsx
+│     │  │  ├─ Manage
+│     │  │  │  ├─ Manage.tsx
+│     │  │  │  ├─ ManageContent.tsx
+│     │  │  │  ├─ ManageContentArea.tsx
+│     │  │  │  ├─ ManageContentWrapper.tsx
+│     │  │  │  ├─ ManageDescription.tsx
+│     │  │  │  ├─ ManageLabel.tsx
+│     │  │  │  └─ ManageTitle.tsx
+│     │  │  ├─ MenuItem.tsx
+│     │  │  ├─ Pagination.tsx
+│     │  │  ├─ Search.tsx
+│     │  │  └─ Title.tsx
 │     │  ├─ Fashion
 │     │  │  ├─ Detail
 │     │  │  │  ├─ ContentSection.tsx
@@ -194,56 +183,34 @@ fashion
 │     │  │  │  ├─ SubmitButtons.tsx
 │     │  │  │  ├─ TagSelect.tsx
 │     │  │  │  └─ TitleInput.tsx
-│     │  │  ├─ Fashion
-│     │  │  │  ├─ FashionItem.tsx
-│     │  │  │  ├─ FashionList.tsx
-│     │  │  │  └─ Item
-│     │  │  │     ├─ Item.tsx
-│     │  │  │     ├─ ItemBody.tsx
-│     │  │  │     ├─ ItemImage.tsx
-│     │  │  │     └─ ItemSubTitle.tsx
-│     │  │  ├─ ItemEntry.tsx
-│     │  │  ├─ MyFashion
-│     │  │  │  ├─ MyFashionItem.tsx
-│     │  │  │  ├─ MyFashionList.tsx
-│     │  │  │  └─ MyFashionListTitle.tsx
-│     │  │  └─ SearchFashion
-│     │  │     ├─ SearchFashionList.tsx
-│     │  │     └─ SearchItem.tsx
+│     │  │  ├─ FashionList
+│     │  │  │  ├─ Fashion
+│     │  │  │  │  ├─ FashionItem.tsx
+│     │  │  │  │  └─ FashionList.tsx
+│     │  │  │  ├─ ItemEntry.tsx
+│     │  │  │  └─ SearchFashion
+│     │  │  │     ├─ SearchFashionList.tsx
+│     │  │  │     └─ SearchItem.tsx
+│     │  │  └─ MyFashion
+│     │  │     ├─ MyFashionItem.tsx
+│     │  │     ├─ MyFashionList.tsx
+│     │  │     └─ MyFashionListTitle.tsx
 │     │  ├─ Gnb
-│     │  │  ├─ AuthMenu.tsx
-│     │  │  ├─ Link
-│     │  │  │  └─ MenuItem.tsx
-│     │  │  ├─ MobileMenu.tsx
-│     │  │  ├─ PcMenu.tsx
-│     │  │  ├─ Search.tsx
-│     │  │  ├─ Title.tsx
 │     │  │  └─ TopGnb.tsx
-│     │  ├─ Manage
-│     │  │  ├─ Manage.tsx
-│     │  │  ├─ ManageContent.tsx
-│     │  │  ├─ ManageContentArea.tsx
-│     │  │  ├─ ManageContentWrapper.tsx
-│     │  │  ├─ ManageDescription.tsx
-│     │  │  ├─ ManageLabel.tsx
-│     │  │  └─ ManageTitle.tsx
+│     │  ├─ HomeContent
+│     │  │  └─ HomeContent.tsx
+│     │  ├─ Menu
+│     │  │  ├─ MobileMenu.tsx
+│     │  │  └─ PcMenu.tsx
 │     │  ├─ Modal
 │     │  │  ├─ DeleteBtn.tsx
 │     │  │  └─ ModalCalendar.tsx
-│     │  ├─ My
-│     │  │  ├─ LoginInfo.tsx
-│     │  │  ├─ RecordInfo.tsx
-│     │  │  └─ UserInfo.tsx
-│     │  ├─ Pagination
-│     │  │  └─ Pagination.tsx
-│     │  ├─ Skeleton
-│     │  │  └─ FashionSkleton.tsx
-│     │  └─ Spinner
-│     │     └─ LoadingSpinner.tsx
+│     │  └─ My
+│     │     ├─ LoginInfo.tsx
+│     │     ├─ RecordInfo.tsx
+│     │     └─ UserInfo.tsx
 │     ├─ _constant
 │     │  └─ constant.ts
-│     ├─ _fonts
-│     │  └─ Dongle-Regular.ttf
 │     ├─ _hooks
 │     │  ├─ useAuth
 │     │  │  ├─ useSignIn.ts
@@ -268,6 +235,7 @@ fashion
 │     │  ├─ useFashion.ts
 │     │  ├─ useLoading.ts
 │     │  ├─ useLocalStorageState.ts
+│     │  ├─ useMobile.ts
 │     │  ├─ usePreview.ts
 │     │  ├─ useQueryString.ts
 │     │  ├─ useRouteChange.ts
@@ -277,29 +245,54 @@ fashion
 │     │  └─ Protected
 │     │     ├─ AuthProtectedRoute.tsx
 │     │     └─ NoAuthProtectedRoute.tsx
+│     ├─ _lib
+│     │  ├─ fonts
+│     │  │  └─ Dongle-Regular.ttf
+│     │  ├─ supabase
+│     │  │  ├─ auth
+│     │  │  │  ├─ getUser.ts
+│     │  │  │  ├─ signIn.ts
+│     │  │  │  ├─ signOut.ts
+│     │  │  │  └─ signUp.ts
+│     │  │  ├─ auth.ts
+│     │  │  ├─ fashion
+│     │  │  │  ├─ createComment.ts
+│     │  │  │  ├─ createFashion.ts
+│     │  │  │  ├─ deleteComment.ts
+│     │  │  │  ├─ deleteFashion.ts
+│     │  │  │  ├─ readComments.ts
+│     │  │  │  ├─ readFashion.ts
+│     │  │  │  ├─ readFashionEditData.ts
+│     │  │  │  ├─ readFashionList.ts
+│     │  │  │  ├─ readMyFashionList.ts
+│     │  │  │  ├─ readSearchFashion.ts
+│     │  │  │  └─ updateFashion.ts
+│     │  │  ├─ fashion.ts
+│     │  │  └─ supabase.ts
+│     │  └─ utils
+│     │     ├─ autoSignOut.ts
+│     │     ├─ convertToKST.ts
+│     │     ├─ convertToTag.ts
+│     │     ├─ dateFn.ts
+│     │     ├─ generateImageMetadata.ts
+│     │     ├─ getQueryClient.ts
+│     │     ├─ imgCompression.ts
+│     │     ├─ isValid.ts
+│     │     ├─ localstorage.ts
+│     │     ├─ metadata.ts
+│     │     ├─ setFashionRoute.ts
+│     │     └─ tagCount.ts
 │     ├─ _provider
 │     │  ├─ DarkModeProvider.tsx
 │     │  ├─ TanstackProvider.tsx
 │     │  ├─ ToastProvider.tsx
 │     │  └─ UserContextProvider.tsx
-│     ├─ _types
-│     │  └─ type.ts
-│     └─ _utils
-│        ├─ autoSignOut.ts
-│        ├─ convertToKST.ts
-│        ├─ convertToTag.ts
-│        ├─ dateFn.ts
-│        ├─ generateImageMetadata.ts
-│        ├─ getQueryClient.ts
-│        ├─ imgCompression.ts
-│        ├─ isValid.ts
-│        ├─ localstorage.ts
-│        ├─ metadata.ts
-│        ├─ setFashionRoute.ts
-│        └─ tagCount.ts
+│     └─ _types
+│        └─ type.ts
 ├─ tailwind.config.js
 ├─ tsconfig.json
 └─ yarn.lock
+
 ```
 
 </details>

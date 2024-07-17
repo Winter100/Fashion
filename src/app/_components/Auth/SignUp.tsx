@@ -2,10 +2,10 @@
 
 import { Button, Spinner } from "flowbite-react";
 
-import Manage from "../Manage/Manage";
-import InputField from "./InputField";
 import { useSignUp } from "@/app/_hooks/useAuth";
-import { isValidSignValue } from "@/app/_utils/isValid";
+import { isValidSignValue } from "@/app/_lib/utils/isValid";
+import Manage from "../Common/Manage/Manage";
+import InputField from "../Common/InputField";
 
 export default function SignUp() {
   const {

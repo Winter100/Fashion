@@ -1,7 +1,7 @@
 import React from "react";
 import { TextInput } from "flowbite-react";
 
-import Manage from "../../Manage/Manage";
+import Manage from "../../Common/Manage/Manage";
 import { EditInputProps } from "@/app/_types/type";
 
 export default function TitleInput({

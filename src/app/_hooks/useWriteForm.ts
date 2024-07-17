@@ -1,9 +1,10 @@
 import { useState, useEffect, ChangeEvent } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+
 import { usePreview } from "@/app/_hooks/usePreview";
 import { inputType } from "@/app/_types/type";
 import { IMAGE_MAX_SIZE } from "@/app/_constant/constant";
-import { useRouter } from "next/navigation";
 
 interface ItemProps {
   title: string;
@@ -11,7 +12,7 @@ interface ItemProps {
   tag: string;
 }
 
-export const useWriteForm = (item?: ItemProps) => {
+export default function useWriteForm(item?: ItemProps) {
   const {
     register,
     handleSubmit,
@@ -61,4 +62,4 @@ export const useWriteForm = (item?: ItemProps) => {
     handleImageChange,
     router,
   };
-};
+}

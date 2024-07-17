@@ -1,11 +1,10 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
-
 import {
   getUserDataForLocalStorage,
   removeUserDataForLocalSotarge,
-} from "@/app/_utils/localstorage";
+} from "../_lib/utils/localstorage";
 
 interface UserCotextType {
   userData: any | null;

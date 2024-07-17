@@ -2,7 +2,7 @@ import "./globals.css";
 import dynamic from "next/dynamic";
 import localFont from "next/font/local";
 
-import { getMetaData } from "./_utils/metadata";
+import { getMetaData } from "./_lib/utils/metadata";
 
 const DynamicDarkModeProvider = dynamic(
   () => import("./_provider/DarkModeProvider"),
@@ -13,7 +13,11 @@ export const metadata = getMetaData();
 
 const myfont = localFont({
   src: [
-    { path: "./_fonts/Dongle-Regular.ttf", weight: "normal", style: "normal" },
+    {
+      path: "./_lib/fonts/Dongle-Regular.ttf",
+      weight: "normal",
+      style: "normal",
+    },
   ],
 });
 

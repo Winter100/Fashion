@@ -1,7 +1,7 @@
 import { useParams, useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 
-import { readFashionApi } from "@/app/_api/fashionApi";
+import { readFashion as readFashionLib } from "@/app/_lib/supabase/fashion";
 
 export default function useReadDetail() {
   const { tag, id }: { tag: string; id: string } = useParams();
@@ -9,7 +9,7 @@ export default function useReadDetail() {
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: [`detail`, tag, id],
-    queryFn: () => readFashionApi(id, tag),
+    queryFn: () => readFashionLib(id, tag),
   });
 
   return { data, isLoading, isError, error, router };

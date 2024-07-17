@@ -3,11 +3,10 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+import LoadingSpinner from "@/app/_components/Common/LoadingSpinner";
 import { useUser } from "@/app/_hooks/useAuth";
-
-import { setFashionRoute } from "@/app/_utils/setFashionRoute";
 import { TAG_NAME } from "@/app/_constant/constant";
-import LoadingSpinner from "@/app/_components/Spinner/LoadingSpinner";
+import { setFashionRoute } from "@/app/_lib/utils/setFashionRoute";
 
 // 로그인시 들어올 수 없는 페이지 (로그인, 회원가입)
 export default function NoAuthProtectedRoute({
