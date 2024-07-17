@@ -1,7 +1,7 @@
 import { memo } from "react";
-import Image from "next/image";
 
 import Item from "@/app/_components/Common/Item/Item";
+import FashionImage from "@/app/_components/Common/FashionImage";
 import { convertToTag } from "@/app/_lib/utils/convertToTag";
 import { convertToKST } from "@/app/_lib/utils/convertToKST";
 import { ListItemType } from "@/app/_types/type";
@@ -16,14 +16,7 @@ const SearchItem = memo(function SearchItem({
   return (
     <Item>
       <Item.Image>
-        <Image
-          className="rounded-xl object-cover"
-          src={image}
-          alt={title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority
-        />
+        <FashionImage src={image} alt={title} />
       </Item.Image>
       <Item.Body>
         <Item.SubTitle>{title}</Item.SubTitle>
