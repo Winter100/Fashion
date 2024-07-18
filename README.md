@@ -148,6 +148,7 @@ fashion
 │     │  │  │  ├─ CommentHeader.tsx
 │     │  │  │  └─ CommentTitle.tsx
 │     │  │  ├─ DarkModeToggleBtn.tsx
+│     │  │  ├─ FashionImage.tsx
 │     │  │  ├─ FashionSkleton.tsx
 │     │  │  ├─ InputField.tsx
 │     │  │  ├─ Item
@@ -174,7 +175,6 @@ fashion
 │     │  │  │  ├─ ContentSection.tsx
 │     │  │  │  ├─ Detail.tsx
 │     │  │  │  ├─ DetailItem.tsx
-│     │  │  │  ├─ ImageSection.tsx
 │     │  │  │  └─ LabelContent.tsx
 │     │  │  ├─ Edit
 │     │  │  │  ├─ ContentTextarea.tsx
@@ -317,6 +317,11 @@ fashion
 | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | ![게시글 수정](https://github.com/Winter100/Fashion/assets/119467710/d35b9f13-d3e8-432f-bb8d-26805ff1104b) | ![게시글 삭제](https://github.com/Winter100/Fashion/assets/119467710/0da9c070-ae7d-48e4-a896-38be22d5e270) | ![검색](https://github.com/Winter100/Fashion/assets/119467710/512186ea-b4c1-4fc8-8056-6ff1f24e2ac4) |
 |                                                                                                            |                                                                                                            |                                                                                                     |
+
+| 반응형 디자인                                                                              |
+| ------------------------------------------------------------------------------------------ |
+| ![반응형](https://github.com/user-attachments/assets/067339c9-e004-4358-9bf1-180a4f3ca1c3) |
+| tailwind를 이용하여 반응형 디자인을 구현했습니다.                                          |
 
 ## 프로젝트를 진행하며 발생한 문제 및 해결
 
