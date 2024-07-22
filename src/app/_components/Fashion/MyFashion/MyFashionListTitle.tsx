@@ -6,26 +6,14 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import DeleteBtn from "../../Modal/DeleteBtn";
 import { convertToDateName, convertToTag } from "@/app/_lib/utils/convertToTag";
 import { TAG_NAME } from "@/app/_constant/constant";
+import { useMyFashionFilter } from "@/app/_provider/MyFashionFilterProvider";
+import { useMyFashionDelete } from "@/app/_provider/MyFashionDeleteProvider";
 
-interface MyFahsionListTitleType {
-  setTagFilter: (value: string) => void;
-  setDateFilter: (value: "up" | "down") => void;
-  onDelete: () => void;
-  isLoading: boolean;
-  disabled: boolean;
-  tagFilter: string;
-  dateFilter: string;
-}
+export default function MyFashionListTitle() {
+  const { dateFilter, setDateFilter, setTagFilter, tagFilter } =
+    useMyFashionFilter();
+  const { isLoading, disabled, handleDelete } = useMyFashionDelete();
 
-export default function MyFashionListTitle({
-  setTagFilter,
-  setDateFilter,
-  onDelete,
-  isLoading,
-  disabled,
-  tagFilter,
-  dateFilter,
-}: MyFahsionListTitleType) {
   return (
     <ul>
       <li className="grid grid-cols-6 items-center justify-items-center text-base md:text-2xl">
@@ -65,7 +53,7 @@ export default function MyFashionListTitle({
             </Button>
           ) : (
             <DeleteBtn
-              onDelete={onDelete}
+              onDelete={handleDelete}
               isLoading={isLoading}
               disabled={disabled}
               color="light"

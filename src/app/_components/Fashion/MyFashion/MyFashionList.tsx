@@ -8,39 +8,22 @@ import LoadingSpinner from "../../Common/LoadingSpinner";
 import { convertToTag } from "@/app/_lib/utils/convertToTag";
 import { useReadMyFashionList } from "@/app/_hooks/useFashion";
 import { MyFashionListType } from "@/app/_types/type";
+import { useMyFashionFilter } from "@/app/_provider/MyFashionFilterProvider";
+import { useMyFashionDelete } from "@/app/_provider/MyFashionDeleteProvider";
+import { filterData, sortData } from "@/app/_lib/utils/filterData";
 
-export default function MyFashionList({
-  handleCheck,
-  tagFilter,
-  dateFilter,
-}: {
-  handleCheck: (id: string, tag: string) => void;
-  tagFilter: string;
-  dateFilter: string;
-}) {
+export default function MyFashionList() {
   const { data, isLoading } = useReadMyFashionList<MyFashionListType>();
 
-  if (isLoading || !data) {
-    return <LoadingSpinner />;
-  }
+  const { tagFilter, dateFilter } = useMyFashionFilter();
+  const { handleCheck } = useMyFashionDelete();
 
-  const filteredData =
-    tagFilter === "all" ? data : data.filter((item) => item.tag === tagFilter);
+  if (isLoading || !data) return <LoadingSpinner />;
 
-  const sortedData =
-    dateFilter === "up"
-      ? filteredData.sort((a, b) => {
-          return (
-            new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
-          );
-        })
-      : filteredData.sort((a, b) => {
-          return (
-            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-          );
-        });
+  const filteredData = filterData(data, tagFilter);
+  const sortedData = sortData(filteredData, dateFilter);
 
-  if (!isLoading && sortedData.length === 0) {
+  if (sortedData.length === 0) {
     return (
       <AlertWrapper
         description={`${convertToTag(tagFilter)} 의 기록이 없습니다.`}
