@@ -21,7 +21,7 @@ const MyFashionItem = memo(function MyFashionItem({
       <div className=" h-full w-full ">
         <div className="relative flex h-full items-center justify-center">
           <Link href={`/detail/${tag}/${id}`}>
-            <FashionImage className=" object-cover" src={image} alt={title} />
+            <FashionImage className="object-contain" src={image} alt={title} />
           </Link>
         </div>
       </div>
