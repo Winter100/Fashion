@@ -1,25 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { toast } from "react-toastify";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { deleteFashion as deleteFashionLib } from "@/app/_lib/supabase/fashion";
 import { useLoading } from "../useLoading";
 import { DeleteListType } from "@/app/_types/type";
-import {
-  getFilteredValueForLocalStorage,
-  setFilterValueForLocalStorage,
-} from "@/app/_lib/utils/localstorage";
 
 export default function useDelete() {
   const queryClient = useQueryClient();
   const { isLoading, setLoading } = useLoading();
   const [checkedIds, setCheckedIds] = useState<DeleteListType[]>([]);
-  const [tagFilter, setTagFilter] = useState(
-    () => getFilteredValueForLocalStorage("tagFilter") || "all",
-  );
-  const [dateFilter, setDateFilter] = useState(
-    () => getFilteredValueForLocalStorage("dateFilter") || "down",
-  );
 
   const handleCheck = useCallback((id: string, tag: string) => {
     setCheckedIds((prevCheckedIds) => {
@@ -42,14 +32,6 @@ export default function useDelete() {
     });
   }
 
-  useEffect(() => {
-    setFilterValueForLocalStorage("tagFilter", tagFilter);
-  }, [tagFilter]);
-
-  useEffect(() => {
-    setFilterValueForLocalStorage("dateFilter", dateFilter);
-  }, [dateFilter]);
-
   const { mutate: deleteFashion } = useMutation({
     mutationFn: (items: DeleteListType[]) => deleteFashionLib(items),
     onSuccess: () => {
@@ -62,14 +44,12 @@ export default function useDelete() {
     },
   });
 
+  const disabled = checkedIds.length === 0;
+
   return {
     handleCheck,
     isLoading,
-    setTagFilter,
-    setDateFilter,
     handleDelete,
-    tagFilter,
-    dateFilter,
-    checkedIds,
+    disabled,
   };
 }
